@@ -20,7 +20,7 @@ public:
 		if (!full())
 			S[++top] = x;
 		else
-			cout << "overflow error...";
+			cout << "array_stack push overflow.";
 	}
 
 	char pop() {

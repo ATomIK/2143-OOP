@@ -1,15 +1,22 @@
 #pragma once
 #include "array_stack.h"
 #include <string>
+#include <fstream>
 
 class Balance {
 private:
-	Stack* L = new Stack(30);
-	Stack* R = new Stack(30);
+	Stack* L;
+	Stack* R;
+	ofstream output;
 public:
+	Balance() {
+		L = new Stack(30);
+		R = new Stack(30);
+		output.open("output.txt");
+	}
+
 	void checkBalance() {
 		string input;
-		//int bal;
 		for (int i = 0; i < 10; i++) {
 			cin >> input;
 			for (int j = 0; j < input.length(); j++) {
@@ -20,15 +27,19 @@ public:
 					R->push(letter);
 				}
 			}
+			output << input << endl;
 			printBalance();
 		}
 	}
 
 	void printBalance() {
+		string out;
 		if (L->count() == R->count())
-			cout << "Balanced!" << endl;
+			out = "Balanced!";
 		else
-			cout << "Not balanced." << endl;
+			out = "Not balanced.";
+		cout << out << endl;
+		output << out << endl;
 	}
 
 };
