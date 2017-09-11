@@ -6,3 +6,7 @@
 Tell user if it's balanced or not and write everything to a file.
 
 Done.
+
+**Bugs**
+
+1. char 32 causes multiple print outs (i think)
