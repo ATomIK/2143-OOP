@@ -1,3 +1,0 @@
-# Dynamic array stack to balance parenthesis
-
-Array stacks...
