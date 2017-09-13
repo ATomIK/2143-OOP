@@ -1,7 +1,3 @@
-```cpp
-
-// array_stack.cpp
-
 /*
 	Tom Johnson
 	2143 - Object Oriented Programming
@@ -109,5 +105,3 @@ bool Stack::full() {
 bool Stack::empty() {
 	return top == -1;
 }
-
-```
