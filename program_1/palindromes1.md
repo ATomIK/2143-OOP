@@ -1,3 +1,7 @@
+```cpp
+
+// palindromes.h
+
 /*
 	Tom Johnson
 	2143 - Object Oriented Programming
@@ -33,3 +37,5 @@ public:
 	void printBalance(bool);
 
 };
+
+```
