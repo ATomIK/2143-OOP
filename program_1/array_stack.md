@@ -1,3 +1,7 @@
+```cpp
+
+// array_stack.h
+
 /*
 	Tom Johnson
 	2143 - Object Oriented Programming
@@ -31,3 +35,5 @@ public:
 	bool empty();
 
 };
+
+```
