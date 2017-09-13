@@ -1,6 +1,18 @@
+/*
+	Tom Johnson
+	2143 - Object Oriented Programming
+	Dr. Stringfellow
+	Program 1 - Palindromes
+	09/13/2017
+*/
+
 #pragma once
 
-using namespace std;
+/*
+ * @ClassName: Stack
+ * @Description:
+ *			Creates a stack data type.
+ */
 
 class Stack {
 
@@ -10,43 +22,12 @@ private:
 	int size;
 
 public:
-	Stack(int s) {
-		size = s;
-		top = -1;
-		S = new char[size];
-	}
+	Stack(int);
 
-	void push(char x) {
-		if (!full())
-			S[++top] = x;
-		else
-			cout << "array_stack overflow.";
-	}
-
-	char pop() {
-		if (!empty())
-			return S[top--];
-		else
-			return 'x';
-	}
-
-	void print() {
-		for (int i = top; i >= 0; i--)
-			cout << S[i] << " ";
-		cout << endl;
-	}
-
-	bool full() {
-		return top == size - 1;
-	}
-
-	bool empty() {
-		return top == -1;
-	}
-
-	int count() {
-		int count = top;
-		return count;
-	}
+	void push(char);
+	char pop();
+	void print();
+	bool full();
+	bool empty();
 
 };

@@ -1,3 +1,5 @@
+Input file: input.txt
+
 Balanced!
 Not balanced.
 Balanced!
@@ -7,5 +9,4 @@ Not balanced.
 Balanced!
 Not balanced.
 Balanced!
-Not balanced.
 Not balanced.
