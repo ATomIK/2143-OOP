@@ -5,41 +5,62 @@
 
 class Balance {
 private:
-	Stack* L;
-	Stack* R;
+	Stack* S;
+	ifstream input;
 	ofstream output;
 public:
 	Balance() {
-		L = new Stack(30);
-		R = new Stack(30);
+		input.open("input.txt");
 		output.open("output.txt");
 	}
 
 	void checkBalance() {
-		string input;
-		for (int i = 0; i < 10; i++) {
-			cin >> input;
-			for (int j = 0; j < input.length(); j++) {
-				char letter = input[j];
-				if (letter == '(')
-					L->push(letter);
-				else if (letter == ')') {
-					R->push(letter);
+		char in;
+		while (!input.eof()) {
+			bool bal = true;
+			S = new Stack(30);
+			while (input.get(in)) {
+				if (in == '(')
+					S->push(in);
+				if (in == ')') {
+					if (!S->empty())
+						S->pop();
+					else
+						bal = false;
 				}
+				if (in == '\n')
+					break;
 			}
-			output << input << endl;
-			printBalance();
+			if (!bal)
+				printBalance(bal);
+			else
+				printBalance(S->empty());
+			S = NULL;
+			bal = NULL;
+			in = NULL;
 		}
 	}
 
-	void printBalance() {
+	void printBalance(bool bal) {
 		string out;
-		if (L->count() == R->count())
+		if (bal)
 			out = "Balanced!";
 		else
 			out = "Not balanced.";
 		cout << out << endl;
 		output << out << endl;
+	}
+
+	bool processBalance(char in) {
+		if (in == '(')
+			S->push(in);
+		if (in == ')') {
+			if (S->pop() == 'x')
+				return false;
+			//if (S->empty())
+				//return false;
+		}
+		return S->empty();
 	}
 
 };

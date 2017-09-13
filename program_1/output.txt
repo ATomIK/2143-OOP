@@ -1,12 +1,11 @@
-()
 Balanced!
-(()
-
-(I
-
-think
-
-I
-
-am))
+Not balanced.
 Balanced!
+Balanced!
+Balanced!
+Not balanced.
+Balanced!
+Not balanced.
+Balanced!
+Not balanced.
+Not balanced.

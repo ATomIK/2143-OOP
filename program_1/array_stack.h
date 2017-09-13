@@ -20,14 +20,14 @@ public:
 		if (!full())
 			S[++top] = x;
 		else
-			cout << "array_stack push overflow.";
+			cout << "array_stack overflow.";
 	}
 
 	char pop() {
 		if (!empty())
 			return S[top--];
 		else
-			return -1;
+			return 'x';
 	}
 
 	void print() {
