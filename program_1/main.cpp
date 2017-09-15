@@ -1,7 +1,3 @@
-```cpp
-
-// main.cpp
-
 /*
 	Tom Johnson
 	2143 - Object Oriented Programming
@@ -35,5 +31,3 @@ int main() {
 
 	return 0;
 }
-
-```
