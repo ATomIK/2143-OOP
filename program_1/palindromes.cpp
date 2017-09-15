@@ -1,7 +1,3 @@
-```cpp
-
-// palindromes.cpp
-
 /*
 	Tom Johnson
 	2143 - Object Oriented Programming
@@ -97,5 +93,3 @@ void Palindromes::printBalance(bool bal) {
 	cout << out << endl;
 	output << out << endl;
 }
-
-```
