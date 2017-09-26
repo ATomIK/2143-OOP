@@ -1,5 +1,8 @@
 #include <iostream>
 
+#include "asteroid.h"
+#include "ship.h"
+
 using namespace std;
 
 int main(){
@@ -18,7 +21,7 @@ int main(){
 
 	// endloop
 
-
+	cout << "Ran\n";
 
 	return 0;
 }

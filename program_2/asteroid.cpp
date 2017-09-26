@@ -4,11 +4,13 @@ class Asteroid {
 
 private:
 
-
 public:
-Asteroid();
-//Asteroid();
+  bool isCollected(){
 
-~Asteroid();
+  }
+
+  int weight(){
+    
+  }
 
 };
