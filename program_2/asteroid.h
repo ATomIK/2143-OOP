@@ -6,9 +6,10 @@ private:
 
 
 public:
-Asteroid();
-//Asteroid();
+  Asteroid();
+  Asteroid(double,double,double,bool);
+  //Asteroid();
 
-~Asteroid();
+  ~Asteroid();
 
 };
