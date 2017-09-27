@@ -1,19 +1,25 @@
 #pragma once
 #include <iostream>
 #include <fstream>
+#include <vector>
+#include "asteroid.h"
 
 class AsteroidList {
 
 private:
   std::ifstream infile;
+
   int ast_limit;
   int line_count;
-  int asts;
+  std::vector<Asteroid> asteroids;
 
 public:
 
   AsteroidList();
 
-  void generateRoids(int);
+  int getLines();
+  void generateRoids(std::string);
+
+  // ~AsteroidList();
 
 };

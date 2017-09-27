@@ -1,8 +1,8 @@
 #include <iostream>
 
 #include "asteroid.h"
-#include "ship.h"
 #include "asteroidlist.h"
+#include "ship.h"
 
 using namespace std;
 
@@ -31,7 +31,7 @@ int main(){
 		cout << "\nWarping to (0,0)...\n\n";
 	else {
 		int x = 0, y = 0;
-		cout << "Please enter an x coordinate followed by a y coordinate "
+		cout << "Please enter an x coordinate followed by a y coordinate\n "
 		"for the ship to warp to. (Example: 5 25):";
 		cin >> x >> y;
 		cout << "\nWarping to (" << x << "," << y << ")...\n\n";
@@ -42,11 +42,24 @@ int main(){
 	int amt;
 	cin >> amt;
 
+	string input, output;
+	cout << "What's the name of your input file? ";
+	cin >> input;
+
+	cout << "What's the name of your output file? ";
+	cin >> output;
+
+	if(input == "\n")
+		input = "input.txt";
+	if(output == "\n")
+		output = "output.txt";
+
 	// generate asteroids from input file
 	AsteroidList RoidList;
-	RoidList.generateRoids(amt);
+	RoidList.generateRoids(input);
 
 	// launch ship
+	
 
 	// loop x times
 
@@ -58,7 +71,7 @@ int main(){
 
 	// endloop
 
-	cout << "Ran\n";
+	cout << "\nRan\n";
 
 	return 0;
 }

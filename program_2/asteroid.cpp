@@ -1,32 +1,25 @@
-#pragma once
+#include <iostream>
+#include "asteroid.h"
 
-class Asteroid {
+Asteroid::Asteroid(){
 
-private:
+}
 
-  double x, y, weight;
-  bool c;
+Asteroid::Asteroid(int setx, int sety, double setw, bool setc){
+  x = setx;
+  y = sety;
+  weight = setw;
+  c = setc;
+}
 
-public:
+bool Asteroid::isCollected(){
+  return c;
+}
 
-  Asteroid(){
+double Asteroid::getWeight(){
+  return weight;
+}
 
-  }
+Asteroid::~Asteroid(){
 
-  Asteroid(double x, double y, double weight, bool c){
-    
-  }
-
-  bool isCollected(){
-
-  }
-
-  int weight(){
-
-  }
-
-  ~Asteroid(){
-
-  }
-
-};
+}
