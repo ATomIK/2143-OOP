@@ -27,6 +27,7 @@ int AsteroidList::getLines(){
 }
 
 void AsteroidList::generateRoids(std::string input){
+  // .c_str() converts the string var to const chars.
   infile.open(input.c_str());
 
   int ct = 0;
