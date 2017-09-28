@@ -6,62 +6,27 @@
 
 using namespace std;
 
-// void generateRoids(int size){
-// 	ifstream infile("input.txt");
-// 	while(!infile.eof()){
-//
-// 		double x, y, w;
-//
-// 		infile >> x >> y >> w;
-//
-// 		cout << x << " " << y << " " << w << "\n\n";
-//
-// 	}
-// }
-
 int main(){
 
-	cout << "Would you like to warp using "
-					"pre-defined coordinates?\n\n1. Yes\n2. No.\n";
-
-	int choice;
-	cin >> choice;
-
-	if(choice == 1)
-		cout << "\nWarping to (0,0)...\n\n";
-	else {
-		int x = 0, y = 0;
-		cout << "Please enter an x coordinate followed by a y coordinate\n "
-		"for the ship to warp to. (Example: 5 25):";
-		cin >> x >> y;
-		cout << "\nWarping to (" << x << "," << y << ")...\n\n";
-	}
-
-	cout << "How many asteroids would you like to collect before "
-					"returning to earth? ";
-	int amt;
-	cin >> amt;
+	Ship ship;
+	ship.captainsLog();
 
 	string input, output;
 	cout << "What's the name of your input file? ";
 	cin >> input;
 
+	input = input == "def" ? "input.txt" : input;
+
 	cout << "What's the name of your output file? ";
 	cin >> output;
 
-	if(input == "\n")
-		input = "input.txt";
-	if(output == "\n")
-		output = "output.txt";
+	output = output == "def" ? "output.txt" : output;
 
 	// generate asteroids from input file
 	AsteroidList RoidList;
 	RoidList.generateRoids(input);
 
-	// launch ship
-	
-
-	// loop x times
+	// loop <RoidList.maxRoids()> times
 
 		// find target
 

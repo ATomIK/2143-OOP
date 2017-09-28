@@ -8,5 +8,7 @@ private:
 public:
   Ship();
 
-  Ship(double,double,int);
+  // Ship(double,double,int);
+
+  void captainsLog();
 };
