@@ -8,6 +8,9 @@ AsteroidList::AsteroidList(){
 
 }
 
+// move all this to the asteroid class.
+// apparently this class is unnecessary.
+
 int AsteroidList::getLines(){
   int ct = 0;
   std::string line;
