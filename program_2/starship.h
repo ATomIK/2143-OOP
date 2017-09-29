@@ -1,14 +1,14 @@
 #pragma once
 
-class Ship {
+class Starship {
 
 private:
   double distance;
 
 public:
-  Ship();
+  Starship();
 
-  // Ship(double,double,int);
-
+  // Starship(double,double,int);
   void captainsLog();
+
 };
