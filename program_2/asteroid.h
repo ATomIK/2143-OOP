@@ -5,27 +5,20 @@
 class Asteroid {
 
 private:
-  std::ifstream infile;
-
   int x, y;
   double weight;
   bool collected;
 
 public:
 
-  int line_count;
-  std::vector<Asteroid> asteroids;
-
   Asteroid();
   Asteroid(int,int,double,bool);
-  //Asteroid();
 
-  void generateRoids(std::string);
+  Asteroid(const Asteroid &);
+  //Asteroid();
 
   bool isCollected();
   double getWeight();
-
-  int getLines();
 
   ~Asteroid();
 

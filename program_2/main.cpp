@@ -1,49 +1,27 @@
 #include <iostream>
+#include <string>
 
 #include "asteroid.h"
-// #include "asteroidlist.h"
 #include "starship.h"
 
 using namespace std;
 
-int getInputLines();
+void generateAsteroidField(vector<Asteroid>&,string);
+
+// void printRoids(vector<Asteroid>&);
 
 int main(){
 
+	vector<Asteroid> asteroids;
+
 	Starship Ship;
-	Asteroid Roid;
 
-	ifstream infile;
-	ofstream outfile;
-
-	Ship.captainsLog();
-
-	string input;
-	cout << "What's the name of your input file? ('def' for 'input.txt'): ";
-	cin >> input;
-	input = input == "def" ? "input.txt" : input;
-
-	infile.open(input.c_str());
-
-  int getx,gety;
-  double getw;
-  bool c = false;
-
-  infile >> getx >> gety >> getw;
-  while(!infile.eof()){
-    Roid.asteroids.push_back(Asteroid(getx,gety,getw,c));
-    infile >> getx >> gety >> getw;
-  }
-
-	string output;
-	cout << "What's the name of your output file? ('def' for 'output.txt'): ";
-	cin >> output;
-
-	output = output == "def" ? "output.txt" : output;
+	//  discuss flight plans with the captain (user)
+	string input, output;
+	Ship.captainsLog(input,output);
 
 	// generate asteroids from input file
-	// Roid.generateRoids(input);
-	generateAsteroidField(input,&Roid);
+	generateAsteroidField(asteroids,input);
 
 	// loop <RoidList.maxRoids()> times
 
@@ -60,7 +38,7 @@ int main(){
 	return 0;
 }
 
-void generateAsteroidField(string input, Asteroid* asteroid){
+void generateAsteroidField(vector<Asteroid> &vect, string input){
 
 	ifstream infile;
 	infile.open(input.c_str());
@@ -71,25 +49,19 @@ void generateAsteroidField(string input, Asteroid* asteroid){
 
   infile >> getx >> gety >> getw;
   while(!infile.eof()){
-    asteroid.push_back(Asteroid(getx,gety,getw,c));
+		Asteroid temp(getx,gety,getw,c);
+    vect.push_back(temp);
     infile >> getx >> gety >> getw;
   }
 
 }
-
-int getInputLines(string infile) {
-
-	int ct = 0;
-  string line;
-
-  while(getline(infile,line))
-    ct++;
-
-  // clear infile
-  infile.clear();
-  // seek to beginning of file
-  infile.seekg(0, ios::beg);
-
-  return ct;
-
-}
+//
+// void printRoids(vector<Asteroid> &vect){
+//
+// 	for(int i = 0;i<vect.size();i++){
+//
+// 		cout << vect[i].getWeight() << " ";
+//
+// 	}
+//
+// }

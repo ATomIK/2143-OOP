@@ -3,12 +3,13 @@
 class Starship {
 
 private:
+  int limit;
   double distance;
 
 public:
   Starship();
 
   // Starship(double,double,int);
-  void captainsLog();
+  void captainsLog(std::string&,std::string&);
 
 };
