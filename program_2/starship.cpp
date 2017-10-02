@@ -1,13 +1,11 @@
 #include <iostream>
-#include <vector>
-#include <cmath>
 #include "starship.h"
 
 Starship::Starship(){
   asteroids = 0;
 }
 
-void Starship::captainsLog(std::string &input,std::string &output){
+void Starship::captainsLog(){
 
   // warp using pre-defined or manually defined coords?
   int choice;
@@ -28,23 +26,18 @@ void Starship::captainsLog(std::string &input,std::string &output){
   coords[1] = y;
 
   // set the limit of the ship's mission
-	std::cout << "How many asteroids would you like to collect before "
+	std::cout << "How many asteroids <9 tons would you like to collect before\n "
 					"returning to earth? (integer): ";
 	std::cin >> limit;
-
-  // get input/output files
-	std::cout << "What's the name of your input file? ('def' for 'input.txt'): ";
-	std::cin >> input;
-	std::cout << "What's the name of your output file? ('def' for 'output.txt'): ";
-	std::cin >> output;
-
-  input = input == "def" ? "input.txt" : input;
-	output = output == "def" ? "output.txt" : output;
 
 }
 
 int Starship::getLimit() {
   return limit;
+}
+
+int Starship::getDistance() {
+  return distance;
 }
 
 int Starship::findClosest(std::vector<Asteroid> &vect) {
@@ -98,13 +91,20 @@ void Starship::moveTo(int index, std::vector<Asteroid> &asts){
 
 void Starship::mineAsteroid(int index, std::vector<Asteroid> &asts){
 
-  // asteroid in the vector is now collected
-  asts[index].setCollected(true);
-  // asteroid count increases
-  asteroids++;
-  // ship's cargo weight is updated
-  cargoWeight = cargoWeight + asts[index].getWeight();
+  if(asts[index].getWeight() < 9.0){
+    // asteroid in the vector is now collected
+    asts[index].setCollected(true);
+    // asteroid count increases
+    asteroids++;
+    // ship's cargo weight is updated
+    cargoWeight = cargoWeight + asts[index].getWeight();
+  } else {
+    std::cout << "Uh-oh, this asteroid is TOO BIG! Would you like to blast\n"
+                "it?\n1. Yes\n2. No\n";
+    system("read -p 'Press Enter to continue...' var");
+  }
 
+  // temp print
   std::cout << "Cargo weight: " << cargoWeight << "\n";
 
 }

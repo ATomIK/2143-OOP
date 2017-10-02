@@ -6,23 +6,23 @@
 
 using namespace std;
 
-void generateAsteroidField(vector<Asteroid>&,string);
+void openFiles(fstream&,fstream&);
 
-// void printRoids(vector<Asteroid>&);
+void generateAsteroidField(vector<Asteroid>&,fstream&);
 
 int main(){
 
-	string input, output;
+	fstream ifile, ofile;
+	Starship Ship;
 	vector<Asteroid> asteroids;
 
-	Starship Ship;
-
+	// prompt the user for input/output
+	openFiles(ifile,ofile);
 	//  discuss flight plans with the captain (user)
-	// in other words, prompting the user for input/output
-	Ship.captainsLog(input,output);
+	Ship.captainsLog();
 
 	// generate asteroids from input file
-	generateAsteroidField(asteroids,input);
+	generateAsteroidField(asteroids,ifile);
 
 	// loop <RoidList.maxRoids()> times
 	for(int i = 0;i < Ship.getLimit();i++){
@@ -44,30 +44,35 @@ int main(){
 	return 0;
 }
 
-void generateAsteroidField(vector<Asteroid> &vect, string input){
+void openFiles(fstream &ifile, fstream &ofile){
 
-	ifstream infile;
-	infile.open(input.c_str());
+	string input, output;
+
+	cout << "Name of input file ('def' for 'input.txt'): ";
+	cin >> input;
+	input = input == "def" ? "input.txt" : input;
+
+	ifile.open(input.c_str(), ios::in);
+
+	cout << "Name of output file ('def' for 'output.txt'): ";
+	cin >> output;
+	output = output == "def" ? "output.txt" : output;
+
+	ofile.open(output.c_str(), ios::out);
+
+}
+
+void generateAsteroidField(vector<Asteroid> &vect, fstream &ifile){
 
   int getx,gety;
   double getw;
   bool c = false;
 
-  infile >> getx >> gety >> getw;
-  while(!infile.eof()){
+  ifile >> getx >> gety >> getw;
+  while(!ifile.eof()){
 		Asteroid temp(getx,gety,getw,c);
     vect.push_back(temp);
-    infile >> getx >> gety >> getw;
+    ifile >> getx >> gety >> getw;
   }
 
 }
-//
-// void printRoids(vector<Asteroid> &vect){
-//
-// 	for(int i = 0;i<vect.size();i++){
-//
-// 		cout << vect[i].getWeight() << " ";
-//
-// 	}
-//
-// }

@@ -1,4 +1,6 @@
 #pragma once
+#include <vector>
+#include <cmath>
 #include "asteroid.h"
 
 class Starship {
@@ -14,8 +16,10 @@ private:
 public:
   Starship();
 
-  void captainsLog(std::string&,std::string&);
+  void captainsLog();
+
   int getLimit();
+  int getDistance();
 
   int findClosest(std::vector<Asteroid>&);
   void moveTo(int, std::vector<Asteroid>&);
