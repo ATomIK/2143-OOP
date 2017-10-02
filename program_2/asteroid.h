@@ -19,6 +19,10 @@ public:
 
   bool isCollected();
   double getWeight();
+  int getX();
+  int getY();
+
+  void setCollected(bool);
 
   ~Asteroid();
 

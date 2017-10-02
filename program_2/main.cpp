@@ -12,26 +12,32 @@ void generateAsteroidField(vector<Asteroid>&,string);
 
 int main(){
 
+	string input, output;
 	vector<Asteroid> asteroids;
 
 	Starship Ship;
 
 	//  discuss flight plans with the captain (user)
-	string input, output;
+	// in other words, prompting the user for input/output
 	Ship.captainsLog(input,output);
 
 	// generate asteroids from input file
 	generateAsteroidField(asteroids,input);
 
 	// loop <RoidList.maxRoids()> times
+	for(int i = 0;i < Ship.getLimit();i++){
 
 		// find target
+		int index;
+		index = Ship.findClosest(asteroids);
+		// ship moves to target
+		Ship.moveTo(index, asteroids);
 
 		// mine asteroid
-				// asteroid > ship ? explode
+		Ship.mineAsteroid(index, asteroids);
+				// asteroid > ship ? blast()
 				// else collect()
-
-	// endloop
+	}
 
 	cout << "\nRan\n";
 

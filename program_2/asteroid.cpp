@@ -26,6 +26,18 @@ double Asteroid::getWeight(){
   return weight;
 }
 
+int Asteroid::getX(){
+  return x;
+}
+
+int Asteroid::getY(){
+  return y;
+}
+
+void Asteroid::setCollected(bool v){
+  collected = v;
+}
+
 Asteroid::~Asteroid(){
 
 }
