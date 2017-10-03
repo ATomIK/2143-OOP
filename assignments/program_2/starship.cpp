@@ -85,7 +85,7 @@ int Starship::findClosest(std::vector<Asteroid> &vect) {
 
 }
 
-void Starship::moveTo(int index, std::vector<Asteroid> &asts){
+double Starship::moveTo(int index, std::vector<Asteroid> &asts){
 
   double x, y, dist;
   x = asts[index].getX() - coords[0];
@@ -99,7 +99,8 @@ void Starship::moveTo(int index, std::vector<Asteroid> &asts){
   coords[1] = asts[index].getY();
 
   // temp print
-  std::cout << "\nMoved to: " << coords[0] << ", " << coords[1] << "\nDistance: " << dist << "\n";
+  // std::cout << "\nMoved to: " << coords[0] << ", " << coords[1] << "\nDistance: " << dist << "\n";
+  return dist;
 
 }
 
@@ -113,10 +114,10 @@ void Starship::mineAsteroid(int index, std::vector<Asteroid> &asts){
     // ship's cargo weight is updated
     cargoWeight = cargoWeight + asts[index].getWeight();
 
-    std::cout << "Asteroid weight: " << asts[index].getWeight() << "\n";
+    // std::cout << "Asteroid weight: " << asts[index].getWeight() << "\n";
   } else {
     int choice;
-    std::cout << "Uh-oh, this asteroid is TOO BIG! Would you like to blast\n"
+    std::cout << "Uh-oh, Asteroid # " << index << " is TOO BIG! Would you like to blast\n"
                 "it?\n1. Yes\n2. No\n";
     std::cin >> choice;
     if(choice == 2)
@@ -127,18 +128,23 @@ void Starship::mineAsteroid(int index, std::vector<Asteroid> &asts){
   }
 
   // temp print
-  std::cout << "Cargo weight: " << cargoWeight << "\n";
+  // std::cout << "Cargo weight: " << cargoWeight << "\n";
 
 }
 
 void Starship::blAsteroid(int index, std::vector<Asteroid> &asts){
-
-  asts[index].setCollected(true); // blow up that asteroid
 
   // spawn 3 smaller asteroids
   for(int i = 0;i < 3;i++){
     Asteroid temp = Asteroid(asts[index].getX(), asts[index].getY(), asts[index].getWeight()/3, 0);
     asts.push_back(temp);
   }
+
+  asts.erase(asts.begin() + index); // blow up that asteroid
+
+  // the ship will move to a different asteroid because nothing exists at these
+  // coordinates as of the end of this function
+  std::cout << "Your ship landed a missle on the asteroid and "
+            << "will return to ground zero after detecting its pieces.\n";
 
 }

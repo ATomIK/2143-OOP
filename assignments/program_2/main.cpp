@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include <string>
 
 #include "asteroid.h"
@@ -24,19 +25,37 @@ int main(){
 	// generate asteroids from input file & allow the ship to scan
 	generateAsteroidField(asteroids,ifile,Ship);
 
+	cout << left << setw(15) << "Asteroid #" << setw(12) << "Position" << setw(15)
+			 << "Size" << setw(12) << "Distance" << setw(0) << endl;
+
 	// loops until the captain gets as many asteroids as he wants
 	while(Ship.getLimit() != Ship.getAsteroidCount()){
-		// find target
+
 		int index;
+		double distance;
+
+		// find target
 		index = Ship.findClosest(asteroids);
 		// if the captain wants to collect more than the field, end mission.
 		if(Ship.getAsteroidCount() == Ship.getDetectedAsteroids())
 			break;
 		// ship moves to target
-		Ship.moveTo(index, asteroids);
+		distance = Ship.moveTo(index, asteroids);
 
 		// mine asteroid
 		Ship.mineAsteroid(index, asteroids);
+
+		cout << left << setw(10) << index;
+
+		cout << "("
+				 	<< setfill('0') << setw(3) << right << asteroids[index].getX()
+				 << ", "
+				 	<< setfill('0') << setw(3) << right << asteroids[index].getY()
+				 << setfill(' ') << left << setw(4) << ")";
+
+		cout << setw(15) << asteroids[index].getWeight();
+
+		cout << setw(12) << distance << "\n";
 	}
 
 	cout << Ship.getDistance() << endl;

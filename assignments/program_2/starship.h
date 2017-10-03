@@ -27,7 +27,7 @@ public:
   int getDetectedAsteroids();
 
   int findClosest(std::vector<Asteroid>&);
-  void moveTo(int, std::vector<Asteroid>&);
+  double moveTo(int, std::vector<Asteroid>&);
 
   void mineAsteroid(int, std::vector<Asteroid>&);
   void blAsteroid(int, std::vector<Asteroid>&);
