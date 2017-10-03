@@ -1,4 +1,7 @@
 #include <iostream>
+#ifdef __linux__
+  #include <unistd.h>
+#endif
 #include "starship.h"
 
 Starship::Starship(){
@@ -133,18 +136,41 @@ void Starship::mineAsteroid(int index, std::vector<Asteroid> &asts){
 }
 
 void Starship::blAsteroid(int index, std::vector<Asteroid> &asts){
+  int pieces;
+  double weight;
 
-  // spawn 3 smaller asteroids
-  for(int i = 0;i < 3;i++){
-    Asteroid temp = Asteroid(asts[index].getX(), asts[index].getY(), asts[index].getWeight()/3, 0);
+  srand(time(NULL));
+
+  pieces = rand() % 5;
+
+  weight = asts[index].getWeight()/pieces;
+
+  std::cout << "Asteroid exploded.\n";
+
+  for (int j = 0;j < pieces;j++){
+
+    int x = rand()%100, y = rand()%100;
+
+    Asteroid temp = Asteroid(x, y, weight, 0);
     asts.push_back(temp);
+
+    if(!pieces)
+      std::cout << "You vaporized that asteroid! Woops..\n";
+    else{
+      if(x == coords[0] && y == coords[1]){
+        std::cout << "A piece flew into your ship. Repair bots are on the way\n";
+        #ifdef __linux__
+          usleep(3000000);
+        #else
+          Sleep(3000);
+        #endif
+        std::cout << "Repaired!\n";
+      } else
+        std::cout << "Piece landed at: (" << x << ", " << y << ")\n";
+    }
+
   }
 
   asts.erase(asts.begin() + index); // blow up that asteroid
-
-  // the ship will move to a different asteroid because nothing exists at these
-  // coordinates as of the end of this function
-  std::cout << "Your ship landed a missle on the asteroid and "
-            << "will return to ground zero after detecting its pieces.\n";
 
 }
