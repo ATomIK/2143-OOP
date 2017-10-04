@@ -1,3 +1,11 @@
+/*
+	Tom Johnson
+	2143 - Object Oriented Programming
+	Dr. Stringfellow
+	Program 2 - Asteroids
+	10/04/2017
+*/
+
 #include <iostream>
 #include <iomanip>
 #include <string>
@@ -7,10 +15,9 @@
 
 using namespace std;
 
+// function prototypes
 void openFiles(fstream&,fstream&);
-
 void generateAsteroidField(vector<Asteroid>&,fstream&,Starship&);
-
 void endMission(fstream&, fstream&, Starship&);
 
 int main(){
@@ -56,10 +63,22 @@ int main(){
 			Ship.transmitData(index, asteroids, distance, ofile);
 	}
 
+	// close files and end program
 	endMission(ifile, ofile, Ship);
 
 	return 0;
 }
+
+/*
+ * @FunctionName: openFiles
+ * @Description:
+ *			Prompts the user for input & output files
+ * @Params:
+ *			fstream &ifile - fstream set to ios::in
+ *			fstream &ofile - fstream set to ios::out
+ * @Returns:
+ *			void
+ */
 
 void openFiles(fstream &ifile, fstream &ofile){
 
@@ -78,6 +97,18 @@ void openFiles(fstream &ifile, fstream &ofile){
 	ofile.open(output.c_str(), ios::out);
 
 }
+
+/*
+ * @FunctionName: generateAsteroidField
+ * @Description:
+ *			Loops through input file and generates a vector of type Asteroid
+ * @Params:
+ *			vector<Asteroid> &vect - the vector used to store Asteroids
+ *			fstream &ifile - the input file to read from
+ *			Starship &Ship - Ship is passed in to know how big the field is
+ * @Returns:
+ *			void
+ */
 
 void generateAsteroidField(vector<Asteroid> &vect, fstream &ifile, Starship &Ship){
 
@@ -98,6 +129,18 @@ void generateAsteroidField(vector<Asteroid> &vect, fstream &ifile, Starship &Shi
 	Ship.setDetected(count);
 
 }
+
+/*
+ * @FunctionName: endMission
+ * @Description:
+ *			Prompts the user for input & output files
+ * @Params:
+ *			fstream &ifile - input file
+ *			fstream &ofile - output file
+ *			Starship &Ship - passed in ship to prompt end results
+ * @Returns:
+ *			void
+ */
 
 void endMission(fstream &ifile, fstream &ofile, Starship& Ship){
 
