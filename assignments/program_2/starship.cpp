@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #ifdef __linux__
   #include <unistd.h>
 #endif
@@ -32,6 +33,7 @@ void Starship::captainsLog(){
 	std::cout << "How many asteroids <9 tons would you like to collect before\n "
 					"returning to earth? (integer): ";
 	std::cin >> limit;
+  std::cout << "\n";
 
 }
 
@@ -101,13 +103,11 @@ double Starship::moveTo(int index, std::vector<Asteroid> &asts){
   coords[0] = asts[index].getX();
   coords[1] = asts[index].getY();
 
-  // temp print
-  // std::cout << "\nMoved to: " << coords[0] << ", " << coords[1] << "\nDistance: " << dist << "\n";
   return dist;
 
 }
 
-void Starship::mineAsteroid(int index, std::vector<Asteroid> &asts){
+bool Starship::mineAsteroid(int index, std::vector<Asteroid> &asts){
 
   if(asts[index].getWeight() < 9.0){
     // asteroid in the vector is now collected
@@ -118,20 +118,30 @@ void Starship::mineAsteroid(int index, std::vector<Asteroid> &asts){
     cargoWeight = cargoWeight + asts[index].getWeight();
 
     // std::cout << "Asteroid weight: " << asts[index].getWeight() << "\n";
+    std::cout << "Warped to: ("
+              << asts[index].getX() << ", " << asts[index].getY()
+              << "). Mining asteroid...\n";
+    #ifdef __linux__
+      usleep(1000000);
+    #else
+      Sleep(1000);
+    #endif
+    return true;
   } else {
+
     int choice;
-    std::cout << "Uh-oh, Asteroid # " << index << " is TOO BIG! Would you like to blast\n"
-                "it?\n1. Yes\n2. No\n";
+    std::cout << "\nUh-oh, you've encountered an asteroid too large for our drill!"
+              << "\nWould you like to blast it?\n1. Yes\n2. No\n";
     std::cin >> choice;
+    std::cout << "\n";
+
     if(choice == 2)
       asts[index].setCollected(true); // not really collected, just ignored
     else {
       blAsteroid(index, asts);
     }
   }
-
-  // temp print
-  // std::cout << "Cargo weight: " << cargoWeight << "\n";
+  return false;
 
 }
 
@@ -147,6 +157,9 @@ void Starship::blAsteroid(int index, std::vector<Asteroid> &asts){
 
   std::cout << "Asteroid exploded.\n";
 
+  if(!pieces)
+    std::cout << "You vaporized that asteroid! Woops..\n";
+
   for (int j = 0;j < pieces;j++){
 
     int x = rand()%100, y = rand()%100;
@@ -154,23 +167,37 @@ void Starship::blAsteroid(int index, std::vector<Asteroid> &asts){
     Asteroid temp = Asteroid(x, y, weight, 0);
     asts.push_back(temp);
 
-    if(!pieces)
-      std::cout << "You vaporized that asteroid! Woops..\n";
-    else{
-      if(x == coords[0] && y == coords[1]){
-        std::cout << "A piece flew into your ship. Repair bots are on the way\n";
-        #ifdef __linux__
-          usleep(3000000);
-        #else
-          Sleep(3000);
-        #endif
-        std::cout << "Repaired!\n";
-      } else
-        std::cout << "Piece landed at: (" << x << ", " << y << ")\n";
-    }
+    if(x == coords[0] && y == coords[1]){
+      std::cout << "A piece flew into your ship. Repair bots are on the way\n";
+      #ifdef __linux__
+        usleep(3000000);
+      #else
+        Sleep(3000);
+      #endif
+      std::cout << "Repaired!\n";
+    } else
+      std::cout << "A piece flew to: (" << x << ", " << y << ")\n";
 
   }
 
+  std::cout << "\n";
+
   asts.erase(asts.begin() + index); // blow up that asteroid
+
+}
+
+void Starship::transmitData(int i, std::vector<Asteroid> &asts, double distance, std::fstream &ofile){
+
+  ofile << std::left << std::setw(4) << " " << std::setw(10) << i;
+
+  ofile << "("
+        << std::setfill('0') << std::setw(3) << std::right << asts[i].getX()
+       << ", "
+        << std::setfill('0') << std::setw(3) << std::right << asts[i].getY()
+       << std::setfill(' ') << std::left << std::setw(4) << ")";
+
+  ofile << std::fixed << std::setprecision(2) << std::setw(15) << asts[i].getWeight();
+
+  ofile << std::fixed << std::setprecision(2) << std::setw(12) << (distance*10) << "\n";
 
 }

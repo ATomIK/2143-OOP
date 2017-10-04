@@ -29,7 +29,9 @@ public:
   int findClosest(std::vector<Asteroid>&);
   double moveTo(int, std::vector<Asteroid>&);
 
-  void mineAsteroid(int, std::vector<Asteroid>&);
+  bool mineAsteroid(int, std::vector<Asteroid>&);
   void blAsteroid(int, std::vector<Asteroid>&);
+
+  void transmitData(int, std::vector<Asteroid>&, double, std::fstream&);
 
 };

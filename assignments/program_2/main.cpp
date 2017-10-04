@@ -11,6 +11,8 @@ void openFiles(fstream&,fstream&);
 
 void generateAsteroidField(vector<Asteroid>&,fstream&,Starship&);
 
+void endMission(fstream&, fstream&, Starship&);
+
 int main(){
 
 	fstream ifile, ofile;
@@ -25,43 +27,36 @@ int main(){
 	// generate asteroids from input file & allow the ship to scan
 	generateAsteroidField(asteroids,ifile,Ship);
 
-	cout << left << setw(15) << "Asteroid #" << setw(12) << "Position" << setw(15)
-			 << "Size" << setw(12) << "Distance" << setw(0) << endl;
+	// setting tabular mission headers
+	ofile << left << setw(15) << "Asteroid #" << setw(12) << "Position" << setw(15)
+			 << "Size" << setw(12) << "Distance (in miles)" << endl;
 
 	// loops until the captain gets as many asteroids as he wants
 	while(Ship.getLimit() != Ship.getAsteroidCount()){
 
 		int index;
 		double distance;
+		bool mined;
 
 		// find target
 		index = Ship.findClosest(asteroids);
+
 		// if the captain wants to collect more than the field, end mission.
 		if(Ship.getAsteroidCount() == Ship.getDetectedAsteroids())
 			break;
+
 		// ship moves to target
 		distance = Ship.moveTo(index, asteroids);
 
 		// mine asteroid
-		Ship.mineAsteroid(index, asteroids);
+		mined = Ship.mineAsteroid(index, asteroids);
 
-		cout << left << setw(10) << index;
-
-		cout << "("
-				 	<< setfill('0') << setw(3) << right << asteroids[index].getX()
-				 << ", "
-				 	<< setfill('0') << setw(3) << right << asteroids[index].getY()
-				 << setfill(' ') << left << setw(4) << ")";
-
-		cout << setw(15) << asteroids[index].getWeight();
-
-		cout << setw(12) << distance << "\n";
+		// send mission data back to earth
+		if(mined)
+			Ship.transmitData(index, asteroids, distance, ofile);
 	}
 
-	cout << Ship.getDistance() << endl;
-	cout << Ship.getAsteroidCount() << endl;
-
-	cout << "\nRan\n";
+	endMission(ifile, ofile, Ship);
 
 	return 0;
 }
@@ -101,5 +96,19 @@ void generateAsteroidField(vector<Asteroid> &vect, fstream &ifile, Starship &Shi
   }
 
 	Ship.setDetected(count);
+
+}
+
+void endMission(fstream &ifile, fstream &ofile, Starship& Ship){
+
+	ofile << "\nOur ship traveled: " << Ship.getDistance() * 10 << " miles!\n"
+				<< "Asteroids collected: " << Ship.getAsteroidCount() << "\n";
+
+	cout << "\nMission complete!\n"
+			 << "Our ship traveled: " << Ship.getDistance() * 10 << " miles!\n"
+			 << "Asteroids collected: " << Ship.getAsteroidCount() << "\n";
+
+	ifile.close();
+	ofile.close();
 
 }
