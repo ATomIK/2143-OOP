@@ -4,6 +4,8 @@
 // check in case the program was compiled on linux as it was created on linux
 #ifdef __linux__
   #include <unistd.h>
+#else
+  #include <windows.h>
 #endif
 
 #include "starship.h"
@@ -102,7 +104,7 @@ int Starship::getLimit() {
  *			int - total distance the ship has traveled
  */
 
-int Starship::getDistance() {
+double Starship::getDistance() {
   return distance;
 }
 
@@ -153,7 +155,8 @@ int Starship::findClosest(std::vector<Asteroid> &vect) {
   // set initial minDist to the maximum double value possible
   minDist = 1.79769e+308;
   // go through vector to compare distances
-  for(int i = 0;i < vect.size();i++){
+  // set i's type to vector's size_type to avoid possible loss of data
+  for(std::vector<Asteroid>::size_type i = 0;i < vect.size();i++){
 
     double tempDist = 0;
 
@@ -166,7 +169,8 @@ int Starship::findClosest(std::vector<Asteroid> &vect) {
     // the distance is less than the initla minDist
     // then this is the closest asteroid to the ship
     if(!vect[i].isCollected() && tempDist < minDist){
-      index = i;
+	  // had to typecast i as int because of size_type
+      index = (int)i;
       minDist = tempDist;
     }
 
@@ -285,7 +289,7 @@ void Starship::blAsteroid(int index, std::vector<Asteroid> &asts){
   int pieces;
   double weight;
 
-  srand(time(NULL));
+  srand((unsigned int)time(NULL));
 
   pieces = rand() % 5;
 

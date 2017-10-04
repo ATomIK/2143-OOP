@@ -33,7 +33,7 @@ public:
   // gets the ship's collection limit
   int getLimit();
   // gets the ship's current total distance traveled
-  int getDistance();
+  double getDistance();
   // gets amount of asteroids collected
   int getAsteroidCount();
   // gets total amount of asteroids within a field

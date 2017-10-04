@@ -34,10 +34,6 @@ int main(){
 	// generate asteroids from input file & allow the ship to scan
 	generateAsteroidField(asteroids,ifile,Ship);
 
-	// setting tabular mission headers
-	ofile << left << setw(15) << "Asteroid #" << setw(12) << "Position" << setw(15)
-			 << "Size" << setw(12) << "Distance (in miles)" << endl;
-
 	// loops until the captain gets as many asteroids as he wants
 	while(Ship.getLimit() != Ship.getAsteroidCount()){
 
@@ -95,6 +91,11 @@ void openFiles(fstream &ifile, fstream &ofile){
 	output = output == "def" ? "output.txt" : output;
 
 	ofile.open(output.c_str(), ios::out);
+
+	// setting tabular mission headers
+	ofile << "Welcome captain, here's a table of asteroids collected:\n\n";
+	ofile << left << setw(15) << "Asteroid #" << setw(12) << "Position" << setw(15)
+		<< "Size" << setw(12) << "Distance (in miles)" << endl;
 
 }
 
