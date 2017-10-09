@@ -30,6 +30,8 @@ class SpaceShip : public SpaceObject {
 - A bird is NOT a mammal
 - An apple pie is NOT an apple.
 
+### **Inheritance is transitive**
+
 ### **Why use Inheritance**
 
 1. REUSE CODE
