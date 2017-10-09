@@ -36,3 +36,5 @@ class SpaceShip : public SpaceObject {
 
 1. REUSE CODE
 1. REUSE CONCEPTS
+
+
