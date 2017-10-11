@@ -37,4 +37,27 @@ class SpaceShip : public SpaceObject {
 1. REUSE CODE
 1. REUSE CONCEPTS
 
+### Multiple inheritance
 
+C++
+```cpp
+  class AudioBook : AudioMaterials, Book {
+
+  };
+```
+
+Java
+```java
+class AudioBook implements IAudioMaterials, IBook {
+
+};
+```
+
+- Subclassing for specialization (subtyping)
+- Subclassing for specification
+- Subclassing for construction
+- Subclassing for generalization
+- Subclassing for extension
+- Subclassing for limitation
+- Subclassing for variance
+- Subclassing for combination
