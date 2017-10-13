@@ -1,0 +1,3 @@
+SpaceObject::SpaceObject(){
+
+}

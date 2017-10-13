@@ -2,14 +2,15 @@
 
 class SpaceObject {
 
+protected:
+  int x, y;
+
 private:
 
 
 public:
 
   SpaceObject();
-
-  void moveTo(int,std::vector<Asteroid>&);
 
   ~SpaceObject();
 

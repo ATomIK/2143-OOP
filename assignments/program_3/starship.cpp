@@ -148,23 +148,26 @@ int Starship::getDetectedAsteroids(){
  */
 int Starship::findClosest(std::vector<Asteroid> &vect) {
 
-  double minDist = 0;
+  // set initial minDist to the maximum double value possible
+  double minDist = 1.79769e+308;
 
   // loop through all asteroids
   int index = 0;
-  // set initial minDist to the maximum double value possible
-  minDist = 1.79769e+308;
   // go through vector to compare distances
   // set i's type to vector's size_type to avoid possible loss of data
   for(std::vector<Asteroid>::size_type i = 0;i < vect.size();i++){
 
     double tempDist = 0;
 
+    // start new method: computeDistance
     int x, y;
     x = vect[i].getX() - coords[0];
     y = vect[i].getY() - coords[1];
     // ship distancec from asteroid[i]
     tempDist = std::sqrt((x*x + y*y));
+    // end new method: computeDistance
+    // tempDist = computeDistance(vect[i].getX(), vect[i].getY());
+
     // if the asteroid hasn't been collected and
     // the distance is less than the initla minDist
     // then this is the closest asteroid to the ship
