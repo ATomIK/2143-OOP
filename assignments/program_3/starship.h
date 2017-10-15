@@ -3,7 +3,7 @@
 #include <cmath>
 #include "asteroid.h"
 
-class Starship : SpaceObject {
+class Starship : public SpaceObject {
 
 private:
   // asteroids in the field

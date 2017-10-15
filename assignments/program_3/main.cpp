@@ -2,7 +2,7 @@
 	Tom Johnson
 	2143 - Object Oriented Programming
 	Dr. Stringfellow
-	Program 2 - Asteroids
+	Program 3 - StarProbe
 	10/04/2017
 */
 
