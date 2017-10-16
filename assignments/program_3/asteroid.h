@@ -1,12 +1,13 @@
 #pragma once
 #include <fstream>
 #include <vector>
+#include "spaceobject.h"
 
-class Asteroid {
+class Asteroid : public SpaceObject {
 
 private:
-  // x , y coordinates
-  int x, y;
+  // coords[2] are inherited from SpaceObject
+
   // weight of Asteroid
   double weight;
   // collected status

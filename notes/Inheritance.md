@@ -5,19 +5,19 @@ Property that instances of a child class (subclass, derived class) can access bo
 ```cpp
 class SpaceObject {
 private:
-  int x, y;
+	int x, y;
 
 public:
-  void moveto(){
-    // update coords
-  }
+	void moveto(){
+		// update coords
+	}
 };
 
-class SpaceShip : public SpaceObject {
-  bool collect(){
-    moveTo();
-    // collect asteroid
-  }
+class SpaceCraft : public SpaceObject {
+	bool collect(){
+		// main called moveTo();
+		// collect asteroid
+	}
 };
 ```
 
@@ -41,9 +41,9 @@ class SpaceShip : public SpaceObject {
 
 C++
 ```cpp
-  class AudioBook : AudioMaterials, Book {
+class AudioBook : public AudioMaterials, public Book {
 
-  };
+};
 ```
 
 Java
