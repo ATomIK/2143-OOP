@@ -3,7 +3,7 @@
 class SpaceObject {
 
 protected:
-  int x, y;
+  int coords[2];
 
 private:
 
