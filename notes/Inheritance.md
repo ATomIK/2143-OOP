@@ -61,3 +61,29 @@ class AudioBook implements IAudioMaterials, IBook {
 - Subclassing for limitation
 - Subclassing for variance
 - Subclassing for combination
+
+## Private vs Protected vs Public Inheritance
+
+**Private**
+
+```cpp
+class Child : private Parent {};
+```
+
+Methods are only available to the child class. (?)
+
+**Protected**
+
+```cpp
+class Child : protected Parent {};
+```
+
+Methods and variables are only available to the child class. (?)
+
+**Public**
+
+```cpp
+class Child : public Parent {};
+```
+
+Methods and variables are only available to the child class. (?)

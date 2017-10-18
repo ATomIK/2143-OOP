@@ -1,13 +1,14 @@
 #pragma once
 #include "parent.h"
 
-class Child : protected Parent {
+class Child : private Parent {
 private:
 
 public:
+  Child();
+
   void setCoords(int,int);
 
-  int getX();
-  int getY();
+  void echoCoords();
 
 };

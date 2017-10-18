@@ -9,4 +9,7 @@ protected:
 
 public:
 
+  int getX();
+  int getY();
+
 };

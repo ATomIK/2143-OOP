@@ -1,20 +1,22 @@
+#include "iostream"
 #include "child.h"
+
+Child::Child(){
+  coords[0] = 0;
+  coords[1] = 1;
+}
 
 void Child::setCoords(int x, int y){
 
   coords[0] = x;
   coords[1] = y;
 
-}
-
-int Child::getX(){
-
-  return coords[0];
+  std::cout << "Set: " << coords[0] << ", " << coords[1] << "\n";
 
 }
 
-int Child::getY(){
+void Child::echoCoords(){
 
-  return coords[1];
+  std::cout << getX() << ", " << getY() << "\n";
 
 }

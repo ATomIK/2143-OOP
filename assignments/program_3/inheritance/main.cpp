@@ -11,9 +11,7 @@ int main(){
 
   child.setCoords(5,7);
 
-  cout << child.getX() << "\n";
-
-  cout << child.getY() << "\n";
+  // child.echoCoords();
 
   return 0;
 }
