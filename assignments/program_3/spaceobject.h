@@ -2,20 +2,19 @@
 
 class SpaceObject {
 
-protected:
+private:
   int coords[2]; // coordinates of the object
 
-private:
-
+protected:
 
 public:
 
   SpaceObject();
 
-  // return x coordinate
-  int getX();
-  // return y coordinate
-  int getY();
+  // returns coordinate
+  int getCoord(int);
+  // sets coordinate
+  void setCoord(int,int);
 
   ~SpaceObject();
 
