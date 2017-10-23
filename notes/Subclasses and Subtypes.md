@@ -22,4 +22,10 @@ It's a subtype if it provides all the operations of the parent class **and** sat
 public void push(itemtype item);
 ```
 
+## Storage using subclasses
+
+1. Minimum space allocation
+1. Maximum space allocation
+1. Dynamic memory allocation
+
 

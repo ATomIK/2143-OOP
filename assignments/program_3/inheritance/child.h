@@ -1,7 +1,7 @@
 #pragma once
 #include "parent.h"
 
-class Child : private Parent {
+class Child : protected Parent {
 private:
 
 public:
