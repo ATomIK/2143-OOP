@@ -64,38 +64,20 @@ class AudioBook implements IAudioMaterials, IBook {
 
 ## Inheritance Scope
 
-===
+***
 
 ![](class_inheritance_diagram.png)
 
-===
+***
 
-**Private scope**
+**Public inheritance**
 
-Methods and vars are only available to the class.
+Parent's public & protected data will be accessible by child class.
+
+**Protected inheritance**
+
+Parent's protected data will be accessible by child class.
 
 **Private inheritance**
 
-
-
-```cpp
-class Child : private Parent {};
-```
-
-Methods are only available to the child class. (?)
-
-**Protected**
-
-```cpp
-class Child : protected Parent {};
-```
-
-Methods and variables are only available to the child class. (?)
-
-**Public**
-
-```cpp
-class Child : public Parent {};
-```
-
-Methods and variables are only available to the child class. (?)
+Parent's private data will be accessible by child class.
