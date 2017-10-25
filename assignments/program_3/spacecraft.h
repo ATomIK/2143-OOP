@@ -9,7 +9,7 @@ private:
 
   // asteroids in the field
   int detectedAsteroids;
-  // limit of asteroids to collect
+  // limit of asteroids to collect/visit
   int limit;
   // total weight of asteroids collected
   double cargoWeight;

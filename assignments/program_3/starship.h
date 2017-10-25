@@ -21,12 +21,12 @@ public:
 
 
   // "mines" an asteroid
-  bool mineAsteroid(int, std::vector<Asteroid>&);
+  void mineAsteroid(int, std::vector<Asteroid>&);
   // "blasts" an asteroid
   void blAsteroid(int, std::vector<Asteroid>&);
 
   // formats output
-  void transmitData(int, std::vector<Asteroid>&, double, std::fstream&);
+  //void transmitData(int, std::vector<Asteroid>&, double, std::fstream&);
 
   ~Starship();
 

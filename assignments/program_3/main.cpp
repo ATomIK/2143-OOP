@@ -12,55 +12,66 @@
 
 #include "asteroid.h"
 #include "starship.h"
+#include "spaceprobe.h"
 
 using namespace std;
 
 // function prototypes
-void openFiles(fstream&,fstream&);
+void openFile(fstream&);
 void generateAsteroidField(vector<Asteroid>&,fstream&,Starship&);
-void endMission(fstream&, fstream&, Starship&);
+void endMission(fstream&, Starship&, SpaceProbe&);
 
 int main(){
 
-	fstream ifile, ofile;
+	fstream ifile;
 	Starship Ship;
+	SpaceProbe Probe;
 	vector<Asteroid> asteroids;
+	vector<Asteroid> preciousRoids;
 
 	// prompt the user for input/output
-	openFiles(ifile,ofile);
+	openFile(ifile);
 	//  discuss flight plans with the captain (user)
 	Ship.captainsLog();
+	// discuss flight plans of the space probe
+	Probe.plans();
 
 	// generate asteroids from input file & allow the ship to scan
 	generateAsteroidField(asteroids,ifile,Ship);
 
 	// loops until the captain gets as many asteroids as he wants
-	while(Ship.getLimit() != Ship.getAsteroidCount()){
+	// launch both the probe and the star ship
+	while(Ship.getLimit() != Ship.getAsteroidCount() || Probe.getLimit() != Probe.getScannedCount()){
 
-		int index;
-		double distance;
-		bool mined;
+		int index, probei;
+		double distance, probedist;
 
 		// find target
 		index = Ship.findClosest(asteroids);
+		probei = Probe.findClosest(asteroids);
 
 		// if the captain wants to collect more than the field, end mission.
-		if(Ship.getAsteroidCount() == Ship.getDetectedAsteroids())
+		// or if the probe is set to scan more than the field, end mission.
+		if(Ship.getAsteroidCount() == Ship.getDetectedAsteroids() || Probe.getScannedCount() == Ship.getDetectedAsteroids())
 			break;
 
 		// ship moves to target
 		distance = Ship.moveTo(index, asteroids);
+		// probe moves to target
+		probedist = Probe.moveTo(probei, asteroids);
 
 		// mine asteroid
-		mined = Ship.mineAsteroid(index, asteroids);
+		Ship.mineAsteroid(index, asteroids);
+		// probe scans asteroid
+		Probe.scanAsteroid(probei, asteroids);
 
 		// send mission data back to earth
-		if(mined)
-			Ship.transmitData(index, asteroids, distance, ofile);
+		// if(mined)
+			// Ship.transmitData(index, asteroids, distance);
 	}
 
 	// close files and end program
-	endMission(ifile, ofile, Ship);
+	endMission(ifile, Ship, Probe);
 
 	return 0;
 }
@@ -76,26 +87,15 @@ int main(){
  *			void
  */
 
-void openFiles(fstream &ifile, fstream &ofile){
+void openFile(fstream &ifile){
 
-	string input, output;
+	string input;
 
 	cout << "Name of input file ('def' for 'input.txt'): ";
 	cin >> input;
 	input = input == "def" ? "input.txt" : input;
 
 	ifile.open(input.c_str(), ios::in);
-
-	cout << "Name of output file ('def' for 'output.txt'): ";
-	cin >> output;
-	output = output == "def" ? "output.txt" : output;
-
-	ofile.open(output.c_str(), ios::out);
-
-	// setting tabular mission headers
-	ofile << "Welcome captain, here's a table of asteroids collected:\n\n";
-	ofile << left << setw(15) << "Asteroid #" << setw(12) << "Position" << setw(15)
-		<< "Size" << setw(12) << "Distance (in miles)" << endl;
 
 }
 
@@ -123,7 +123,7 @@ void generateAsteroidField(vector<Asteroid> &vect, fstream &ifile, Starship &Shi
   ifile >> getx >> gety >> getw >> precious;
   while(!ifile.eof()){
 		p = precious == 'P' ? true : false;
-		Asteroid temp(getx,gety,getw,c,p);
+		Asteroid temp(getx,gety,getw,c,0,p);
     vect.push_back(temp);
     ifile >> getx >> gety >> getw >> precious;
 		count++;
@@ -145,16 +145,14 @@ void generateAsteroidField(vector<Asteroid> &vect, fstream &ifile, Starship &Shi
  *			void
  */
 
-void endMission(fstream &ifile, fstream &ofile, Starship& Ship){
-
-	ofile << "\nOur ship traveled: " << Ship.getDistance() * 10 << " miles!\n"
-				<< "Asteroids collected: " << Ship.getAsteroidCount() << "\n";
+void endMission(fstream &ifile, Starship& Ship, SpaceProbe& Probe){
 
 	cout << "\nMission complete!\n"
 			 << "Our ship traveled: " << Ship.getDistance() * 10 << " miles!\n"
-			 << "Asteroids collected: " << Ship.getAsteroidCount() << "\n";
+			 << "Asteroids collected: " << Ship.getAsteroidCount() << "\n\n"
+			 << "Our probe traveled: " << Probe.getDistance() * 10 << " miles!\n"
+			 << "It found " << Probe.getPreciousRoids() << " asteroids that contain precious metals!\n";
 
 	ifile.close();
-	ofile.close();
 
 }

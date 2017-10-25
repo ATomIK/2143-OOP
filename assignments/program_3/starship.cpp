@@ -57,10 +57,10 @@ void Starship::captainsLog(){
 	std::cin >> choice;
 
   // if manually defined, set x and y
-  int coords[2];
+	int coords[2] = { 0,0 };
 	if(choice == 2){
 		std::cout << "Please enter an x coordinate followed by a y coordinate\n "
-		"for the ship to warp to. (Example: 5 25):";
+		"for the ship to warp to. ( Example: 5 25 ):";
 		std::cin >> coords[0] >> coords[1];
 	}
   std::cout << "\nWarping to (" << coords[0] << "," << coords[1] << ")...\n\n";
@@ -77,6 +77,7 @@ void Starship::captainsLog(){
 
 }
 
+
 /*
  * @MethodName: mineAsteroid
  * @Description:
@@ -91,52 +92,53 @@ void Starship::captainsLog(){
  *			bool - whether the ship mined something or not
  */
 
-bool Starship::mineAsteroid(int index, std::vector<Asteroid> &asts){
+void Starship::mineAsteroid(int index, std::vector<Asteroid> &asts){
 
-  if(asts[index].getWeight() < 9.0){
-    // asteroid in the vector is now collected
-    asts[index].setCollected(true);
-    // asteroid count increases
-    asteroids++;
-    // ship's cargo weight is updated
-    setWeight(getWeight() + asts[index].getWeight());
+	// if the starship has not reached its limit
+	if (getLimit() != asteroids) {
 
-    // std::cout << "Asteroid weight: " << asts[index].getWeight() << "\n";
-    std::cout << "Warped to: ("
-              << asts[index].getCoord(0) << ", " << asts[index].getCoord(1)
-              << "). Mining asteroid...\n";
+		if (asts[index].getWeight() < 9.0) {
+			// asteroid in the vector is now collected
+			asts[index].setCollected(true);
+			// asteroid count increases
+			asteroids++;
+			// ship's cargo weight is updated
+			setWeight(getWeight() + asts[index].getWeight());
 
-    // linux has a different sleep function than windows.
-    #ifdef __linux__
-      usleep(1000000);
-    #else
-      Sleep(1000);
-    #endif
+			// std::cout << "Asteroid weight: " << asts[index].getWeight() << "\n";
+			std::cout << "Starship warped to: ("
+				<< asts[index].getCoord(0) << ", " << asts[index].getCoord(1)
+				<< "). Mining asteroid...\n";
 
-    // ship mined an asteroid.
-    return true;
-  } else {
+			// linux has a different sleep function than windows.
+			#ifdef __linux__
+				usleep(1000000);
+			#else
+				Sleep(1000);
+			#endif
 
-    // prompt the user for a choice
-    int choice;
-    std::cout << "\nUh-oh, you've encountered an asteroid too large for our drill!"
-              << "\nWould you like to blast it?\n1. Yes\n2. No\n";
-    std::cin >> choice;
-    std::cout << "\n";
+		} else {
 
-    // User chose not to blast it, ignoring it.
-    if(choice == 2){
-      asts.erase(asts.begin() + index); // delete asteroid from field
+			// prompt the user for a choice
+			int choice;
+			std::cout << "\nUh-oh, you've encountered an asteroid too large for our drill!"
+				<< "\nWould you like to blast it?\n1. Yes\n2. No\n";
+			std::cin >> choice;
+			std::cout << "\n";
 
-      std::cout << "Ignoring asteroid...\n\n";
-    } else {
-      // blast the asteroid
-      blAsteroid(index, asts);
-    }
-  }
-  // ship did no mine an asteroid
-  return false;
+			// User chose not to blast it, ignoring it.
+			if (choice == 2) {
+				asts.erase(asts.begin() + index); // delete asteroid from field
 
+				std::cout << "Ignoring asteroid...\n\n";
+			} else {
+				// blast the asteroid
+				blAsteroid(index, asts);
+			}
+		}
+
+	} else
+		std::cout << "Starship is idle...\n";
 }
 
 /*
@@ -182,7 +184,7 @@ void Starship::blAsteroid(int index, std::vector<Asteroid> &asts){
     bool precious = false;
     if(asts[index].getPrecious())
       precious = true;
-    Asteroid temp = Asteroid(x, y, weight, 0, precious);
+    Asteroid temp = Asteroid(x, y, weight, 0, 0, precious);
     asts.push_back(temp);
 
     // A piece flew into the ship if its coordinates equal the ship's coordinates
@@ -220,7 +222,7 @@ void Starship::blAsteroid(int index, std::vector<Asteroid> &asts){
  *			void
  */
 
-void Starship::transmitData(int i, std::vector<Asteroid> &asts, double distance, std::fstream &ofile){
+/*void Starship::transmitData(int i, std::vector<Asteroid> &asts, double distance, std::fstream &ofile){
 
   ofile << std::left << std::setw(4) << " " << std::setw(10) << i;
 
@@ -234,7 +236,7 @@ void Starship::transmitData(int i, std::vector<Asteroid> &asts, double distance,
 
   ofile << std::fixed << std::setprecision(2) << std::setw(12) << (getDistance()*10) << "\n";
 
-}
+}*/
 
 /*
  * @DestructorName: ~Starship
