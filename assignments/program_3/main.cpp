@@ -115,15 +115,17 @@ void generateAsteroidField(vector<Asteroid> &vect, fstream &ifile, Starship &Shi
 
   int getx,gety;
   double getw;
-  bool c = false;
+	char precious;
+  bool c = false, p = false;
 
 	int count = 1;
 
-  ifile >> getx >> gety >> getw;
+  ifile >> getx >> gety >> getw >> precious;
   while(!ifile.eof()){
-		Asteroid temp(getx,gety,getw,c);
+		p = precious == 'P' ? true : false;
+		Asteroid temp(getx,gety,getw,c,p);
     vect.push_back(temp);
-    ifile >> getx >> gety >> getw;
+    ifile >> getx >> gety >> getw >> precious;
 		count++;
   }
 

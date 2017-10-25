@@ -1,5 +1,15 @@
-SpaceCraft::SpaceCraft() : SpaceObject(){
+#include "spaceobject.h"
+#include "spacecraft.h"
+#include <cmath>
 
+SpaceCraft::SpaceCraft(){
+  setCoord(0,0);
+  setCoord(0,1);
+  cargoWeight = 0.0;
+  distance = 0.0;
+
+  limit = 0;
+  detectedAsteroids = 0;
 }
 
 /*
@@ -16,18 +26,116 @@ SpaceCraft::SpaceCraft() : SpaceObject(){
 double SpaceCraft::moveTo(int index, std::vector<Asteroid> &asts){
 
   double x, y, dist;
-  x = asts[index].getX() - coords[0];
-  y = asts[index].getY() - coords[1];
+  x = asts[index].getCoord(0) - getCoord(0);
+  y = asts[index].getCoord(1) - getCoord(1);
   dist = std::sqrt((x*x) + (y*y));
   // increase total distance
   distance+= dist;
 
   // ship's coordinates are updated
-  coords[0] = asts[index].getX();
-  coords[1] = asts[index].getY();
+  setCoord(asts[index].getCoord(0),0);
+  setCoord(asts[index].getCoord(1),1);
 
   return dist;
 
+}
+
+/*
+ * @MethodName: setDetected
+ * @Description:
+ *			Sets detected asteroids so the ship will know when to stop trying to collect
+ * @Params:
+ *			int i - the number of asteroids that exist in the field
+ * @Returns:
+ *			void
+ */
+
+void SpaceCraft::setDetected(int i){
+  detectedAsteroids = i;
+}
+
+/*
+ * @MethodName: setLimit
+ * @Description:
+ *			Sets the collection limit.
+ * @Params:
+ *			int - limit
+ * @Returns:
+ *			void
+ */
+
+void SpaceCraft::setLimit(int lim) {
+  limit = lim;
+}
+
+/*
+ * @MethodName: setWeight
+ * @Description:
+ *			Sets the weight of the spacecraft.
+ * @Params:
+   *			double - weight
+ * @Returns:
+ *			void
+ */
+
+void SpaceCraft::setWeight(double w) {
+  cargoWeight = w;
+}
+
+/*
+ * @MethodName: getLimit
+ * @Description:
+ *			Returns the user-specified collection limit.
+ * @Params:
+ *			n/a
+ * @Returns:
+ *			int - user-specified asteroid collection limit
+ */
+
+int SpaceCraft::getLimit() {
+  return limit;
+}
+
+/*
+ * @MethodName: getDistance
+ * @Description:
+ *			Returns the current total distance traveled by the ship.
+ * @Params:
+ *			n/a
+ * @Returns:
+ *			int - total distance the ship has traveled
+ */
+
+double SpaceCraft::getDistance() {
+  return distance;
+}
+
+/*
+ * @MethodName: getDetectedAsteroids
+ * @Description:
+ *			Returns the amount of asteroids detected in a field.
+ * @Params:
+ *			n/a
+ * @Returns:
+ *			int - detected asteroids
+ */
+
+int SpaceCraft::getDetectedAsteroids(){
+  return detectedAsteroids;
+}
+
+/*
+ * @MethodName: getWeight
+ * @Description:
+ *			Returns the weight of the craft's cargo bay
+ * @Params:
+ *			n/a
+ * @Returns:
+ *			double - weight
+ */
+
+double SpaceCraft::getWeight(){
+  return cargoWeight;
 }
 
 /*
@@ -55,8 +163,8 @@ int SpaceCraft::findClosest(std::vector<Asteroid> &vect) {
 
     // start new method: computeDistance
     int x, y;
-    x = vect[i].getX() - coords[0];
-    y = vect[i].getY() - coords[1];
+    x = vect[i].getCoord(0) - getCoord(0);
+    y = vect[i].getCoord(1) - getCoord(1);
     // ship distancec from asteroid[i]
     tempDist = std::sqrt((x*x + y*y));
     // end new method: computeDistance
@@ -78,6 +186,6 @@ int SpaceCraft::findClosest(std::vector<Asteroid> &vect) {
 
 }
 
-SpaceCraft::~SpaceCraft() : ~SpaceObject(){
+SpaceCraft::~SpaceCraft(){
 
 }

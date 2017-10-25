@@ -3,9 +3,9 @@
 class SpaceObject {
 
 private:
-  int coords[2]; // coordinates of the object
 
 protected:
+  int coords[2]; // coordinates of the object
 
 public:
 

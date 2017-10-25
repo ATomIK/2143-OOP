@@ -6,7 +6,6 @@
 class Asteroid : public SpaceObject {
 
 private:
-  // coords[2] are inherited from SpaceObject
 
   // weight of Asteroid
   double weight;
@@ -20,7 +19,7 @@ public:
   // default constructor
   Asteroid();
   // constructor
-  Asteroid(int,int,double,bool);
+  Asteroid(int,int,double,bool,bool);
   // copy constructor
   Asteroid(const Asteroid &);
 
@@ -28,11 +27,8 @@ public:
   bool isCollected();
   // return weight
   double getWeight();
-  // return x coordinate
-  int getX();
-  // return y coordinate
-  int getY();
-
+  // returns if the asteroid is precious
+  bool getPrecious();
   // set the collected status
   void setCollected(bool);
 

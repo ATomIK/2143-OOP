@@ -1,3 +1,5 @@
+#include "spaceobject.h"
+
 SpaceObject::SpaceObject(){
 
 }
@@ -29,4 +31,8 @@ int SpaceObject::getCoord(int type){
 
 void SpaceObject::setCoord(int set, int type){
   coords[type] = set;
+}
+
+SpaceObject::~SpaceObject(){
+
 }

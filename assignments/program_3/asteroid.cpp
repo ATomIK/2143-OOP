@@ -11,10 +11,11 @@
  */
 
 Asteroid::Asteroid(){
-  x = 0;
-  y = 0;
+  setCoord(0,0);
+  setCoord(0,1);
   weight = 0.0;
   collected = false;
+  p = false;
 }
 
 /*
@@ -27,11 +28,12 @@ Asteroid::Asteroid(){
  *			n/a
  */
 
-Asteroid::Asteroid(int setx, int sety, double setw, bool setc){
-  x = setx;
-  y = sety;
+Asteroid::Asteroid(int setx, int sety, double setw, bool setc, bool precious){
+  setCoord(setx,0);
+  setCoord(sety,1);
   weight = setw;
   collected = setc;
+  p = precious;
 }
 
 /*
@@ -45,8 +47,9 @@ Asteroid::Asteroid(int setx, int sety, double setw, bool setc){
  */
 
 Asteroid::Asteroid(const Asteroid &obj){
-  x = obj.x;
-  y = obj.y;
+  int x = obj.coords[0], y = obj.coords[1];
+  setCoord(x,0);
+  setCoord(y,1);
   weight = obj.weight;
   collected = obj.collected;
 }
@@ -80,31 +83,17 @@ double Asteroid::getWeight(){
 }
 
 /*
- * @MethodName: getX
+ * @MethodName: getPrecious
  * @Description:
- *			Returns x coordinate of Asteroid
+ *			Returns if the Asteroid has precious metals
  * @Params:
  *			n/a
  * @Returns:
- *			int - x coordinate
+ *			bool - precious metals or not
  */
 
-int Asteroid::getX(){
-  return x;
-}
-
-/*
- * @MethodName: getY
- * @Description:
- *			Returns y coordinate of Asteroid
- * @Params:
- *			n/a
- * @Returns:
- *			int - y coordinate
- */
-
-int Asteroid::getY(){
-  return y;
+bool Asteroid::getPrecious(){
+  return p;
 }
 
 /*
