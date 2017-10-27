@@ -39,7 +39,7 @@ int Starship::getAsteroidCount(){
 }
 
 /*
- * @MethodName: captainsLog
+ * @MethodName: flightPlan
  * @Description:
  *			Prompts the user for initial warp coordinates and asteroid collection
  * @Params:
@@ -48,7 +48,7 @@ int Starship::getAsteroidCount(){
  *			void
  */
 
-void Starship::captainsLog(){
+void Starship::flightPlan(){
 
   // warp using pre-defined or manually defined coords?
   int choice;

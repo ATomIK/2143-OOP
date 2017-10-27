@@ -2,9 +2,9 @@
 #include <vector>
 #include <cmath>
 #include "asteroid.h"
-#include "spacecraft.h"
+#include "starcraft.h"
 
-class Starship : public SpaceCraft {
+class Starship : public Starcraft {
 
 private:
   // asteroids currently collected
@@ -15,7 +15,7 @@ public:
   Starship();
 
   // method to set limit and coordinates
-  void captainsLog();
+  void flightPlan();
   // gets amount of asteroids collected
   int getAsteroidCount();
 

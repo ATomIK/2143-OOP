@@ -1,22 +1,23 @@
 #pragma once
 #include <vector>
-#include "spacecraft.h"
+#include "starcraft.h"
 #include "asteroid.h"
 
-class SpaceProbe : public SpaceCraft {
+class Starprobe : public Starcraft {
 
 private:
 	int preciousRoids;
 	int scanned;
+	std::vector<Asteroid> pAsteroids;
 
 protected:
 
 public:
 
-  SpaceProbe();
+  Starprobe();
 
   // discusses plans with the captain of the star ship
-  void plans();
+  void flightPlan();
 
   // finds the closest non scanned asteroid
   int findClosest(std::vector<Asteroid>&);
@@ -29,6 +30,6 @@ public:
 
   int getScannedCount();
 
-  ~SpaceProbe();
+  ~Starprobe();
 
 };

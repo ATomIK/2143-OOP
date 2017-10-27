@@ -12,34 +12,34 @@
 
 #include "asteroid.h"
 #include "starship.h"
-#include "spaceprobe.h"
+#include "starprobe.h"
 
 using namespace std;
 
 // function prototypes
-void openFile(fstream&);
-void generateAsteroidField(vector<Asteroid>&,fstream&,Starship&);
-void endMission(fstream&, Starship&, SpaceProbe&);
+void getInput(fstream&);
+void generateField(vector<Asteroid>&,fstream&,Starship&);
+void captainsLog(fstream&, Starship&, Starprobe&);
+void endMission(fstream&, Starship&, Starprobe&);
 
 int main(){
 
-	fstream ifile;
+	fstream input;
 	Starship Ship;
-	SpaceProbe Probe;
+	Starprobe Probe;
 	vector<Asteroid> asteroids;
-	vector<Asteroid> preciousRoids;
 
-	// prompt the user for input/output
-	openFile(ifile);
-	//  discuss flight plans with the captain (user)
-	Ship.captainsLog();
-	// discuss flight plans of the space probe
-	Probe.plans();
+	// prompt the user for input
+	getInput(input);
+	//  discuss the flight plan with the captain (user)
+	Ship.flightPlan();
+	// discuss the flight plan of the probe with the captain
+	Probe.flightPlan();
 
-	// generate asteroids from input file & allow the ship to scan
-	generateAsteroidField(asteroids,ifile,Ship);
+	// read input and generate Asteroid vector
+	generateField(asteroids,input,Ship);
 
-	// loops until the captain gets as many asteroids as he wants
+	// loop until Ship's limit
 	// launch both the probe and the star ship
 	while(Ship.getLimit() != Ship.getAsteroidCount() || Probe.getLimit() != Probe.getScannedCount()){
 
@@ -64,30 +64,25 @@ int main(){
 		Ship.mineAsteroid(index, asteroids);
 		// probe scans asteroid
 		Probe.scanAsteroid(probei, asteroids);
-
-		// send mission data back to earth
-		// if(mined)
-			// Ship.transmitData(index, asteroids, distance);
 	}
 
 	// close files and end program
-	endMission(ifile, Ship, Probe);
+	endMission(input, Ship, Probe);
 
 	return 0;
 }
 
 /*
- * @FunctionName: openFiles
+ * @FunctionName: getInput
  * @Description:
- *			Prompts the user for input & output files
+ *			Prompts the user to select an input file.
  * @Params:
- *			fstream &ifile - fstream set to ios::in
- *			fstream &ofile - fstream set to ios::out
+ *			fstream &f - fstream set to ios::in
  * @Returns:
  *			void
  */
 
-void openFile(fstream &ifile){
+void getInput(fstream &f){
 
 	string input;
 
@@ -95,64 +90,73 @@ void openFile(fstream &ifile){
 	cin >> input;
 	input = input == "def" ? "input.txt" : input;
 
-	ifile.open(input.c_str(), ios::in);
+	f.open(input.c_str(), ios::in);
 
 }
 
 /*
- * @FunctionName: generateAsteroidField
+ * @FunctionName: generateField
  * @Description:
- *			Loops through input file and generates a vector of type Asteroid
+ *			Loops through input file and generates a vector of type Asteroid.
  * @Params:
- *			vector<Asteroid> &vect - the vector used to store Asteroids
- *			fstream &ifile - the input file to read from
- *			Starship &Ship - Ship is passed in to know how big the field is
+ *			vector<Asteroid> &v - the vector of Asteroids
+ *			fstream &f - the input file
+ *			Starship &S - Ship is passed in to get size of field
  * @Returns:
  *			void
  */
 
-void generateAsteroidField(vector<Asteroid> &vect, fstream &ifile, Starship &Ship){
+void generateField(vector<Asteroid> &v, fstream &f, Starship &S){
 
-  int getx,gety;
-  double getw;
+  int x,y,count = 1;
+  double weight;
 	char precious;
   bool c = false, p = false;
 
-	int count = 1;
+  f >> x >> y >> weight >> precious;
+  while(!f.eof()){
 
-  ifile >> getx >> gety >> getw >> precious;
-  while(!ifile.eof()){
+		// if last char is P, asteroid is precious
 		p = precious == 'P' ? true : false;
-		Asteroid temp(getx,gety,getw,c,0,p);
-    vect.push_back(temp);
-    ifile >> getx >> gety >> getw >> precious;
+		// new Asteroid
+		Asteroid temp(x,y,weight,c,0,p);
+
+		// push Asteroid onto field
+    v.push_back(temp);
+
+    f >> x >> y >> weight >> precious;
+
+		// Starship is detecting Asteroid field
 		count++;
+
   }
 
-	Ship.setDetected(count);
+	// Starship scanned the field and now knows how many there are
+	S.setDetected(count);
 
 }
 
 /*
- * @FunctionName: endMission
+ * @FunctionName: captainsLog
  * @Description:
- *			Prompts the user for input & output files
+ *			Prompts the user with the stats of the mission
  * @Params:
- *			fstream &ifile - input file
- *			fstream &ofile - output file
- *			Starship &Ship - passed in ship to prompt end results
+ *			fstream &f - input file to close
+ *			Starship &S - passed in ship to get data
+ *			SpaceProbe &P - passed in probe to get data
  * @Returns:
  *			void
  */
 
-void endMission(fstream &ifile, Starship& Ship, SpaceProbe& Probe){
+void endMission(fstream &f, Starship &S, Starprobe &P){
 
 	cout << "\nMission complete!\n"
-			 << "Our ship traveled: " << Ship.getDistance() * 10 << " miles!\n"
-			 << "Asteroids collected: " << Ship.getAsteroidCount() << "\n\n"
-			 << "Our probe traveled: " << Probe.getDistance() * 10 << " miles!\n"
-			 << "It found " << Probe.getPreciousRoids() << " asteroids that contain precious metals!\n";
+			 << "Our ship traveled: " << S.getDistance() * 10 << " miles!\n"
+			 << "Asteroids collected: " << S.getAsteroidCount() << "\n\n"
+			 << "Our probe traveled: " << P.getDistance() * 10 << " miles!\n"
+			 << "It found " << P.getPreciousRoids() << " asteroids that contain "
+			 "precious metals!\n";
 
-	ifile.close();
+	f.close();
 
 }

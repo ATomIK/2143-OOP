@@ -3,7 +3,7 @@
 #include "asteroid.h"
 #include "spaceobject.h"
 
-class SpaceCraft : public SpaceObject {
+class Starcraft : public SpaceObject {
 
 private:
 
@@ -19,7 +19,7 @@ private:
 protected:
 
 public:
-  SpaceCraft();
+  Starcraft();
 
   // gets the ship's collection limit
   int getLimit();
@@ -48,6 +48,6 @@ public:
   // calculates the closest asteroid
   int findClosest(std::vector<Asteroid>&);
 
-  ~SpaceCraft();
+  ~Starcraft();
 
 };

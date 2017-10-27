@@ -1,5 +1,6 @@
 #include <iostream>
-#include "spaceprobe.h"
+#include <cmath>
+#include "starprobe.h"
 
 // check in case the program was compiled on linux as it was created on linux
 #ifdef __linux__
@@ -8,7 +9,7 @@
 	#include <windows.h>
 #endif
 
-SpaceProbe::SpaceProbe() {
+Starprobe::Starprobe() {
 	preciousRoids = 0;
 	scanned = 0;
 }
@@ -23,7 +24,7 @@ SpaceProbe::SpaceProbe() {
 * @Returns:
 *			int - index of the Asteroid closest to the ship
 */
-int SpaceProbe::findClosest(std::vector<Asteroid> &vect) {
+int Starprobe::findClosest(std::vector<Asteroid> &vect) {
 
 	// set initial minDist to the maximum double value possible
 	double minDist = 1.79769e+308;
@@ -71,7 +72,7 @@ int SpaceProbe::findClosest(std::vector<Asteroid> &vect) {
 *			void
 */
 
-void SpaceProbe::plans() {
+void Starprobe::flightPlan() {
 	// warp using pre-defined or manually defined coords?
 	int choice;
 	std::cout << "Would you like to send the probe using "
@@ -110,7 +111,7 @@ void SpaceProbe::plans() {
 *			void
 */
 
-void SpaceProbe::scanAsteroid(int index, std::vector<Asteroid> &asts) {
+void Starprobe::scanAsteroid(int index, std::vector<Asteroid> &asts) {
 
 	std::cout << "Probe warped to: ("
 		<< asts[index].getCoord(0) << ", " << asts[index].getCoord(1)
@@ -151,7 +152,7 @@ void SpaceProbe::scanAsteroid(int index, std::vector<Asteroid> &asts) {
 *			int - preciousRoids
 */
 
-int SpaceProbe::getPreciousRoids() {
+int Starprobe::getPreciousRoids() {
 	return preciousRoids;
 }
 
@@ -165,10 +166,10 @@ int SpaceProbe::getPreciousRoids() {
 *			int - scanned
 */
 
-int SpaceProbe::getScannedCount() {
+int Starprobe::getScannedCount() {
 	return scanned;
 }
 
-SpaceProbe::~SpaceProbe() {
+Starprobe::~Starprobe() {
 
 }

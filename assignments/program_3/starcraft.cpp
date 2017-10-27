@@ -1,8 +1,8 @@
 #include "spaceobject.h"
-#include "spacecraft.h"
+#include "starcraft.h"
 #include <cmath>
 
-SpaceCraft::SpaceCraft(){
+Starcraft::Starcraft(){
   setCoord(0,0);
   setCoord(0,1);
   cargoWeight = 0.0;
@@ -23,7 +23,7 @@ SpaceCraft::SpaceCraft(){
  *			double - the distance the ship just traveled
  */
 
-double SpaceCraft::moveTo(int index, std::vector<Asteroid> &asts){
+double Starcraft::moveTo(int index, std::vector<Asteroid> &asts){
 
   double x, y, dist;
   x = asts[index].getCoord(0) - getCoord(0);
@@ -50,7 +50,7 @@ double SpaceCraft::moveTo(int index, std::vector<Asteroid> &asts){
 * @Returns:
 *			int - index of the Asteroid closest to the ship
 */
-int SpaceCraft::findClosest(std::vector<Asteroid> &vect) {
+int Starcraft::findClosest(std::vector<Asteroid> &vect) {
 
 	// set initial minDist to the maximum double value possible
 	double minDist = 1.79769e+308;
@@ -98,7 +98,7 @@ int SpaceCraft::findClosest(std::vector<Asteroid> &vect) {
  *			void
  */
 
-void SpaceCraft::setDetected(int i){
+void Starcraft::setDetected(int i){
   detectedAsteroids = i;
 }
 
@@ -112,21 +112,21 @@ void SpaceCraft::setDetected(int i){
  *			void
  */
 
-void SpaceCraft::setLimit(int lim) {
+void Starcraft::setLimit(int lim) {
   limit = lim;
 }
 
 /*
  * @MethodName: setWeight
  * @Description:
- *			Sets the weight of the spacecraft.
+ *			Sets the weight of the Starcraft.
  * @Params:
    *			double - weight
  * @Returns:
  *			void
  */
 
-void SpaceCraft::setWeight(double w) {
+void Starcraft::setWeight(double w) {
   cargoWeight = w;
 }
 
@@ -140,7 +140,7 @@ void SpaceCraft::setWeight(double w) {
  *			int - user-specified asteroid collection limit
  */
 
-int SpaceCraft::getLimit() {
+int Starcraft::getLimit() {
   return limit;
 }
 
@@ -154,7 +154,7 @@ int SpaceCraft::getLimit() {
  *			int - total distance the ship has traveled
  */
 
-double SpaceCraft::getDistance() {
+double Starcraft::getDistance() {
   return distance;
 }
 
@@ -168,7 +168,7 @@ double SpaceCraft::getDistance() {
  *			int - detected asteroids
  */
 
-int SpaceCraft::getDetectedAsteroids(){
+int Starcraft::getDetectedAsteroids(){
   return detectedAsteroids;
 }
 
@@ -182,10 +182,10 @@ int SpaceCraft::getDetectedAsteroids(){
  *			double - weight
  */
 
-double SpaceCraft::getWeight(){
+double Starcraft::getWeight(){
   return cargoWeight;
 }
 
-SpaceCraft::~SpaceCraft(){
+Starcraft::~Starcraft(){
 
 }
