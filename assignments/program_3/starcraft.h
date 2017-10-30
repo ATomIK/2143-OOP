@@ -28,14 +28,21 @@ public:
   // return total distance traveled
   double getDist();
 
+  // return weight of craft's cargo bay
+  double getWeight();
+
   // set detected asteroids in a field
   void setDetected(int);
 
+  // set cargo weight of craft
+  void setWeight(double);
+
   // updates the SpaceObject's coordinates (moves to an asteroid) and returns distance
-  double moveTo(int,std::vector<Asteroid>&);
+  virtual double moveTo(int,std::vector<Asteroid>&);
 
   // calculates the closest asteroid
-  int findClosest(std::vector<Asteroid>&);
+  // bool if ship else probe
+  int findClosest(std::vector<Asteroid>&,bool);
 
   ~Starcraft();
 

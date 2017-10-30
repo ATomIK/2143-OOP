@@ -64,10 +64,10 @@ Asteroid::Asteroid(const Asteroid &obj){
  * @Params:
  *			n/a
  * @Returns:
- *			int - collected
+ *			bool - collected
  */
 
-int Asteroid::isCollected(){ return collected; }
+bool Asteroid::isCollected(){ return collected; }
 
 /*
  * @MethodName: isScanned
@@ -76,10 +76,58 @@ int Asteroid::isCollected(){ return collected; }
  * @Params:
  *			n/a
  * @Returns:
- *			int - scanned
+ *			bool - scanned
  */
 
-int Asteroid::isScanned(){ return scanned; }
+bool Asteroid::isScanned(){ return scanned; }
+
+/*
+ * @MethodName: isPrecious
+ * @Description:
+ *			Return precious status
+ * @Params:
+ *			n/a
+ * @Returns:
+ *			bool - precious
+ */
+
+bool Asteroid::isPrecious(){ return p; }
+
+/*
+ * @MethodName: getWeight
+ * @Description:
+ *			Return weight of asteroid
+ * @Params:
+ *			n/a
+ * @Returns:
+ *			double - weight
+ */
+
+double Asteroid::getWeight(){ return weight; }
+
+/*
+ * @MethodName: setCollected
+ * @Description:
+ *			Sets collected status
+ * @Params:
+ *			bool - collected
+ * @Returns:
+ *			void
+ */
+
+void Asteroid::setCollected(bool c){ collected = c; }
+
+/*
+ * @MethodName: setScanned
+ * @Description:
+ *			Sets scanned status
+ * @Params:
+ *			bool - scanned
+ * @Returns:
+ *			void
+ */
+
+void Asteroid::setScanned(bool s){ scanned = s; }
 
 /*
  * @DestructorName: ~Asteroid

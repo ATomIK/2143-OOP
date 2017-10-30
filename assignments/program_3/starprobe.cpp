@@ -144,7 +144,7 @@ void Starprobe::scanAsteroid(int index, std::vector<Asteroid> &asts) {
 		Sleep(500);
 	#endif
 
-	if (asts[index].getPrecious()) {
+	if (asts[index].isPrecious()) {
 		std::cout << "Asteroid contains precious metals!\n";
 		preciousRoids++;
 	} else

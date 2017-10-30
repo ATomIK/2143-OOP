@@ -34,9 +34,7 @@ Starship::Starship(){
  *			int - number of asteroids
  */
 
-int getAsteroids(){
-  return asteroids;
-}
+int Starship::getAsteroids(){ return asteroids; }
 
 /*
  * @MethodName: flightPlan
@@ -92,17 +90,17 @@ void Starship::mineAsteroid(int index, std::vector<Asteroid> &asts){
 	// if the starship has not reached its limit
 	if (limit != asteroids) {
 
-		if (asts[index].weight < 9.0) {
+		if (asts[index].getWeight() < 9.0) {
 			// asteroid in the vector is now collected
-			asts[index].collected = true;
+			asts[index].setCollected(true);
 			// asteroid count increases
 			asteroids++;
 			// ship's cargo weight is updated
-      cargoWeight = cargoWeight + asts[index].weight;
+      setWeight(getWeight() + asts[index].getWeight());
 
 			// std::cout << "Asteroid weight: " << asts[index].getWeight() << "\n";
 			std::cout << "Starship warped to: ("
-				<< asts[index].coords[0] << ", " << asts[index].coords[1]
+				<< asts[index].get(0) << ", " << asts[index].get(1)
 				<< "). Mining asteroid...\n";
 
 			// linux has a different sleep function than windows.
@@ -161,7 +159,7 @@ void Starship::blAsteroid(int index, std::vector<Asteroid> &asts){
 
   pieces = rand() % 5;
 
-  weight = asts[index].weight/pieces;
+  weight = asts[index].getWeight()/pieces;
 
   std::cout << "Asteroid exploded.\n";
 
@@ -177,7 +175,7 @@ void Starship::blAsteroid(int index, std::vector<Asteroid> &asts){
 
     // created asteroid and add it to the vector
     bool precious = false;
-    if(asts[index].p)
+    if(asts[index].isPrecious())
       precious = true;
     Asteroid temp = Asteroid(x, y, weight, 0, 0, precious);
     asts.push_back(temp);

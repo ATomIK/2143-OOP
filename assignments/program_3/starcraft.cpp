@@ -49,6 +49,18 @@ int Starcraft::getDetected(){ return detectedAsteroids; }
 double Starcraft::getDist(){ return distance; }
 
 /*
+ * @MethodName: getWeight
+ * @Description:
+ *			Return cargo weight of craft
+ * @Params:
+ *			n/a
+ * @Returns:
+ *			double - cargo weight
+ */
+
+double Starcraft::getWeight(){ return cargoWeight; }
+
+/*
  * @MethodName: setDetected
  * @Description:
  *			Set detected asteroids in a field
@@ -58,7 +70,19 @@ double Starcraft::getDist(){ return distance; }
  *			void
  */
 
-void setDetected(int num){ detectedAsteroids = num; }
+void Starcraft::setDetected(int num){ detectedAsteroids = num; }
+
+/*
+ * @MethodName: setWeight
+ * @Description:
+ *			Set cargo weight of craft
+ * @Params:
+ *			double w - weight
+ * @Returns:
+ *			void
+ */
+
+void Starcraft::setWeight(double w){ cargoWeight = w; }
 
 /*
  * @MethodName: moveTo
@@ -98,7 +122,7 @@ double Starcraft::moveTo(int index, std::vector<Asteroid> &asts){
 * @Returns:
 *			int - index of the Asteroid closest to the ship
 */
-int Starcraft::findClosest(std::vector<Asteroid> &vect) {
+int Starcraft::findClosest(std::vector<Asteroid> &vect,bool ship) {
 
 	// set initial minDist to the maximum double value possible
 	double minDist = 1.79769e+308;
@@ -120,10 +144,12 @@ int Starcraft::findClosest(std::vector<Asteroid> &vect) {
 		// end new method: computeDistance
 		// tempDist = computeDistance(vect[i].getX(), vect[i].getY());
 
-		// if the asteroid hasn't been collected and
-		// the distance is less than the initla minDist
-		// then this is the closest asteroid to the ship
-		if (!vect[i].isCollected() && tempDist < minDist) {
+    // if ship is false, then it's the starprobe else starship
+    bool nt = !ship ? vect[i].isScanned() : vect[i].isCollected();
+    // if the asteroid hasn't been collected/scanned and
+    // the distance is less than the initial minDist
+    // then this is the closest asteroid to the ship
+		if (!nt && tempDist < minDist) {
 			// had to typecast i as int because of size_type
 			index = (int)i;
 			minDist = tempDist;

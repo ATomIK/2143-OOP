@@ -151,9 +151,9 @@ void generateField(vector<Asteroid> &v, fstream &f, Starship &S){
 void endMission(fstream &f, Starship &S, Starprobe &P){
 
 	cout << "\nMission complete!\n"
-			 << "Our ship traveled: " << S.getDistance() * 10 << " miles!\n"
+			 << "Our ship traveled: " << S.getDist() * 10 << " miles!\n"
 			 << "Asteroids collected: " << S.getAsteroids() << "\n\n"
-			 << "Our probe traveled: " << P.getDistance() * 10 << " miles!\n"
+			 << "Our probe traveled: " << P.getDist() * 10 << " miles!\n"
 			 << "It found " << P.getPrecious() << " asteroids that contain "
 			 "precious metals!\n";
 

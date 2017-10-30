@@ -29,10 +29,17 @@ public:
   // return scanned status
   bool isScanned();
 
-  // need to do these next
-  // void setCollected(bool);
+  // return precious status
+  bool isPrecious();
 
-  // void setScanned(bool);
+  // return weight of asteroid
+  double getWeight();
+
+  // sets collected status
+  void setCollected(bool);
+
+  // sets scanned status
+  void setScanned(bool);
 
   // default destructor
   ~Asteroid();
