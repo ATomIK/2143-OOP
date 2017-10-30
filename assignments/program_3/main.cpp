@@ -20,7 +20,7 @@ using namespace std;
 void getInput(fstream&);
 void generateField(vector<Asteroid>&,fstream&,Starship&);
 void captainsLog(fstream&, Starship&, Starprobe&);
-void endMission(fstream&, Starship&, Starprobe&);
+void endMission(fstream&, Starship, Starprobe, vector<Asteroid>);
 
 int main(){
 
@@ -39,16 +39,17 @@ int main(){
 	// read input and generate Asteroid vector
 	generateField(asteroids,input,Ship);
 
-	// loop until Ship's limit
+	cout << "\n== [ Beginning mission ] ==\n";
+	// loop until both hit their limit
 	// launch both the probe and the star ship
 	while(Ship.getLimit() != Ship.getAsteroids() || Probe.getLimit() != Probe.getScanned()){
 
-		int index, probei;
-		double distance, probedist;
+		int sindex, pindex;
+		double sdist, pdist;
 
 		// find target
-		index = Ship.findClosest(asteroids);
-		probei = Probe.findClosest(asteroids);
+		sindex = Ship.findClosest(asteroids,true);
+		pindex = Probe.findClosest(asteroids,false);
 
 		// if the captain wants to collect more than the field, end mission.
 		// or if the probe is set to scan more than the field, end mission.
@@ -56,18 +57,19 @@ int main(){
 			break;
 
 		// ship moves to target
-		distance = Ship.moveTo(index, asteroids);
+		sdist = Ship.moveTo(sindex, asteroids);
 		// probe moves to target
-		probedist = Probe.moveTo(probei, asteroids);
+		pdist = Probe.moveTo(pindex, asteroids);
 
-		// mine asteroid
-		Ship.mineAsteroid(index, asteroids);
+		// mine asteroid if ship hasnt reached its limit
+		if(!Ship.doAsteroid(sindex, asteroids, true, 9.0) && Ship.getLimit() != Ship.getAsteroids())
+			Ship.blAsteroid(sindex,asteroids);
 		// probe scans asteroid
-		Probe.scanAsteroid(probei, asteroids);
+		Probe.doAsteroid(pindex, asteroids, false, 9.0);
 	}
 
 	// close files and end program
-	endMission(input, Ship, Probe);
+	endMission(input, Ship, Probe, asteroids);
 
 	return 0;
 }
@@ -148,14 +150,33 @@ void generateField(vector<Asteroid> &v, fstream &f, Starship &S){
  *			void
  */
 
-void endMission(fstream &f, Starship &S, Starprobe &P){
+void endMission(fstream &f, Starship S, Starprobe P, vector<Asteroid> vect){
 
-	cout << "\nMission complete!\n"
-			 << "Our ship traveled: " << S.getDist() * 10 << " miles!\n"
+	cout << "== [ Mission complete ] ==\n";
+
+	cout << "\nOur ship traveled: " << fixed << setprecision(2) << S.getDist() * 10 << " miles!\n"
 			 << "Asteroids collected: " << S.getAsteroids() << "\n\n"
-			 << "Our probe traveled: " << P.getDist() * 10 << " miles!\n"
+			 << " ID | Coords | Weight \n";
+
+	for (std::vector<Asteroid>::size_type i = 0; i < vect.size(); i++) {
+		if(vect[i].isCollected()){
+			cout << setw(2) << right << i << setw(5) << "(" << vect[i].get(0) << ", " << vect[i].get(1)
+					 << ")" << setw(6) << setprecision(2) << vect[i].getWeight() << "\n";
+		}
+	}
+
+	cout << "\nOur probe traveled: " << P.getDist() * 10 << " miles!\n"
 			 << "It found " << P.getPrecious() << " asteroids that contain "
-			 "precious metals!\n";
+			 "precious metals!\n\n"
+			 << " ID | Coords | Weight \n";
+
+	vector<Asteroid> db = P.getDb();
+	for (vector<Asteroid>::size_type i = 0; i < db.size(); i++) {
+		if(db[i].isCollected()){
+			cout << setw(2) << right << i << setw(5) << "(" << db[i].get(0) << ", " << db[i].get(1)
+					 << ")" << setw(6) << setprecision(2) << db[i].getWeight() << "\n";
+		}
+	}
 
 	f.close();
 

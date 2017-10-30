@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cmath>
 #include "starprobe.h"
+#include "asteroid.h"
 
 // check in case the program was compiled on linux as it was created on linux
 #ifdef __linux__
@@ -9,9 +10,9 @@
 	#include <windows.h>
 #endif
 
-Starprobe::Starprobe() {
+Starprobe::Starprobe() : Starcraft(){
 	preciousRoids = 0;
-	scanned = 0;
+	current = 0;
 }
 
 /*
@@ -24,7 +25,7 @@ Starprobe::Starprobe() {
 *			int - scanned asteroids
 */
 
-int Starprobe::getScanned(){ return scanned; }
+int Starprobe::getScanned(){ return current; }
 
 /*
 * @MethodName: getPrecious
@@ -39,56 +40,19 @@ int Starprobe::getScanned(){ return scanned; }
 int Starprobe::getPrecious(){ return preciousRoids; }
 
 /*
-* @MethodName: findClosest
+* @MethodName: getPrecious
 * @Description:
-*			Loops through the vector of Asteroids and finds the Asteroid closest to
-*           the ship's coordinates through basic algebra.
+*			Return number of precious asteroids
 * @Params:
-*			std::vector<Asteroid> &vect - the vector passed in by reference
+*			n/a
 * @Returns:
-*			int - index of the Asteroid closest to the ship
+*			int - precious asteroids
 */
 
-int Starprobe::findClosest(std::vector<Asteroid> &vect) {
-
-	// set initial minDist to the maximum double value possible
-	double minDist = 1.79769e+308;
-
-	// loop through all asteroids
-	int index = 0;
-	// go through vector to compare distances
-	// set i's type to vector's size_type to avoid possible loss of data
-	for (std::vector<Asteroid>::size_type i = 0; i < vect.size(); i++) {
-
-		double tempDist = 0;
-
-		// start new method: computeDistance
-		int x, y;
-		x = vect[i].get(0) - get(0);
-		y = vect[i].get(1) - get(1);
-		// ship distancec from asteroid[i]
-		tempDist = std::sqrt((x*x + y*y));
-		// end new method: computeDistance
-		// tempDist = computeDistance(vect[i].getX(), vect[i].getY());
-
-		// if the asteroid hasn't been scanned and
-		// the distance is less than the initla minDist
-		// then this is the closest asteroid to the ship
-		if (!vect[i].isScanned() && tempDist < minDist) {
-			// had to typecast i as int because of size_type
-			index = (int)i;
-			minDist = tempDist;
-		}
-
-	}
-
-	// return the final closest index in the vector
-	return index;
-
-}
+std::vector<Asteroid> Starprobe::getDb(){ return database; }
 
 /*
-* @MethodName: plans
+* @MethodName: flightPlan
 * @Description:
 *			Discusses plans with the captain of the starship
 * @Params:
@@ -100,20 +64,20 @@ int Starprobe::findClosest(std::vector<Asteroid> &vect) {
 void Starprobe::flightPlan() {
 	// warp using pre-defined or manually defined coords?
 	int choice;
-	std::cout << "Would you like to send the probe using "
+	std::cout << "\nWould you like to send the probe using "
 		"pre-defined coordinates?\n\n1. Yes\n2. No.\n";
 	std::cin >> choice;
 
 	// if manually defined, set x and y
 	if (choice == 2) {
-		std::cout << "Please enter an x coordinate followed by a y coordinate\n "
+		std::cout << "\nPlease enter an x coordinate followed by a y coordinate\n "
 			"for the probe to warp to. ( Example: 5 25 ):";
 		std::cin >> coords[0] >> coords[1];
 	}
 	std::cout << "\nProbe warped to (" << coords[0] << "," << coords[1] << ")...\n\n";
 
 	// set the limit of visitation
-	std::cout << "How many asteroids would you like the probe to scan before\n "
+	std::cout << "\nHow many asteroids would you like the probe to scan before\n "
 		"returning to earth? (integer): ";
 	std::cin >> limit;
 	std::cout << "\n";
@@ -121,44 +85,60 @@ void Starprobe::flightPlan() {
 
 
 /*
-* @MethodName: scanAsteroid
+* @MethodName: doAsteroid
 * @Description:
-*			Sets the asteroid to scanned
+*			Overrides base class' method; Performs a scan on an asteroid
 * @Params:
 *			int index - the index of the closest asteroid
 *			std::vector<Asteroid> &vect - the vector passed in by reference
+*			bool ship - true if ship false if probe
+*     double max - max weight of asteroid to collect
 * @Returns:
-*			void
+*			bool - scanned or not
 */
 
-void Starprobe::scanAsteroid(int index, std::vector<Asteroid> &asts) {
+bool Starprobe::doAsteroid(int index, std::vector<Asteroid> &asts, bool ship, double max) {
 
-	std::cout << "Probe warped to: ("
-		<< asts[index].get(0) << ", " << asts[index].get(1)
-		<< "). Scanning asteroid...\n";
+	// if the craft has not reached its limit
+	if (limit != current) {
 
-	// linux has a different sleep function than windows.
-	#ifdef __linux__
-		usleep(500000);
-	#else
-		Sleep(500);
-	#endif
+		std::cout << "Probe warped to: ("
+			<< asts[index].get(0) << ", " << asts[index].get(1)
+			<< "). Scanning asteroid...\n";
 
-	if (asts[index].isPrecious()) {
-		std::cout << "Asteroid contains precious metals!\n";
-		preciousRoids++;
+		// linux has a different sleep function than windows.
+		#ifdef __linux__
+			usleep(500000);
+		#else
+			Sleep(500);
+		#endif
+
+		if (asts[index].isPrecious()) {
+			std::cout << "Asteroid contains precious metals!\n\n";
+			// increment total number of precious asteroids
+			preciousRoids++;
+			// add precious asteroid to probe's database
+			database.push_back(asts[index]);
+		} else
+			std::cout << "Asteroid did not contain precious metals...\n\n";
+
+		// increment total number of scanned asteroids
+		current++;
+		asts[index].setScanned(true);
+
+		// linux has a different sleep function than windows.
+		#ifdef __linux__
+			usleep(500000);
+		#else
+			Sleep(500);
+		#endif
+
+		return true;
+
 	} else
-		std::cout << "Asteroid did not contain precious metals...\n";
+		std::cout << "Starprobe is idle...\n";
 
-	scanned++;
-	asts[index].setScanned(true);
-
-	// linux has a different sleep function than windows.
-	#ifdef __linux__
-		usleep(500000);
-	#else
-		Sleep(500);
-	#endif
+	return false;
 
 }
 

@@ -6,8 +6,8 @@
 class Starprobe : public Starcraft {
 
 protected:
-	int preciousRoids, scanned;
-	std::vector<Asteroid> pAsteroids;
+	int preciousRoids;
+	std::vector<Asteroid> database;
 
 public:
 
@@ -19,13 +19,14 @@ public:
 	// return number of precious asteroids
 	int getPrecious();
 
+	// return database of scanned asteroids
+	std::vector<Asteroid> getDb();
+
   // discusses plans with the captain of the star ship
   void flightPlan();
 
-  // finds the closest non scanned asteroid
-  int findClosest(std::vector<Asteroid>&);
-
-  void scanAsteroid(int, std::vector<Asteroid>&);
+	// override base class' doAsteroid method
+  bool doAsteroid(int,std::vector<Asteroid>&,bool,double);
 
   ~Starprobe();
 

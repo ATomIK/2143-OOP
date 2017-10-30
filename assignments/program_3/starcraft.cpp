@@ -1,6 +1,14 @@
+#include <iostream>
 #include "spaceobject.h"
 #include "starcraft.h"
 #include <cmath>
+
+// check in case the program was compiled on linux as it was created on linux
+#ifdef __linux__
+  #include <unistd.h>
+#else
+  #include <windows.h>
+#endif
 
 Starcraft::Starcraft(){
   coords[0] = 0;
@@ -122,6 +130,7 @@ double Starcraft::moveTo(int index, std::vector<Asteroid> &asts){
 * @Returns:
 *			int - index of the Asteroid closest to the ship
 */
+
 int Starcraft::findClosest(std::vector<Asteroid> &vect,bool ship) {
 
 	// set initial minDist to the maximum double value possible
@@ -159,6 +168,55 @@ int Starcraft::findClosest(std::vector<Asteroid> &vect,bool ship) {
 
 	// return the final closest index in the vector
 	return index;
+
+}
+
+/*
+* @MethodName: doAsteroid
+* @Description:
+*			Performs action on the asteroid depending on the ship's type
+* @Params:
+*     int index -  index of asteroid
+*			std::vector<Asteroid> &vect - the vector passed in by reference
+*     bool ship - true if ship false if probe
+*     double max - max weight of asteroid to collect
+* @Returns:
+*			void
+*/
+
+bool Starcraft::doAsteroid(int index, std::vector<Asteroid> &asts, bool ship, double max){
+
+  // if the craft has not reached its limit
+	if (limit != current) {
+
+		if (asts[index].getWeight() < max) {
+			// asteroid in the vector is now collected
+			asts[index].setCollected(true);
+			// asteroid count increases
+			current++;
+			// ship's cargo weight is updated
+      setWeight(getWeight() + asts[index].getWeight());
+
+			// std::cout << "Asteroid weight: " << asts[index].getWeight() << "\n";
+			std::cout << "Starship warped to: ("
+				<< asts[index].get(0) << ", " << asts[index].get(1)
+				<< "). Mining asteroid...\n\n";
+
+			// linux has a different sleep function than windows.
+			#ifdef __linux__
+				usleep(1000000);
+			#else
+				Sleep(1000);
+			#endif
+
+      return true;
+
+		}
+
+	} else
+		std::cout << "Starship is idle...\n";
+
+  return false;
 
 }
 

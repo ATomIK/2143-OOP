@@ -11,6 +11,8 @@ protected:
   int detectedAsteroids;
   // limit of asteroids to collect/visit
   int limit;
+  // current number of asteroids scanned/collected
+  int current;
   // total weight of asteroids collected
   double cargoWeight;
   // total distance traveled
@@ -38,11 +40,15 @@ public:
   void setWeight(double);
 
   // updates the SpaceObject's coordinates (moves to an asteroid) and returns distance
-  virtual double moveTo(int,std::vector<Asteroid>&);
+  double moveTo(int,std::vector<Asteroid>&);
 
   // calculates the closest asteroid
   // bool if ship else probe
   int findClosest(std::vector<Asteroid>&,bool);
+
+  // perferms action on the asteroid depending on ship type
+  // bool if ship else probe
+  virtual bool doAsteroid(int,std::vector<Asteroid>&,bool,double);
 
   ~Starcraft();
 

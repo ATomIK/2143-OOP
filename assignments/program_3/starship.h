@@ -6,10 +6,6 @@
 
 class Starship : public Starcraft {
 
-protected:
-  // asteroids currently collected
-  int asteroids;
-
 public:
 
   Starship();
