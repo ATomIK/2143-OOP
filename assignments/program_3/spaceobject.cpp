@@ -5,33 +5,29 @@ SpaceObject::SpaceObject(){
 }
 
 /*
- * @MethodName: getCoord
+ * @MethodName: get
  * @Description:
- *			Returns a coordinate of SpaceObject
+ *			Return specified coordinate
  * @Params:
- *			int - 0 for x, 1 for y
+ *			int t - 0 for x 1 for y
  * @Returns:
- *			int - coordinate
+ *			int - specified coordinate
  */
 
-int SpaceObject::getCoord(int type){
-  return coords[type];
-}
+int SpaceObject::get(int t){ return coords[t]; }
 
 /*
- * @MethodName: setCoord
+ * @MethodName: set
  * @Description:
- *			Sets the x or y coordinate
+ *			Sets specified coordinate
  * @Params:
- *			int - coordinate to set
- *      int - type of coordinate; 0 for x, 1 for y
+ *			int t - 0 for x 1 for y
+ *      int v - value of coordinate
  * @Returns:
  *			void
  */
 
-void SpaceObject::setCoord(int set, int type){
-  coords[type] = set;
-}
+void SpaceObject::set(int t,int v){ coords[t] = v; }
 
 SpaceObject::~SpaceObject(){
 

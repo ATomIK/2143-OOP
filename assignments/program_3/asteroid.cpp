@@ -11,8 +11,8 @@
  */
 
 Asteroid::Asteroid(){
-  setCoord(0,0);
-  setCoord(0,1);
+  coords[0] = 0;
+  coords[1] = 0;
   weight = 0.0;
   scanned = false;
   collected = false;
@@ -30,8 +30,8 @@ Asteroid::Asteroid(){
  */
 
 Asteroid::Asteroid(int setx, int sety, double setw, bool setc, bool scanstat, bool precious){
-  setCoord(setx,0);
-  setCoord(sety,1);
+  coords[0] = setx;
+  coords[1] = sety;
   weight = setw;
   collected = setc;
   scanned = scanstat;
@@ -49,9 +49,8 @@ Asteroid::Asteroid(int setx, int sety, double setw, bool setc, bool scanstat, bo
  */
 
 Asteroid::Asteroid(const Asteroid &obj){
-  int x = obj.coords[0], y = obj.coords[1];
-  setCoord(x,0);
-  setCoord(y,1);
+  coords[0] = obj.coords[0];
+  coords[1] = obj.coords[1];
   weight = obj.weight;
   collected = obj.collected;
   scanned = obj.scanned;
@@ -61,86 +60,26 @@ Asteroid::Asteroid(const Asteroid &obj){
 /*
  * @MethodName: isCollected
  * @Description:
- *			Returns collected status of an Asteroid
+ *			Return collection status
  * @Params:
  *			n/a
  * @Returns:
- *			bool - whether an Asteroid is collected or not
+ *			int - collected
  */
 
-bool Asteroid::isCollected(){
-  return collected;
-}
+int Asteroid::isCollected(){ return collected; }
 
 /*
-* @MethodName: isScanned
-* @Description:
-*			Returns scanned status of an Asteroid
-* @Params:
-*			n/a
-* @Returns:
-*			bool - whether an Asteroid is scanned or not
-*/
-
-bool Asteroid::isScanned() {
-	return scanned;
-}
-
-/*
- * @MethodName: getWeight
+ * @MethodName: isScanned
  * @Description:
- *			Returns weight of an Asteroid
+ *			Return scanned status
  * @Params:
  *			n/a
  * @Returns:
- *			double - weight
+ *			int - scanned
  */
 
-double Asteroid::getWeight(){
-  return weight;
-}
-
-/*
- * @MethodName: getPrecious
- * @Description:
- *			Returns if the Asteroid has precious metals
- * @Params:
- *			n/a
- * @Returns:
- *			bool - precious metals or not
- */
-
-bool Asteroid::getPrecious(){
-  return p;
-}
-
-/*
- * @MethodName: setCollected
- * @Description:
- *			Sets an Asteroid's collected status
- * @Params:
- *			bool v - collected or not
- * @Returns:
- *			void
- */
-
-void Asteroid::setCollected(bool v){
-  collected = v;
-}
-
-/*
-* @MethodName: setScanned
-* @Description:
-*			Sets an Asteroid's scanned status
-* @Params:
-*			bool v - scanned or not
-* @Returns:
-*			void
-*/
-
-void Asteroid::setScanned(bool v) {
-	scanned = v;
-}
+int Asteroid::isScanned(){ return scanned; }
 
 /*
  * @DestructorName: ~Asteroid

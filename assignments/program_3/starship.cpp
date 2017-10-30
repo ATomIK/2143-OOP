@@ -25,16 +25,16 @@ Starship::Starship(){
 }
 
 /*
- * @MethodName: getAsteroidCount
+ * @MethodName: getAsteroids
  * @Description:
- *			Returns the current total amount of collected asteroids.
+ *			Returns number of asteroids collected
  * @Params:
  *			n/a
  * @Returns:
- *			int - number of asteroids collected by the ship
+ *			int - number of asteroids
  */
 
-int Starship::getAsteroidCount(){
+int getAsteroids(){
   return asteroids;
 }
 
@@ -57,22 +57,17 @@ void Starship::flightPlan(){
 	std::cin >> choice;
 
   // if manually defined, set x and y
-	int coords[2] = { 0,0 };
 	if(choice == 2){
 		std::cout << "Please enter an x coordinate followed by a y coordinate\n "
 		"for the ship to warp to. ( Example: 5 25 ):";
 		std::cin >> coords[0] >> coords[1];
 	}
   std::cout << "\nWarping to (" << coords[0] << "," << coords[1] << ")...\n\n";
-  setCoord(coords[0],0);
-  setCoord(coords[1],1);
 
   // set the limit of the ship's mission
-  int limit;
 	std::cout << "How many asteroids <9 tons would you like to collect before\n "
 					"returning to earth? (integer): ";
 	std::cin >> limit;
-  setLimit(limit);
   std::cout << "\n";
 
 }
@@ -95,19 +90,19 @@ void Starship::flightPlan(){
 void Starship::mineAsteroid(int index, std::vector<Asteroid> &asts){
 
 	// if the starship has not reached its limit
-	if (getLimit() != asteroids) {
+	if (limit != asteroids) {
 
-		if (asts[index].getWeight() < 9.0) {
+		if (asts[index].weight < 9.0) {
 			// asteroid in the vector is now collected
-			asts[index].setCollected(true);
+			asts[index].collected = true;
 			// asteroid count increases
 			asteroids++;
 			// ship's cargo weight is updated
-			setWeight(getWeight() + asts[index].getWeight());
+      cargoWeight = cargoWeight + asts[index].weight;
 
 			// std::cout << "Asteroid weight: " << asts[index].getWeight() << "\n";
 			std::cout << "Starship warped to: ("
-				<< asts[index].getCoord(0) << ", " << asts[index].getCoord(1)
+				<< asts[index].coords[0] << ", " << asts[index].coords[1]
 				<< "). Mining asteroid...\n";
 
 			// linux has a different sleep function than windows.
@@ -166,7 +161,7 @@ void Starship::blAsteroid(int index, std::vector<Asteroid> &asts){
 
   pieces = rand() % 5;
 
-  weight = asts[index].getWeight()/pieces;
+  weight = asts[index].weight/pieces;
 
   std::cout << "Asteroid exploded.\n";
 
@@ -182,13 +177,13 @@ void Starship::blAsteroid(int index, std::vector<Asteroid> &asts){
 
     // created asteroid and add it to the vector
     bool precious = false;
-    if(asts[index].getPrecious())
+    if(asts[index].p)
       precious = true;
     Asteroid temp = Asteroid(x, y, weight, 0, 0, precious);
     asts.push_back(temp);
 
     // A piece flew into the ship if its coordinates equal the ship's coordinates
-    if(x == getCoord(0) && y == getCoord(1)){
+    if(x == coords[0] && y == coords[1]){
       // Captain is alerted and repait bots are called
       std::cout << "A piece flew into your ship. Repair bots are on the way\n";
       // Repair bots are repairing the ship...
@@ -208,35 +203,6 @@ void Starship::blAsteroid(int index, std::vector<Asteroid> &asts){
   asts.erase(asts.begin() + index); // asteroid blows up
 
 }
-
-/*
- * @MethodName: transmitData
- * @Description:
- *			Formats output for the best legibility
- * @Params:
- *			int i - index of the Asteroid being described
- *      std::vector<Asteroid> &asts - vector of Asteroids
- *      double distance - distance it took to get to that Asteroid
- *      std::fstream &ofile - output stream to format to
- * @Returns:
- *			void
- */
-
-/*void Starship::transmitData(int i, std::vector<Asteroid> &asts, double distance, std::fstream &ofile){
-
-  ofile << std::left << std::setw(4) << " " << std::setw(10) << i;
-
-  ofile << "("
-        << std::setfill('0') << std::setw(3) << std::right << asts[i].getCoord(0)
-       << ", "
-        << std::setfill('0') << std::setw(3) << std::right << asts[i].getCoord(1)
-       << std::setfill(' ') << std::left << std::setw(4) << ")";
-
-  ofile << std::fixed << std::setprecision(2) << std::setw(15) << asts[i].getWeight();
-
-  ofile << std::fixed << std::setprecision(2) << std::setw(12) << (getDistance()*10) << "\n";
-
-}*/
 
 /*
  * @DestructorName: ~Starship

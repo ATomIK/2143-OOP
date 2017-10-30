@@ -5,7 +5,7 @@
 
 class Asteroid : public SpaceObject {
 
-private:
+protected:
 
   // weight of Asteroid
   double weight;
@@ -23,18 +23,16 @@ public:
   // copy constructor
   Asteroid(const Asteroid &);
 
-  // return collected status
+  // return collection status
   bool isCollected();
+
   // return scanned status
   bool isScanned();
-  // return weight
-  double getWeight();
-  // returns if the asteroid is precious
-  bool getPrecious();
-  // set the collected status
-  void setCollected(bool);
-  // set the scanned status
-  void setScanned(bool);
+
+  // need to do these next
+  // void setCollected(bool);
+
+  // void setScanned(bool);
 
   // default destructor
   ~Asteroid();

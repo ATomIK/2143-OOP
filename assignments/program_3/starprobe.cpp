@@ -15,6 +15,30 @@ Starprobe::Starprobe() {
 }
 
 /*
+* @MethodName: getScanned
+* @Description:
+*			Return scanned asteroids
+* @Params:
+*			n/a
+* @Returns:
+*			int - scanned asteroids
+*/
+
+int Starprobe::getScanned(){ return scanned; }
+
+/*
+* @MethodName: getPrecious
+* @Description:
+*			Return number of precious asteroids
+* @Params:
+*			n/a
+* @Returns:
+*			int - precious asteroids
+*/
+
+int Starprobe::getPrecious(){ return preciousRoids; }
+
+/*
 * @MethodName: findClosest
 * @Description:
 *			Loops through the vector of Asteroids and finds the Asteroid closest to
@@ -24,6 +48,7 @@ Starprobe::Starprobe() {
 * @Returns:
 *			int - index of the Asteroid closest to the ship
 */
+
 int Starprobe::findClosest(std::vector<Asteroid> &vect) {
 
 	// set initial minDist to the maximum double value possible
@@ -39,8 +64,8 @@ int Starprobe::findClosest(std::vector<Asteroid> &vect) {
 
 		// start new method: computeDistance
 		int x, y;
-		x = vect[i].getCoord(0) - getCoord(0);
-		y = vect[i].getCoord(1) - getCoord(1);
+		x = vect[i].get(0) - get(0);
+		y = vect[i].get(1) - get(1);
 		// ship distancec from asteroid[i]
 		tempDist = std::sqrt((x*x + y*y));
 		// end new method: computeDistance
@@ -79,7 +104,6 @@ void Starprobe::flightPlan() {
 		"pre-defined coordinates?\n\n1. Yes\n2. No.\n";
 	std::cin >> choice;
 
-	int coords[2] = { 0,0 };
 	// if manually defined, set x and y
 	if (choice == 2) {
 		std::cout << "Please enter an x coordinate followed by a y coordinate\n "
@@ -87,15 +111,11 @@ void Starprobe::flightPlan() {
 		std::cin >> coords[0] >> coords[1];
 	}
 	std::cout << "\nProbe warped to (" << coords[0] << "," << coords[1] << ")...\n\n";
-	setCoord(coords[0], 0);
-	setCoord(coords[1], 1);
 
 	// set the limit of visitation
-	int limit;
 	std::cout << "How many asteroids would you like the probe to scan before\n "
 		"returning to earth? (integer): ";
 	std::cin >> limit;
-	setLimit(limit);
 	std::cout << "\n";
 }
 
@@ -114,7 +134,7 @@ void Starprobe::flightPlan() {
 void Starprobe::scanAsteroid(int index, std::vector<Asteroid> &asts) {
 
 	std::cout << "Probe warped to: ("
-		<< asts[index].getCoord(0) << ", " << asts[index].getCoord(1)
+		<< asts[index].get(0) << ", " << asts[index].get(1)
 		<< "). Scanning asteroid...\n";
 
 	// linux has a different sleep function than windows.
@@ -140,34 +160,6 @@ void Starprobe::scanAsteroid(int index, std::vector<Asteroid> &asts) {
 		Sleep(500);
 	#endif
 
-}
-
-/*
-* @MethodName: getPreciousRoids
-* @Description:
-*			returns the amount of scanned precious roids
-* @Params:
-*			n/a
-* @Returns:
-*			int - preciousRoids
-*/
-
-int Starprobe::getPreciousRoids() {
-	return preciousRoids;
-}
-
-/*
-* @MethodName: getScannedCount
-* @Description:
-*			returns the amount of scanned asteroids
-* @Params:
-*			n/a
-* @Returns:
-*			int - scanned
-*/
-
-int Starprobe::getScannedCount() {
-	return scanned;
 }
 
 Starprobe::~Starprobe() {

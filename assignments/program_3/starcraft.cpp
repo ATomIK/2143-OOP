@@ -3,14 +3,62 @@
 #include <cmath>
 
 Starcraft::Starcraft(){
-  setCoord(0,0);
-  setCoord(0,1);
+  coords[0] = 0;
+  coords[1] = 1;
   cargoWeight = 0.0;
   distance = 0.0;
 
   limit = 0;
   detectedAsteroids = 0;
 }
+
+/*
+ * @MethodName: getLimit
+ * @Description:
+ *			Return the craft's visitation/collection limit
+ * @Params:
+ *			n/a
+ * @Returns:
+ *			int - number limit
+ */
+
+int Starcraft::getLimit(){ return limit; }
+
+/*
+ * @MethodName: getDetected
+ * @Description:
+ *			Return detected asteroids in a field
+ * @Params:
+ *			n/a
+ * @Returns:
+ *			int - detected asteroids
+ */
+
+int Starcraft::getDetected(){ return detectedAsteroids; }
+
+/*
+ * @MethodName: getDist
+ * @Description:
+ *			Return total distance traveled
+ * @Params:
+ *			n/a
+ * @Returns:
+ *			double - total distance traveled
+ */
+
+double Starcraft::getDist(){ return distance; }
+
+/*
+ * @MethodName: setDetected
+ * @Description:
+ *			Set detected asteroids in a field
+ * @Params:
+ *			int num - number of detected asteroids
+ * @Returns:
+ *			void
+ */
+
+void setDetected(int num){ detectedAsteroids = num; }
 
 /*
  * @MethodName: moveTo
@@ -26,15 +74,15 @@ Starcraft::Starcraft(){
 double Starcraft::moveTo(int index, std::vector<Asteroid> &asts){
 
   double x, y, dist;
-  x = asts[index].getCoord(0) - getCoord(0);
-  y = asts[index].getCoord(1) - getCoord(1);
+  x = asts[index].get(0) - get(0);
+  y = asts[index].get(1) - get(1);
   dist = std::sqrt((x*x) + (y*y));
   // increase total distance
   distance+= dist;
 
   // ship's coordinates are updated
-  setCoord(asts[index].getCoord(0),0);
-  setCoord(asts[index].getCoord(1),1);
+  set(0,asts[index].get(0));
+  set(1,asts[index].get(1));
 
   return dist;
 
@@ -65,8 +113,8 @@ int Starcraft::findClosest(std::vector<Asteroid> &vect) {
 
 		// start new method: computeDistance
 		int x, y;
-		x = vect[i].getCoord(0) - getCoord(0);
-		y = vect[i].getCoord(1) - getCoord(1);
+		x = vect[i].get(0) - get(0);
+		y = vect[i].get(1) - get(1);
 		// ship distancec from asteroid[i]
 		tempDist = std::sqrt((x*x + y*y));
 		// end new method: computeDistance
@@ -86,104 +134,6 @@ int Starcraft::findClosest(std::vector<Asteroid> &vect) {
 	// return the final closest index in the vector
 	return index;
 
-}
-
-/*
- * @MethodName: setDetected
- * @Description:
- *			Sets detected asteroids so the ship will know when to stop trying to collect
- * @Params:
- *			int i - the number of asteroids that exist in the field
- * @Returns:
- *			void
- */
-
-void Starcraft::setDetected(int i){
-  detectedAsteroids = i;
-}
-
-/*
- * @MethodName: setLimit
- * @Description:
- *			Sets the collection limit.
- * @Params:
- *			int - limit
- * @Returns:
- *			void
- */
-
-void Starcraft::setLimit(int lim) {
-  limit = lim;
-}
-
-/*
- * @MethodName: setWeight
- * @Description:
- *			Sets the weight of the Starcraft.
- * @Params:
-   *			double - weight
- * @Returns:
- *			void
- */
-
-void Starcraft::setWeight(double w) {
-  cargoWeight = w;
-}
-
-/*
- * @MethodName: getLimit
- * @Description:
- *			Returns the user-specified collection limit.
- * @Params:
- *			n/a
- * @Returns:
- *			int - user-specified asteroid collection limit
- */
-
-int Starcraft::getLimit() {
-  return limit;
-}
-
-/*
- * @MethodName: getDistance
- * @Description:
- *			Returns the current total distance traveled by the ship.
- * @Params:
- *			n/a
- * @Returns:
- *			int - total distance the ship has traveled
- */
-
-double Starcraft::getDistance() {
-  return distance;
-}
-
-/*
- * @MethodName: getDetectedAsteroids
- * @Description:
- *			Returns the amount of asteroids detected in a field.
- * @Params:
- *			n/a
- * @Returns:
- *			int - detected asteroids
- */
-
-int Starcraft::getDetectedAsteroids(){
-  return detectedAsteroids;
-}
-
-/*
- * @MethodName: getWeight
- * @Description:
- *			Returns the weight of the craft's cargo bay
- * @Params:
- *			n/a
- * @Returns:
- *			double - weight
- */
-
-double Starcraft::getWeight(){
-  return cargoWeight;
 }
 
 Starcraft::~Starcraft(){

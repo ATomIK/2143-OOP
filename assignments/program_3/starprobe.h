@@ -5,16 +5,19 @@
 
 class Starprobe : public Starcraft {
 
-private:
-	int preciousRoids;
-	int scanned;
-	std::vector<Asteroid> pAsteroids;
-
 protected:
+	int preciousRoids, scanned;
+	std::vector<Asteroid> pAsteroids;
 
 public:
 
   Starprobe();
+
+	// return scanned asteroids
+	int getScanned();
+
+	// return number of precious asteroids
+	int getPrecious();
 
   // discusses plans with the captain of the star ship
   void flightPlan();
@@ -22,13 +25,7 @@ public:
   // finds the closest non scanned asteroid
   int findClosest(std::vector<Asteroid>&);
 
-  // scans the asteroid ( starships are capable of this, but are more focused on mining )
   void scanAsteroid(int, std::vector<Asteroid>&);
-
-  // return how many asteroids it scanned that are precious
-  int getPreciousRoids();
-
-  int getScannedCount();
 
   ~Starprobe();
 

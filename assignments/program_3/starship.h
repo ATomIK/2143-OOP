@@ -6,7 +6,7 @@
 
 class Starship : public Starcraft {
 
-private:
+protected:
   // asteroids currently collected
   int asteroids;
 
@@ -14,19 +14,14 @@ public:
 
   Starship();
 
+  // returns number of asteroids collected
+  int getAsteroids();
   // method to set limit and coordinates
   void flightPlan();
-  // gets amount of asteroids collected
-  int getAsteroidCount();
-
-
   // "mines" an asteroid
   void mineAsteroid(int, std::vector<Asteroid>&);
   // "blasts" an asteroid
   void blAsteroid(int, std::vector<Asteroid>&);
-
-  // formats output
-  //void transmitData(int, std::vector<Asteroid>&, double, std::fstream&);
 
   ~Starship();
 

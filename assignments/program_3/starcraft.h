@@ -5,7 +5,7 @@
 
 class Starcraft : public SpaceObject {
 
-private:
+protected:
 
   // asteroids in the field
   int detectedAsteroids;
@@ -16,31 +16,20 @@ private:
   // total distance traveled
   double distance;
 
-protected:
-
 public:
   Starcraft();
 
-  // gets the ship's collection limit
+  // return the craft's visitation/collection limit
   int getLimit();
 
-  // gets the ship's current total distance traveled
-  double getDistance();
+  // return detected asteroids in a field
+  int getDetected();
 
-  // gets total amount of asteroids within a field
-  int getDetectedAsteroids();
+  // return total distance traveled
+  double getDist();
 
-  // get a report from the cargo bay
-  double getWeight();
-
-  // set collection/visitation limit
-  void setLimit(int);
-
-  // sets detectedAsteroids
+  // set detected asteroids in a field
   void setDetected(int);
-
-  // sets weight of spacecraft
-  void setWeight(double);
 
   // updates the SpaceObject's coordinates (moves to an asteroid) and returns distance
   double moveTo(int,std::vector<Asteroid>&);

@@ -41,7 +41,7 @@ int main(){
 
 	// loop until Ship's limit
 	// launch both the probe and the star ship
-	while(Ship.getLimit() != Ship.getAsteroidCount() || Probe.getLimit() != Probe.getScannedCount()){
+	while(Ship.getLimit() != Ship.getAsteroids() || Probe.getLimit() != Probe.getScanned()){
 
 		int index, probei;
 		double distance, probedist;
@@ -52,7 +52,7 @@ int main(){
 
 		// if the captain wants to collect more than the field, end mission.
 		// or if the probe is set to scan more than the field, end mission.
-		if(Ship.getAsteroidCount() == Ship.getDetectedAsteroids() || Probe.getScannedCount() == Ship.getDetectedAsteroids())
+		if(Ship.getAsteroids() == Ship.getDetected() || Probe.getScanned() == Ship.getDetected())
 			break;
 
 		// ship moves to target
@@ -152,9 +152,9 @@ void endMission(fstream &f, Starship &S, Starprobe &P){
 
 	cout << "\nMission complete!\n"
 			 << "Our ship traveled: " << S.getDistance() * 10 << " miles!\n"
-			 << "Asteroids collected: " << S.getAsteroidCount() << "\n\n"
+			 << "Asteroids collected: " << S.getAsteroids() << "\n\n"
 			 << "Our probe traveled: " << P.getDistance() * 10 << " miles!\n"
-			 << "It found " << P.getPreciousRoids() << " asteroids that contain "
+			 << "It found " << P.getPrecious() << " asteroids that contain "
 			 "precious metals!\n";
 
 	f.close();
