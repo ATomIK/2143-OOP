@@ -21,6 +21,18 @@ Starcraft::Starcraft(){
 }
 
 /*
+* @MethodName: getPrecious
+* @Description:
+*			Return number of precious asteroids
+* @Params:
+*			n/a
+* @Returns:
+*			int - precious asteroids
+*/
+
+std::vector<Asteroid> Starprobe::getDb(){ return database; }
+
+/*
  * @MethodName: getLimit
  * @Description:
  *			Return the craft's visitation/collection limit
@@ -151,7 +163,6 @@ int Starcraft::findClosest(std::vector<Asteroid> &vect,bool ship) {
 		// ship distancec from asteroid[i]
 		tempDist = std::sqrt((x*x + y*y));
 		// end new method: computeDistance
-		// tempDist = computeDistance(vect[i].getX(), vect[i].getY());
 
     // if ship is false, then it's the starprobe else starship
     bool nt = !ship ? vect[i].isScanned() : vect[i].isCollected();
@@ -197,7 +208,6 @@ bool Starcraft::doAsteroid(int index, std::vector<Asteroid> &asts, bool ship, do
 			// ship's cargo weight is updated
       setWeight(getWeight() + asts[index].getWeight());
 
-			// std::cout << "Asteroid weight: " << asts[index].getWeight() << "\n";
 			std::cout << "Starship warped to: ("
 				<< asts[index].get(0) << ", " << asts[index].get(1)
 				<< "). Mining asteroid...\n\n";

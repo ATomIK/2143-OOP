@@ -40,18 +40,6 @@ int Starprobe::getScanned(){ return current; }
 int Starprobe::getPrecious(){ return preciousRoids; }
 
 /*
-* @MethodName: getPrecious
-* @Description:
-*			Return number of precious asteroids
-* @Params:
-*			n/a
-* @Returns:
-*			int - precious asteroids
-*/
-
-std::vector<Asteroid> Starprobe::getDb(){ return database; }
-
-/*
 * @MethodName: flightPlan
 * @Description:
 *			Discusses plans with the captain of the starship

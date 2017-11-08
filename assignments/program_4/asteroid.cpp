@@ -58,6 +58,25 @@ Asteroid::Asteroid(const Asteroid &obj){
 }
 
 /*
+ * @MethodName: operator =
+ * @Description:
+ *			Copy over an asteroid's values into another asteroid object
+ * @Params:
+ *			Asteroid obj - the asteroid to copy values from
+ * @Returns:
+ *			void
+ */
+
+void Asteroid::operator = (Asteroid obj){
+  coords[0] = obj.coords[0];
+  coords[1] = obj.coords[1];
+  weight = obj.weight;
+  collected = obj.collected;
+  scanned = obj.scanned;
+  p = obj.p;
+}
+
+/*
  * @MethodName: isCollected
  * @Description:
  *			Return collection status

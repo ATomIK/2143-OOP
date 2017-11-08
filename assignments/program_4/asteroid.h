@@ -23,6 +23,9 @@ public:
   // copy constructor
   Asteroid(const Asteroid &);
 
+  // overloaded = operator
+  void operator = (Asteroid);
+
   // return collection status
   bool isCollected();
 

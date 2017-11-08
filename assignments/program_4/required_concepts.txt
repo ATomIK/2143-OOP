@@ -1,17 +1,9 @@
-Move the list of precious metals asteroids to the SpaceCraft class. Make it static, so it will be
-shared amongst all spacecraft.
-
-In the SpaceCraft class, declare four static variables to keep track of values: the total number of
-asteroids to visit and the total to collect and the total number visited and total collected.
-
-Make sure you have a copy constructor in Asteroid class.
-
 Write a toString method in all your classes that formats and returns a string of the values of the
 member data formatted the way you want the main to print them. NOTE: Don’t have SpaceCraft
 include the precious metals asteroid list.
 
 Add a string member data called name to SpaceObject to indicate the type of the object and make
-sure the toString method returns this type for all all subclasses. Modify all the constructors to set
+sure the toString method returns this type for all subclasses. Modify all the constructors to set
 this field. Add a get method to SpaceObject to return this data. The member data and method will be
 inherited.
 

@@ -126,7 +126,9 @@ void Starship::blAsteroid(int index, std::vector<Asteroid> &asts){
       bool precious = false;
       if(asts[index].isPrecious())
         precious = true;
+
       Asteroid temp = Asteroid(x, y, weight, 0, 0, precious);
+
       asts.push_back(temp);
 
       // A piece flew into the ship if its coordinates equal the ship's coordinates

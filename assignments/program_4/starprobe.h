@@ -7,7 +7,6 @@ class Starprobe : public Starcraft {
 
 protected:
 	int preciousRoids;
-	std::vector<Asteroid> database;
 
 public:
 
@@ -18,9 +17,6 @@ public:
 
 	// return number of precious asteroids
 	int getPrecious();
-
-	// return database of scanned asteroids
-	std::vector<Asteroid> getDb();
 
   // discusses plans with the captain of the star ship
   void flightPlan();
