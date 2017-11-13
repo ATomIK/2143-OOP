@@ -10,7 +10,7 @@
   #include <windows.h>
 #endif
 
-std::vector<Asteroid> Starcraft::database = {};
+// std::vector<Asteroid> Starcraft::database = {};
 
 Starcraft::Starcraft() : SpaceObject() {
   coords[0] = 0;

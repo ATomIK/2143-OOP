@@ -24,7 +24,7 @@ public:
   Asteroid(const Asteroid &);
 
   // overloaded = operator
-  void operator = (Asteroid);
+  // void operator= (Asteroid);
 
   // return collection status
   bool isCollected();

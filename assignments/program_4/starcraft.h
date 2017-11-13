@@ -7,7 +7,7 @@ class Starcraft : public SpaceObject {
 
 protected:
   // database of precious asteroids are now shared with all ships
-  static std::vector<Asteroid> database;
+  std::vector<Asteroid> database;
 
   /* spacecraft computer
     [0] = asteroids to visit
@@ -15,7 +15,7 @@ protected:
     [2] = asteroids to mine
     [3] = asteroids mined
   */
-  static int computer[4];
+  // int computer[4];
 
   // asteroids in the field
   int detectedAsteroids;

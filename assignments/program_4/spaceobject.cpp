@@ -26,15 +26,15 @@ int SpaceObject::get(int t){ return coords[t]; }
  *			string - object data
  */
 
-std::string SpaceObject::toString(){
-  std::string output = name;
-  output += " is at coords [";
-  output += coords[0];
-  output += ", ";
-  output += coords[1];
-  output += "]\n";
-  return output;
-}
+// std::string SpaceObject::toString(){
+//   std::string output = name;
+//   output += " is at coords [";
+//   output += coords[0];
+//   output += ", ";
+//   output += coords[1];
+//   output += "]\n";
+//   return output;
+// }
 
 /*
  * @MethodName: set

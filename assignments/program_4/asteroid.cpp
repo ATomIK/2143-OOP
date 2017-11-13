@@ -67,14 +67,14 @@ Asteroid::Asteroid(const Asteroid &obj){
  *			void
  */
 
-void Asteroid::operator = (Asteroid obj){
-  coords[0] = obj.coords[0];
-  coords[1] = obj.coords[1];
-  weight = obj.weight;
-  collected = obj.collected;
-  scanned = obj.scanned;
-  p = obj.p;
-}
+// void Asteroid::operator= (Asteroid obj){
+//   coords[0] = obj.coords[0];
+//   coords[1] = obj.coords[1];
+//   weight = obj.weight;
+//   collected = obj.collected;
+//   scanned = obj.scanned;
+//   p = obj.p;
+// }
 
 /*
  * @MethodName: isCollected
