@@ -29,9 +29,9 @@ int SpaceObject::get(int t){ return coords[t]; }
 std::string SpaceObject::toString(){
   std::string result = name;
   result += " is currently at coords [";
-  result += coords[0];
+  result += std::to_string(coords[0]);
   result += ", ";
-  result += coords[1];
+  result += std::to_string(coords[1]);
   result += "]\n\n";
   return result;
 }

@@ -9,10 +9,8 @@ protected:
 
   // weight of Asteroid
   double weight;
-  // collected status and scanned status
-  bool collected, scanned;
-  // does it contain precious metals
-  bool p;
+  // collected status, scanned status, and contains precious metals
+  bool collected, scanned, p;
 
 public:
 
@@ -24,7 +22,7 @@ public:
   Asteroid(const Asteroid &);
 
   // overloaded = operator
-  // void operator= (Asteroid);
+  void operator= (Asteroid);
 
   // return collection status
   bool isCollected();

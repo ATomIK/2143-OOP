@@ -1,4 +1,7 @@
+#include <iostream>
+#include <iomanip>
 #include "asteroid.h"
+#include <sstream>
 
 /*
  * @DefaultConstructorName: Asteroid
@@ -67,14 +70,14 @@ Asteroid::Asteroid(const Asteroid &obj){
  *			void
  */
 
-// void Asteroid::operator= (Asteroid obj){
-//   coords[0] = obj.coords[0];
-//   coords[1] = obj.coords[1];
-//   weight = obj.weight;
-//   collected = obj.collected;
-//   scanned = obj.scanned;
-//   p = obj.p;
-// }
+void Asteroid::operator= (Asteroid obj){
+  coords[0] = obj.coords[0];
+  coords[1] = obj.coords[1];
+  weight = obj.weight;
+  collected = obj.collected;
+  scanned = obj.scanned;
+  p = obj.p;
+}
 
 /*
  * @MethodName: isCollected
@@ -135,8 +138,19 @@ double Asteroid::getWeight(){ return weight; }
  */
 
 std::string Asteroid::toString(){
-  std::string result = " Asteroid weighs: ";
-  result += weight;
+  std::string result = "\nAsteroid weighs: ";
+  std::stringstream dbl;
+  dbl << std::fixed << std::setprecision(2) << weight;
+  std::string s = dbl.str();
+  result += s;
+  result += ". Collected: ";
+  result += std::to_string(collected);
+  result += ". Scanned: ";
+  result += std::to_string(scanned);
+  result += ". Precious: ";
+  result += std::to_string(p);
+  result += ".\n\n";
+  return result;
 }
 
 /*

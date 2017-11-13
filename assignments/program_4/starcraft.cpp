@@ -86,6 +86,35 @@ double Starcraft::getDist(){ return distance; }
 double Starcraft::getWeight(){ return cargoWeight; }
 
 /*
+ * @MethodName: toString
+ * @Description:
+ *			Returns string of pretty object data
+ * @Params:
+ *      n/a
+ * @Returns:
+ *			string - pretty object data
+ */
+
+std::string Starcraft::toString(){
+  std::string result = "\nCraft mission limit: (";
+  result += std::to_string(current);
+  result += "/";
+  result += std::to_string(limit);
+  result += "). Distance traveled: ";
+  std::stringstream dbl;
+  dbl << std::fixed << std::setprecision(2) << distance;
+  std::string s = dbl.str();
+  result += s;
+  result += ". Cargo bay: ";
+  std::stringstream dbl;
+  dbl << std::fixed << std::setprecision(2) << distance;
+  std::string s = dbl.str();
+  result += s;
+  result += ".\n\n";
+  return result;
+}
+
+/*
  * @MethodName: setDetected
  * @Description:
  *			Set detected asteroids in a field

@@ -154,6 +154,8 @@ void endMission(fstream &f, Starship S, Starprobe P, vector<Asteroid> vect){
 
 	cout << "== [ Mission complete ] ==\n";
 
+	cout << vect[4].toString();
+
 	cout << "\nOur ship traveled: " << fixed << setprecision(2) << S.getDist() * 10 << " miles!\n"
 			 << "Asteroids collected: " << S.getAsteroids() << "\n\n"
 			 << " ID | Coords | Weight \n";
