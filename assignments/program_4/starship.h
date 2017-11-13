@@ -10,6 +10,8 @@ public:
 
   Starship();
 
+  Starship(int,int,int);
+
   // returns number of asteroids collected
   int getAsteroids();
   // method to set limit and coordinates

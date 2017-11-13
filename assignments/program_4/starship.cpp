@@ -20,7 +20,7 @@
  */
 
 Starship::Starship() : Starcraft(){
-  current = 0;
+  
 }
 
 /*

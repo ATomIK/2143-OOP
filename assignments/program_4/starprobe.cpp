@@ -13,7 +13,10 @@
 
 Starprobe::Starprobe() : Starcraft(){
 	preciousRoids = 0;
-	current = 0;
+}
+
+Starprobe::Starprobe(int max, int x, int y) : Starcraft(){
+	preciousRoids = 0;
 }
 
 /*

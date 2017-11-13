@@ -1,4 +1,6 @@
 #include <iostream>
+#include <iomanip>
+#include <sstream>
 #include "spaceobject.h"
 #include "starcraft.h"
 #include <cmath>
@@ -20,7 +22,7 @@ Starcraft::Starcraft() : SpaceObject() {
   coords[1] = 1;
   cargoWeight = 0.0;
   distance = 0.0;
-
+  current = 0;
   limit = 0;
   detectedAsteroids = 0;
 }
@@ -106,10 +108,10 @@ std::string Starcraft::toString(){
   std::string s = dbl.str();
   result += s;
   result += ". Cargo bay: ";
-  std::stringstream dbl;
-  dbl << std::fixed << std::setprecision(2) << distance;
-  std::string s = dbl.str();
-  result += s;
+  std::stringstream db;
+  db << std::fixed << std::setprecision(2) << cargoWeight;
+  std::string l = db.str();
+  result += l;
   result += ".\n\n";
   return result;
 }

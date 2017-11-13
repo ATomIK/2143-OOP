@@ -12,6 +12,8 @@ public:
 
   Starprobe();
 
+	Starprobe(int,int,int);
+
 	// return scanned asteroids
 	int getScanned();
 

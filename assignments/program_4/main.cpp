@@ -16,60 +16,87 @@
 
 using namespace std;
 
+typedef Starcraft *crafts[50];
+
 // function prototypes
-void getInput(fstream&);
+void getInput(fstream&,fstream&);
 void generateField(vector<Asteroid>&,fstream&,Starship&);
 void captainsLog(fstream&, Starship&, Starprobe&);
 void endMission(fstream&, Starship, Starprobe, vector<Asteroid>);
 
 int main(){
 
-	fstream input;
-	Starship Ship;
-	Starprobe Probe;
+	fstream input, ships;
+	Starcraft craft;
+	int shipsNum, maxScan, maxMine, maxAsteroid;
+	// Starship Ship;
+	// Starprobe Probe;
 	vector<Asteroid> asteroids;
 
 	// prompt the user for input
-	getInput(input);
+	getInput(input, ships);
+	ships >> shipsNum;
+	ships >> maxScan;
+	ships >> maxMine;
+	ships >> maxAsteroid;
 	//  discuss the flight plan with the captain (user)
-	Ship.flightPlan();
+	// Ship.flightPlan();
 	// discuss the flight plan of the probe with the captain
-	Probe.flightPlan();
+	// Probe.flightPlan();
 
 	// read input and generate Asteroid vector
-	generateField(asteroids,input,Ship);
+	// generateField(asteroids,input,Ship);
 
 	cout << "\n== [ Beginning mission ] ==\n";
-	// loop until both hit their limit
-	// launch both the probe and the star ship
-	while(Ship.getLimit() != Ship.getAsteroids() || Probe.getLimit() != Probe.getScanned()){
 
-		int sindex, pindex;
-		double sdist, pdist;
+	for(int i = 0; i < shipsNum; i++){
+		char type;
+		int xcoord,ycoord;
+		ships >> type >> xcoord >> ycoord;
 
-		// find target
-		sindex = Ship.findClosest(asteroids,true);
-		pindex = Probe.findClosest(asteroids,false);
+		if(type == 'P'){
+			crafts[i] = new Starprobe(maxScan,xcoord,ycoord);
+			cout << "Probe at (" << xcoord << ", " << ycoord << ").\n";
+		}
+		if(type == 'S'){
+			crafts[i] = new Starship(maxMine,xcoord,ycoord);
+			cout << "Ship at (" << xcoord << ", " << ycoord << ").\n";
+		}
 
-		// if the captain wants to collect more than the field, end mission.
-		// or if the probe is set to scan more than the field, end mission.
-		if(Ship.getAsteroids() == Ship.getDetected() || Probe.getScanned() == Ship.getDetected())
-			break;
-
-		// ship moves to target
-		sdist = Ship.moveTo(sindex, asteroids);
-		// probe moves to target
-		pdist = Probe.moveTo(pindex, asteroids);
-
-		// mine asteroid if ship hasnt reached its limit
-		if(!Ship.doAsteroid(sindex, asteroids, true, 9.0) && Ship.getLimit() != Ship.getAsteroids())
-			Ship.blAsteroid(sindex,asteroids);
-		// probe scans asteroid
-		Probe.doAsteroid(pindex, asteroids, false, 9.0);
 	}
 
+	// loop until both hit their limit
+	// launch both the probe and the star ship
+	// while(Ship.getLimit() != Ship.getAsteroids()
+	// 			|| Probe.getLimit() != Probe.getScanned()){
+	//
+	// 	int sindex, pindex;
+	// 	double sdist, pdist;
+	//
+	// 	// find target
+	// 	sindex = Ship.findClosest(asteroids,true);
+	// 	pindex = Probe.findClosest(asteroids,false);
+	//
+	// 	// if the captain wants to collect more than the field, end mission.
+	// 	// or if the probe is set to scan more than the field, end mission.
+	// 	if(Ship.getAsteroids() == Ship.getDetected()
+	// 			|| Probe.getScanned() == Ship.getDetected())
+	// 		break;
+	//
+	// 	// ship moves to target
+	// 	sdist = Ship.moveTo(sindex, asteroids);
+	// 	// probe moves to target
+	// 	pdist = Probe.moveTo(pindex, asteroids);
+	//
+	// 	// mine asteroid if ship hasnt reached its limit
+	// 	if(!Ship.doAsteroid(sindex, asteroids, true, 9.0) && Ship.getLimit() != Ship.getAsteroids())
+	// 		Ship.blAsteroid(sindex,asteroids);
+	// 	// probe scans asteroid
+	// 	Probe.doAsteroid(pindex, asteroids, false, 9.0);
+	// }
+
 	// close files and end program
-	endMission(input, Ship, Probe, asteroids);
+	// endMission(input, Ship, Probe, asteroids);
 
 	return 0;
 }
@@ -84,15 +111,20 @@ int main(){
  *			void
  */
 
-void getInput(fstream &f){
+void getInput(fstream &f, fstream &s){
 
-	string input;
+	string input, ships;
 
 	cout << "Name of input file ('def' for 'input.txt'): ";
 	cin >> input;
 	input = input == "def" ? "input.txt" : input;
 
+	cout << "Name of ships file ('def' for 'Spacecraft.txt'): ";
+	cin >> ships;
+	ships = ships == "def" ? "Spacecraft.txt" : ships;
+
 	f.open(input.c_str(), ios::in);
+	s.open(ships.c_str(), ios::in);
 
 }
 

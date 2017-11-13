@@ -7,15 +7,11 @@ sure the toString method returns this type for all subclasses. Modify all the co
 this field. Add a get method to SpaceObject to return this data. The member data and method will be
 inherited.
 
-In main, use a typedef and declare an array of pointers to SpaceCraft.
-
 Overload the = operator for the Asteroid class, and use it in any method that needs to assign values
 from one asteroid to another, e.g., alist[i] = asteroid; will NOW be a legal statement
 and will replace statements like alist[i].setWeight (asteroid.getWeight());
 
-You will need to add a toString method to the AsteroidList class, as well.
-
+You will need to add a toString method to the AsteroidList class, as well.
 Add a getList( ) method to the SpaceCraft class, that calls the toString method of the
-
 AsteroidList, to return one huge string of precious asteroids to print out later. This is essentially a
 dump method.
