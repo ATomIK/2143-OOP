@@ -10,7 +10,9 @@
   #include <windows.h>
 #endif
 
-Starcraft::Starcraft(){
+std::vector<Asteroid> Starcraft::database = {};
+
+Starcraft::Starcraft() : SpaceObject() {
   coords[0] = 0;
   coords[1] = 1;
   cargoWeight = 0.0;
@@ -30,7 +32,7 @@ Starcraft::Starcraft(){
 *			int - precious asteroids
 */
 
-std::vector<Asteroid> Starprobe::getDb(){ return database; }
+std::vector<Asteroid> Starcraft::getDb(){ return database; }
 
 /*
  * @MethodName: getLimit
@@ -230,6 +232,6 @@ bool Starcraft::doAsteroid(int index, std::vector<Asteroid> &asts, bool ship, do
 
 }
 
-Starcraft::~Starcraft(){
+Starcraft::~Starcraft() {
 
 }

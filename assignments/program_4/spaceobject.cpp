@@ -17,6 +17,26 @@ SpaceObject::SpaceObject(){
 int SpaceObject::get(int t){ return coords[t]; }
 
 /*
+ * @MethodName: toString
+ * @Description:
+ *			Formats object data into a string.
+ * @Params:
+ *			n/a
+ * @Returns:
+ *			string - object data
+ */
+
+std::string SpaceObject::toString(){
+  std::string output = name;
+  output += " is at coords [";
+  output += coords[0];
+  output += ", ";
+  output += coords[1];
+  output += "]\n";
+  return output;
+}
+
+/*
  * @MethodName: set
  * @Description:
  *			Sets specified coordinate

@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cmath>
+#include "starcraft.h"
 #include "starprobe.h"
 #include "asteroid.h"
 
@@ -106,7 +107,7 @@ bool Starprobe::doAsteroid(int index, std::vector<Asteroid> &asts, bool ship, do
 			// increment total number of precious asteroids
 			preciousRoids++;
 			// add precious asteroid to probe's database
-			database.push_back(asts[index]);
+			Starcraft::database.push_back(asts[index]);
 		} else
 			std::cout << "Asteroid did not contain precious metals...\n\n";
 
