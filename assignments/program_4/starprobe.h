@@ -18,6 +18,9 @@ public:
 	// return number of precious asteroids
 	int getPrecious();
 
+	// object data to pretty string
+  std::string toString();
+
   // discusses plans with the captain of the star ship
   void flightPlan();
 

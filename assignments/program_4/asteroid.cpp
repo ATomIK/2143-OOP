@@ -125,6 +125,21 @@ bool Asteroid::isPrecious(){ return p; }
 double Asteroid::getWeight(){ return weight; }
 
 /*
+ * @MethodName: toString
+ * @Description:
+ *			Returns string of pretty object data
+ * @Params:
+ *      n/a
+ * @Returns:
+ *			string - pretty object data
+ */
+
+std::string Asteroid::toString(){
+  std::string result = " Asteroid weighs: ";
+  result += weight;
+}
+
+/*
  * @MethodName: setCollected
  * @Description:
  *			Sets collected status

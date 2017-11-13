@@ -15,7 +15,8 @@ public:
   // get coordinate
   int get(int);
 
-  // std::string toString();
+  // object data to pretty string
+  std::string toString();
 
   // set coordinate
   void set(int,int);

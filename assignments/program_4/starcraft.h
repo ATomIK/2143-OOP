@@ -6,17 +6,6 @@
 class Starcraft : public SpaceObject {
 
 protected:
-  // database of precious asteroids are now shared with all ships
-  std::vector<Asteroid> database;
-
-  /* spacecraft computer
-    [0] = asteroids to visit
-    [1] = asteroids visited
-    [2] = asteroids to mine
-    [3] = asteroids mined
-  */
-  // int computer[4];
-
   // asteroids in the field
   int detectedAsteroids;
   // limit of asteroids to collect/visit
@@ -27,6 +16,16 @@ protected:
   double cargoWeight;
   // total distance traveled
   double distance;
+  // database of asteroids with precious metals
+  static std::vector<Asteroid> database;
+  // computer data
+  /* spacecraft computer
+    [0] = asteroids to visit
+    [1] = asteroids visited
+    [2] = asteroids to mine
+    [3] = asteroids mined
+ */
+ static int computer[4];
 
 public:
   Starcraft();
@@ -45,6 +44,9 @@ public:
 
   // return weight of craft's cargo bay
   double getWeight();
+
+  // object data to pretty string
+  std::string toString();
 
   // set detected asteroids in a field
   void setDetected(int);

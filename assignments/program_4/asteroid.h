@@ -35,6 +35,9 @@ public:
   // return precious status
   bool isPrecious();
 
+  // object data to pretty string
+  std::string toString();
+
   // return weight of asteroid
   double getWeight();
 

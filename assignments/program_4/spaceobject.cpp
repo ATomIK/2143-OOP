@@ -19,22 +19,22 @@ int SpaceObject::get(int t){ return coords[t]; }
 /*
  * @MethodName: toString
  * @Description:
- *			Formats object data into a string.
+ *			Returns string of pretty object data
  * @Params:
- *			n/a
+ *      n/a
  * @Returns:
- *			string - object data
+ *			string - pretty object data
  */
 
-// std::string SpaceObject::toString(){
-//   std::string output = name;
-//   output += " is at coords [";
-//   output += coords[0];
-//   output += ", ";
-//   output += coords[1];
-//   output += "]\n";
-//   return output;
-// }
+std::string SpaceObject::toString(){
+  std::string result = name;
+  result += " is currently at coords [";
+  result += coords[0];
+  result += ", ";
+  result += coords[1];
+  result += "]\n\n";
+  return result;
+}
 
 /*
  * @MethodName: set

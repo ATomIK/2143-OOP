@@ -10,7 +10,10 @@
   #include <windows.h>
 #endif
 
-// std::vector<Asteroid> Starcraft::database = {};
+// initialize static variables
+std::vector<Asteroid> Starcraft::database = {};
+
+int computer[4] = {0};
 
 Starcraft::Starcraft() : SpaceObject() {
   coords[0] = 0;
