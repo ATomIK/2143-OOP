@@ -24,10 +24,11 @@ protected:
     [1] = asteroids visited
     [2] = asteroids to mine
     [3] = asteroids mined
- */
- static int computer[4];
+  */
+  static int computer[4];
 
 public:
+
   Starcraft();
 
   // return database of scanned asteroids
@@ -47,6 +48,9 @@ public:
 
   // object data to pretty string
   std::string toString();
+
+  // set computer data
+  static void setComputer(int[]);
 
   // set detected asteroids in a field
   void setDetected(int);

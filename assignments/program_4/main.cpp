@@ -26,7 +26,7 @@ void endMission(fstream&, Starship, Starprobe, vector<Asteroid>);
 
 int main(){
 
-	fstream input, ships;
+	fstream input;
 	Starcraft craft;
 	int shipsNum, maxScan, maxMine, maxAsteroid;
 	// Starship Ship;
@@ -34,10 +34,10 @@ int main(){
 	vector<Asteroid> asteroids;
 
 	// prompt the user for input
-	getInput(input, ships);
+	getInput(input);
 	ships >> shipsNum;
-	ships >> maxScan;
-	ships >> maxMine;
+	ships >> Starcraft::computer[0];
+	ships >> Starcraft::computer[2];
 	ships >> maxAsteroid;
 	//  discuss the flight plan with the captain (user)
 	// Ship.flightPlan();
@@ -55,11 +55,11 @@ int main(){
 		ships >> type >> xcoord >> ycoord;
 
 		if(type == 'P'){
-			crafts[i] = new Starprobe(maxScan,xcoord,ycoord);
+			// crafts[i] = new Starprobe(maxScan,xcoord,ycoord);
 			cout << "Probe at (" << xcoord << ", " << ycoord << ").\n";
 		}
 		if(type == 'S'){
-			crafts[i] = new Starship(maxMine,xcoord,ycoord);
+			// crafts[i] = new Starship(maxMine,xcoord,ycoord);
 			cout << "Ship at (" << xcoord << ", " << ycoord << ").\n";
 		}
 
@@ -97,6 +97,7 @@ int main(){
 
 	// close files and end program
 	// endMission(input, Ship, Probe, asteroids);
+	cout << Starcraft::computer[2] << " asteroids to scan.\n\n";
 
 	return 0;
 }
@@ -111,20 +112,15 @@ int main(){
  *			void
  */
 
-void getInput(fstream &f, fstream &s){
+void getInput(fstream &f){
 
-	string input, ships;
+	string input;
 
 	cout << "Name of input file ('def' for 'input.txt'): ";
 	cin >> input;
 	input = input == "def" ? "input.txt" : input;
 
-	cout << "Name of ships file ('def' for 'Spacecraft.txt'): ";
-	cin >> ships;
-	ships = ships == "def" ? "Spacecraft.txt" : ships;
-
 	f.open(input.c_str(), ios::in);
-	s.open(ships.c_str(), ios::in);
 
 }
 
