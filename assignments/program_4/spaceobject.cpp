@@ -1,7 +1,21 @@
 #include "spaceobject.h"
 
 SpaceObject::SpaceObject(){
+  name = "Spaceobject";
+  coords[0] = 0;
+  coords[1] = 0;
+}
 
+SpaceObject::SpaceObject(int x, int y){
+  name = "Spaceobject";
+  coords[0] = x;
+  coords[1] = y;
+}
+
+SpaceObject::SpaceObject(std::string n, int x, int y){
+  name = n;
+  coords[0] = x;
+  coords[1] = y;
 }
 
 /*
@@ -28,11 +42,13 @@ int SpaceObject::get(int t){ return coords[t]; }
 
 std::string SpaceObject::toString(){
   std::string result = name;
-  result += " is currently at coords [";
+
+  result += " at (";
   result += std::to_string(coords[0]);
   result += ", ";
   result += std::to_string(coords[1]);
-  result += "]\n\n";
+  result += ")\n\n";
+  
   return result;
 }
 

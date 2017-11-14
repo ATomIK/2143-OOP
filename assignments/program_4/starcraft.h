@@ -26,10 +26,13 @@ protected:
     [3] = asteroids mined
   */
   static int computer[4];
+  // static int maxScan, currScan, maxMine, currMine;
 
 public:
 
   Starcraft();
+
+  Starcraft(std::string,int,int);
 
   // return database of scanned asteroids
   std::vector<Asteroid> getDb();
@@ -49,8 +52,12 @@ public:
   // object data to pretty string
   std::string toString();
 
-  // set computer data
+  // getlist returns an array of strings of precious asteroids to print out
+  void getlist(std::string&);
+
   static void setComputer(int[]);
+
+  static int getComputer(int);
 
   // set detected asteroids in a field
   void setDetected(int);

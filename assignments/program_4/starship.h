@@ -10,7 +10,7 @@ public:
 
   Starship();
 
-  Starship(int,int,int);
+  Starship(std::string,int,int);
 
   // returns number of asteroids collected
   int getAsteroids();

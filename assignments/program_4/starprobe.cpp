@@ -1,5 +1,7 @@
 #include <iostream>
 #include <cmath>
+#include <sstream>
+#include <iomanip>
 #include "starcraft.h"
 #include "starprobe.h"
 #include "asteroid.h"
@@ -15,7 +17,7 @@ Starprobe::Starprobe() : Starcraft(){
 	preciousRoids = 0;
 }
 
-Starprobe::Starprobe(int max, int x, int y) : Starcraft(){
+Starprobe::Starprobe(std::string n, int x, int y) : Starcraft(n,x,y){
 	preciousRoids = 0;
 }
 
@@ -42,6 +44,33 @@ int Starprobe::getScanned(){ return current; }
 */
 
 int Starprobe::getPrecious(){ return preciousRoids; }
+
+/*
+ * @MethodName: toString
+ * @Description:
+ *			Returns string of pretty object data
+ * @Params:
+ *      n/a
+ * @Returns:
+ *			string - pretty object data
+ */
+
+std::string Starprobe::toString(){
+  std::string result = name;
+	result += " at (";
+  result += std::to_string(coords[0]);
+  result += ", ";
+  result += std::to_string(coords[1]);
+  result += "). Total distance: ";
+	std::stringstream dbl;
+	dbl << std::fixed << std::setprecision(2) << distance;
+	std::string s = dbl.str();
+	result += s;
+	result += ". Scanned asteroids: ";
+  result += std::to_string(current);
+  result += ".\n";
+  return result;
+}
 
 /*
 * @MethodName: flightPlan

@@ -13,9 +13,8 @@
  *			n/a
  */
 
-Asteroid::Asteroid(){
-  coords[0] = 0;
-  coords[1] = 0;
+Asteroid::Asteroid() : SpaceObject(){
+  name = "Asteroid";
   weight = 0.0;
   scanned = false;
   collected = false;
@@ -32,9 +31,8 @@ Asteroid::Asteroid(){
  *			n/a
  */
 
-Asteroid::Asteroid(int setx, int sety, double setw, bool setc, bool scanstat, bool precious){
-  coords[0] = setx;
-  coords[1] = sety;
+Asteroid::Asteroid(int setx, int sety, double setw, bool setc, bool scanstat, bool precious) : SpaceObject(setx,sety){
+  name = "Asteroid";
   weight = setw;
   collected = setc;
   scanned = scanstat;
@@ -52,6 +50,7 @@ Asteroid::Asteroid(int setx, int sety, double setw, bool setc, bool scanstat, bo
  */
 
 Asteroid::Asteroid(const Asteroid &obj){
+  name = obj.name;
   coords[0] = obj.coords[0];
   coords[1] = obj.coords[1];
   weight = obj.weight;
@@ -138,18 +137,33 @@ double Asteroid::getWeight(){ return weight; }
  */
 
 std::string Asteroid::toString(){
-  std::string result = "\nAsteroid weighs: ";
-  std::stringstream dbl;
+
+  std::string result = "\n";
+
+  result += name;
+
+  result += " at ("; // coordinates
+  result += std::to_string(coords[0]);
+  result += ", ";
+  result += std::to_string(coords[1]);
+  result += ") ";
+
+  std::stringstream dbl; // weight
   dbl << std::fixed << std::setprecision(2) << weight;
   std::string s = dbl.str();
   result += s;
-  result += ". Collected: ";
+
+  result += " kilotons. Collected: ";
   result += std::to_string(collected);
+
   result += ". Scanned: ";
   result += std::to_string(scanned);
+
   result += ". Precious: ";
   result += std::to_string(p);
+
   result += ".\n\n";
+
   return result;
 }
 

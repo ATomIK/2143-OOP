@@ -12,6 +12,10 @@ public:
 
   SpaceObject();
 
+  SpaceObject(int,int);
+
+  SpaceObject(std::string,int,int);
+
   // get coordinate
   int get(int);
 

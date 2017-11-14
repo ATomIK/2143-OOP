@@ -1,5 +1,7 @@
 #include <iostream>
 #include <iomanip>
+#include <string>
+#include <sstream>
 
 #ifdef __linux__
   #include <unistd.h>
@@ -20,8 +22,37 @@
  */
 
 Starship::Starship() : Starcraft(){
-  
+  cargoWeight = 0.0;
+  distance = 0.0;
+  current = 0;
+  limit = 0;
 }
+
+Starship::Starship(std::string n, int x, int y) : Starcraft(n,x,y){
+  cargoWeight = 0.0;
+  distance = 0.0;
+  current = 0;
+  limit = 0;
+}
+
+/*
+ * @ParameterizedConstructorName: Starship
+ * @Description:
+ *			Sets ship details
+ * @Params:
+ *			n/a
+ * @Returns:
+ *			n/a
+ */
+
+// Starship::Starship() : Starcraft(){
+//   coords[0] = 0;
+//   coords[1] = 0;
+//   cargoWeight = 0.0;
+//   distance = 0.0;
+//   current = 0;
+//   limit = 0;
+// }
 
 /*
  * @MethodName: getAsteroids
@@ -67,6 +98,38 @@ void Starship::flightPlan(){
 	std::cin >> limit;
   std::cout << "\n";
 
+}
+
+/*
+ * @MethodName: toString
+ * @Description:
+ *			Returns string of pretty object data
+ * @Params:
+ *      n/a
+ * @Returns:
+ *			string - pretty object data
+ */
+
+std::string Starship::toString(){
+  std::string result = name;
+  result += " at (";
+  result += std::to_string(coords[0]);
+  result += ", ";
+  result += std::to_string(coords[1]);
+  result += "). Total distance: ";
+  std::stringstream dbl;
+  dbl << std::fixed << std::setprecision(2) << distance;
+  std::string s = dbl.str();
+  result += s;
+  result += ". Cargo bay: ";
+  std::stringstream db;
+  db << std::fixed << std::setprecision(2) << cargoWeight;
+  std::string l = db.str();
+  result += l;
+  result += " kilotons. Mined asteroids: ";
+  result += std::to_string(current);
+  result += ".\n";
+  return result;
 }
 
 /*

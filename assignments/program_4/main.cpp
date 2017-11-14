@@ -16,11 +16,11 @@
 
 using namespace std;
 
-typedef Starcraft *crafts[50];
+typedef Starcraft *Starcrafts[50];
 
 // function prototypes
-void getInput(fstream&,fstream&);
-void generateField(vector<Asteroid>&,fstream&,Starship&);
+void getInput(fstream&);
+void generateField(vector<Asteroid>&,fstream&);
 void captainsLog(fstream&, Starship&, Starprobe&);
 void endMission(fstream&, Starship, Starprobe, vector<Asteroid>);
 
@@ -28,6 +28,7 @@ int main(){
 
 	fstream input;
 	Starcraft craft;
+	Starcrafts crafts;
 	int shipsNum, maxScan, maxMine, maxAsteroid;
 	// Starship Ship;
 	// Starprobe Probe;
@@ -35,38 +36,50 @@ int main(){
 
 	// prompt the user for input
 	getInput(input);
-	ships >> shipsNum;
-	ships >> Starcraft::computer[0];
-	ships >> Starcraft::computer[2];
-	ships >> maxAsteroid;
+	input >> shipsNum >> maxScan >> maxMine >> maxAsteroid;
+	int a[4] = {maxScan,0,maxMine,0}; // set computer variables.
+	Starcraft::setComputer(a); // get computer will return array for end mission.
 	//  discuss the flight plan with the captain (user)
 	// Ship.flightPlan();
 	// discuss the flight plan of the probe with the captain
 	// Probe.flightPlan();
 
-	// read input and generate Asteroid vector
-	// generateField(asteroids,input,Ship);
-
-	cout << "\n== [ Beginning mission ] ==\n";
-
+	// render ships into space
 	for(int i = 0; i < shipsNum; i++){
 		char type;
 		int xcoord,ycoord;
-		ships >> type >> xcoord >> ycoord;
+		input >> type >> xcoord >> ycoord;
 
-		if(type == 'P'){
-			// crafts[i] = new Starprobe(maxScan,xcoord,ycoord);
-			cout << "Probe at (" << xcoord << ", " << ycoord << ").\n";
-		}
-		if(type == 'S'){
-			// crafts[i] = new Starship(maxMine,xcoord,ycoord);
-			cout << "Ship at (" << xcoord << ", " << ycoord << ").\n";
-		}
-
+		if(type == 'P')
+			crafts[i] = new Starprobe("Starprobe",xcoord,ycoord);
+		if(type == 'S')
+			crafts[i] = new Starship("Starship",xcoord,ycoord);
 	}
 
-	// loop until both hit their limit
-	// launch both the probe and the star ship
+	// render asteroids into space
+	generateField(asteroids,input);
+
+	cout << "\n== [ Beginning mission ] ==\n";
+	for(int i = 0;i < shipsNum;i++){
+		// if derived is a Starship,
+		if(Starship* tempShip = dynamic_cast<Starship*>(crafts[i])){
+			cout << tempShip->toString();
+		} else { // derived is a Starprobe
+			Starprobe* tempProbe = dynamic_cast<Starprobe*>(crafts[i]);
+			cout << tempProbe->toString();
+		}
+	}
+
+	// if probes' missions have not completed or if ships' missions have not
+	// completed
+	while(Spacecraft::getComputer(1) != Spacecraft::getComputer(0)
+					|| Spacecraft::getComputer(4) != Spacecraft::getComputer(3)){
+		// loop through all ships
+		for(int i = 0;i < shipsNum;i++){
+			// don't need to dynamic cast since doAsteroid is the same for both ships.
+			// all that needs to be changed here is how doAsteroid increments the mission.
+		}
+	}
 	// while(Ship.getLimit() != Ship.getAsteroids()
 	// 			|| Probe.getLimit() != Probe.getScanned()){
 	//
@@ -97,7 +110,6 @@ int main(){
 
 	// close files and end program
 	// endMission(input, Ship, Probe, asteroids);
-	cout << Starcraft::computer[2] << " asteroids to scan.\n\n";
 
 	return 0;
 }
@@ -136,7 +148,7 @@ void getInput(fstream &f){
  *			void
  */
 
-void generateField(vector<Asteroid> &v, fstream &f, Starship &S){
+void generateField(vector<Asteroid> &v, fstream &f){
 
   int x,y,count = 1;
   double weight;
@@ -162,7 +174,7 @@ void generateField(vector<Asteroid> &v, fstream &f, Starship &S){
   }
 
 	// Starship scanned the field and now knows how many there are
-	S.setDetected(count);
+	// S.setDetected(count);
 
 }
 

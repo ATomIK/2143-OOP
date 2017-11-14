@@ -18,12 +18,10 @@ std::vector<Asteroid> Starcraft::database = {};
 int Starcraft::computer[4] = {0};
 
 Starcraft::Starcraft() : SpaceObject() {
-  coords[0] = 0;
-  coords[1] = 0;
-  cargoWeight = 0.0;
-  distance = 0.0;
-  current = 0;
-  limit = 0;
+  detectedAsteroids = 0;
+}
+
+Starcraft::Starcraft(std::string n, int x, int y) : SpaceObject(n,x,y) {
   detectedAsteroids = 0;
 }
 
@@ -98,22 +96,48 @@ double Starcraft::getWeight(){ return cargoWeight; }
  */
 
 std::string Starcraft::toString(){
-  std::string result = "\nCraft mission limit: (";
-  result += std::to_string(current);
+  // returns scan mission status and mining mission status
+  std::string result = "\nScan mission: (";
+  result += std::to_string(computer[1]);
   result += "/";
-  result += std::to_string(limit);
-  result += "). Distance traveled: ";
-  std::stringstream dbl;
-  dbl << std::fixed << std::setprecision(2) << distance;
-  std::string s = dbl.str();
-  result += s;
-  result += ". Cargo bay: ";
-  std::stringstream db;
-  db << std::fixed << std::setprecision(2) << cargoWeight;
-  std::string l = db.str();
-  result += l;
-  result += ".\n\n";
+  result += std::to_string(computer[0]);
+  result += "). Mining mission: (";
+  result += std::to_string(computer[4]);
+  result += "/";
+  result += std::to_string(computer[3]);
+  result += ").\n\n";
   return result;
+}
+
+/*
+ * @MethodName: setComputer
+ * @Description:
+ *			Set Starcraft's computer data
+ * @Params:
+ *			int a[] - computer data
+ * @Returns:
+ *			void
+ */
+
+void Starcraft::setComputer(int a[]){
+  computer[0] = a[0];
+  computer[1] = a[1];
+  computer[2] = a[2];
+  computer[3] = a[3];
+}
+
+/*
+ * @MethodName: getComputer
+ * @Description:
+ *			Set Starcraft's computer data
+ * @Params:
+ *			int a[] - computer data
+ * @Returns:
+ *			void
+ */
+
+int Starcraft::getComputer(int type){
+  return computer[type];
 }
 
 /*

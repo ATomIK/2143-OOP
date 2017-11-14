@@ -12,7 +12,7 @@ public:
 
   Starprobe();
 
-	Starprobe(int,int,int);
+	Starprobe(std::string,int,int);
 
 	// return scanned asteroids
 	int getScanned();
