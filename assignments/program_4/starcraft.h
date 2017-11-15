@@ -26,7 +26,6 @@ protected:
     [3] = asteroids mined
   */
   static int computer[4];
-  // static int maxScan, currScan, maxMine, currMine;
 
 public:
 
@@ -65,6 +64,9 @@ public:
   // set cargo weight of craft
   void setWeight(double);
 
+  // calculates hypotenuse of two x,y coordinates
+  double computeDistance(int,std::vector<Asteroid>&,bool);
+
   // updates the SpaceObject's coordinates (moves to an asteroid) and returns distance
   double moveTo(int,std::vector<Asteroid>&);
 
@@ -74,7 +76,7 @@ public:
 
   // perferms action on the asteroid depending on ship type
   // bool if ship else probe
-  virtual bool doAsteroid(int,std::vector<Asteroid>&,bool,double);
+  virtual bool doAsteroid(int,std::vector<Asteroid>&,bool,double,double);
 
   ~Starcraft();
 

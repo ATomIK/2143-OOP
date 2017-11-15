@@ -29,7 +29,8 @@ int main(){
 	fstream input;
 	Starcraft craft;
 	Starcrafts crafts;
-	int shipsNum, maxScan, maxMine, maxAsteroid;
+	int shipsNum, maxScan, maxMine;
+	double maxAsteroid;
 	// Starship Ship;
 	// Starprobe Probe;
 	vector<Asteroid> asteroids;
@@ -39,27 +40,33 @@ int main(){
 	input >> shipsNum >> maxScan >> maxMine >> maxAsteroid;
 	int a[4] = {maxScan,0,maxMine,0}; // set computer variables.
 	Starcraft::setComputer(a); // get computer will return array for end mission.
-	//  discuss the flight plan with the captain (user)
-	// Ship.flightPlan();
-	// discuss the flight plan of the probe with the captain
-	// Probe.flightPlan();
 
 	// render ships into space
+	int p = 1,s = 1;
 	for(int i = 0; i < shipsNum; i++){
+		string name;
 		char type;
 		int xcoord,ycoord;
 		input >> type >> xcoord >> ycoord;
 
-		if(type == 'P')
-			crafts[i] = new Starprobe("Starprobe",xcoord,ycoord);
-		if(type == 'S')
-			crafts[i] = new Starship("Starship",xcoord,ycoord);
+		if(type == 'P'){
+			name = "Starprobe #";
+			name += to_string(p);
+			crafts[i] = new Starprobe(name,xcoord,ycoord);
+			p++;
+		}
+		if(type == 'S'){
+			name = "Starship #";
+			name += to_string(s);
+			crafts[i] = new Starship(name,xcoord,ycoord);
+			s++;
+		}
 	}
 
 	// render asteroids into space
 	generateField(asteroids,input);
 
-	cout << "\n== [ Beginning mission ] ==\n";
+	cout << "\n== [ Status report ] ==\n\n";
 	for(int i = 0;i < shipsNum;i++){
 		// if derived is a Starship,
 		if(Starship* tempShip = dynamic_cast<Starship*>(crafts[i])){
@@ -70,14 +77,42 @@ int main(){
 		}
 	}
 
+		cout << "\n== [ Beginning mission ] ==\n\n";
+
 	// if probes' missions have not completed or if ships' missions have not
 	// completed
-	while(Spacecraft::getComputer(1) != Spacecraft::getComputer(0)
-					|| Spacecraft::getComputer(4) != Spacecraft::getComputer(3)){
+	while(Starcraft::getComputer(1) != Starcraft::getComputer(0)
+					|| Starcraft::getComputer(3) != Starcraft::getComputer(2)){
 		// loop through all ships
 		for(int i = 0;i < shipsNum;i++){
-			// don't need to dynamic cast since doAsteroid is the same for both ships.
-			// all that needs to be changed here is how doAsteroid increments the mission.
+			int index;
+			double traveled;
+
+			// when the probes' mission is complete
+			if(Starcraft::getComputer(0) == Starcraft::getComputer(1)){
+				// as we're looping through crafts, only manipulate crafts that can mine
+				if(Starship* tempShip = dynamic_cast<Starship*>(crafts[i])){
+					// find the closest precious asteroid
+					// passes in redundant asteroids vector
+					index = tempShip->findClosest(asteroids,true);
+					// move to that precious asteroid
+					traveled = tempShip->moveTo(index,asteroids);
+					// if precious asteroid is too big, blast it
+					if(!tempShip->doAsteroid(index,asteroids,true,maxAsteroid,traveled)
+							&& Starcraft::getComputer(2) != Starcraft::getComputer(3))
+						tempShip->blAsteroid(index);
+				}
+			} else {
+				// if scan mission isn't complete, execute commands on probes only
+				if(Starprobe* tempProbe = dynamic_cast<Starprobe*>(crafts[i])){
+					// go through asteroids vector for unscanned asteroids
+					index = tempProbe->findClosest(asteroids,false);
+					// move to unscanned asteroid
+					traveled = tempProbe->moveTo(index,asteroids);
+					// scan asteroid
+					tempProbe->doAsteroid(index,asteroids,false,maxAsteroid,traveled);
+				}
+			}
 		}
 	}
 	// while(Ship.getLimit() != Ship.getAsteroids()

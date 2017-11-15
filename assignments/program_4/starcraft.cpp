@@ -1,9 +1,9 @@
 #include <iostream>
-#include <iomanip>
+#include <cmath>
 #include <sstream>
+#include <iomanip>
 #include "spaceobject.h"
 #include "starcraft.h"
-#include <cmath>
 
 // check in case the program was compiled on linux as it was created on linux
 #ifdef __linux__
@@ -165,6 +165,28 @@ void Starcraft::setDetected(int num){ detectedAsteroids = num; }
 void Starcraft::setWeight(double w){ cargoWeight = w; }
 
 /*
+ * @MethodName: computeDistance
+ * @Description:
+ *			Computes hypotenuse of two (x,y) locations
+ * @Params:
+ *			int index - the Asteroid's index within the vector
+ *      std::vector<Asteroid> &asts - the Asteroid vector
+ *      bool ship - whether to use database or main's asteroid vector
+ * @Returns:
+ *			double - the hypotenuse
+ */
+
+double Starcraft::computeDistance(int i, std::vector<Asteroid> &asts,bool ship){
+
+  double x, y, dist;
+  x = (ship ? database[i].get(0) : asts[i].get(0)) - get(0);
+  y = (ship ? database[i].get(1) : asts[i].get(1)) - get(1);
+  dist = std::sqrt((x*x) + (y*y));
+  return dist;
+
+}
+
+/*
  * @MethodName: moveTo
  * @Description:
  *			Moves to the selected asteroid and updates the ship's coordinates.
@@ -177,16 +199,15 @@ void Starcraft::setWeight(double w){ cargoWeight = w; }
 
 double Starcraft::moveTo(int index, std::vector<Asteroid> &asts){
 
-  double x, y, dist;
-  x = asts[index].get(0) - get(0);
-  y = asts[index].get(1) - get(1);
-  dist = std::sqrt((x*x) + (y*y));
+  double dist = computeDistance(index,asts,0);
   // increase total distance
-  distance+= dist;
+  distance += dist;
 
   // ship's coordinates are updated
-  set(0,asts[index].get(0));
-  set(1,asts[index].get(1));
+  coords[0] = asts[index].get(0);
+  coords[1] = asts[index].get(1);
+  // set(0,asts[index].get(0));
+  // set(1,asts[index].get(1));
 
   return dist;
 
@@ -212,20 +233,12 @@ int Starcraft::findClosest(std::vector<Asteroid> &vect,bool ship) {
 	int index = 0;
 	// go through vector to compare distances
 	// set i's type to vector's size_type to avoid possible loss of data
-	for (std::vector<Asteroid>::size_type i = 0; i < vect.size(); i++) {
+	for (std::vector<Asteroid>::size_type i = 0; i < (!ship ? vect.size() : database.size()); i++) {
 
-		double tempDist = 0;
+		double tempDist = computeDistance(i,vect,ship);
 
-		// start new method: computeDistance
-		int x, y;
-		x = vect[i].get(0) - get(0);
-		y = vect[i].get(1) - get(1);
-		// ship distancec from asteroid[i]
-		tempDist = std::sqrt((x*x + y*y));
-		// end new method: computeDistance
-
-    // if ship is false, then it's the starprobe else starship
-    bool nt = !ship ? vect[i].isScanned() : vect[i].isCollected();
+    // if starship check database if probe check from field
+    bool nt = ship ? database[i].isCollected() : vect[i].isScanned();
     // if the asteroid hasn't been collected/scanned and
     // the distance is less than the initial minDist
     // then this is the closest asteroid to the ship
@@ -255,22 +268,34 @@ int Starcraft::findClosest(std::vector<Asteroid> &vect,bool ship) {
 *			void
 */
 
-bool Starcraft::doAsteroid(int index, std::vector<Asteroid> &asts, bool ship, double max){
+bool Starcraft::doAsteroid(int i, std::vector<Asteroid> &asts, bool ship, double max, double traveled){
+  // method is overriden in the starprobe class, so everything is defaulted to starship
+  // if the mission has not been completed
+	if (computer[3] != computer[2]) {
 
-  // if the craft has not reached its limit
-	if (limit != current) {
+    std::cout << name << " warped " << std::fixed << std::setprecision(2) <<
+      traveled << " light years to: ("
+      << database[i].get(0) << ", " << database[i].get(1)
+      << "). Mining asteroid...\n";
 
-		if (asts[index].getWeight() < max) {
+		if (database[i].getWeight() < max) {
 			// asteroid in the vector is now collected
-			asts[index].setCollected(true);
+      // do the operator= here
+			database[i].setCollected(true);
 			// asteroid count increases
 			current++;
+      computer[3]++;
 			// ship's cargo weight is updated
-      setWeight(getWeight() + asts[index].getWeight());
+      // setWeight(getWeight() + database[i].getWeight());
+      cargoWeight += database[i].getWeight();
 
-			std::cout << "Starship warped to: ("
-				<< asts[index].get(0) << ", " << asts[index].get(1)
-				<< "). Mining asteroid...\n\n";
+      #ifdef __linux__
+				usleep(800000);
+			#else
+				Sleep(8000);
+			#endif
+
+      std::cout << "Asteroid mined! Cargo bay: " << cargoWeight << " kilotons.\n\n";
 
 			// linux has a different sleep function than windows.
 			#ifdef __linux__
@@ -281,10 +306,17 @@ bool Starcraft::doAsteroid(int index, std::vector<Asteroid> &asts, bool ship, do
 
       return true;
 
-		}
+		} else
+      std::cout << "Asteroid is bigger than " << max << " kilotons!!\n";
 
 	} else
-		std::cout << "Starship is idle...\n";
+		std::cout << name << " is idle...\n\n";
+
+  #ifdef __linux__
+    usleep(1000000);
+  #else
+    Sleep(1000);
+  #endif
 
   return false;
 

@@ -2,6 +2,7 @@
 #include <cmath>
 #include <sstream>
 #include <iomanip>
+#include "spaceobject.h"
 #include "starcraft.h"
 #include "starprobe.h"
 #include "asteroid.h"
@@ -20,18 +21,6 @@ Starprobe::Starprobe() : Starcraft(){
 Starprobe::Starprobe(std::string n, int x, int y) : Starcraft(n,x,y){
 	preciousRoids = 0;
 }
-
-/*
-* @MethodName: getScanned
-* @Description:
-*			Return scanned asteroids
-* @Params:
-*			n/a
-* @Returns:
-*			int - scanned asteroids
-*/
-
-int Starprobe::getScanned(){ return current; }
 
 /*
 * @MethodName: getPrecious
@@ -73,39 +62,6 @@ std::string Starprobe::toString(){
 }
 
 /*
-* @MethodName: flightPlan
-* @Description:
-*			Discusses plans with the captain of the starship
-* @Params:
-*			n/a
-* @Returns:
-*			void
-*/
-
-void Starprobe::flightPlan() {
-	// warp using pre-defined or manually defined coords?
-	int choice;
-	std::cout << "\nWould you like to send the probe using "
-		"pre-defined coordinates?\n\n1. Yes\n2. No.\n";
-	std::cin >> choice;
-
-	// if manually defined, set x and y
-	if (choice == 2) {
-		std::cout << "\nPlease enter an x coordinate followed by a y coordinate\n "
-			"for the probe to warp to. ( Example: 5 25 ):";
-		std::cin >> coords[0] >> coords[1];
-	}
-	std::cout << "\nProbe warped to (" << coords[0] << "," << coords[1] << ")...\n\n";
-
-	// set the limit of visitation
-	std::cout << "\nHow many asteroids would you like the probe to scan before\n "
-		"returning to earth? (integer): ";
-	std::cin >> limit;
-	std::cout << "\n";
-}
-
-
-/*
 * @MethodName: doAsteroid
 * @Description:
 *			Overrides base class' method; Performs a scan on an asteroid
@@ -118,20 +74,20 @@ void Starprobe::flightPlan() {
 *			bool - scanned or not
 */
 
-bool Starprobe::doAsteroid(int index, std::vector<Asteroid> &asts, bool ship, double max) {
+bool Starprobe::doAsteroid(int index, std::vector<Asteroid> &asts, bool ship, double max, double traveled) {
 
-	// if the craft has not reached its limit
-	if (limit != current) {
+	// if the scanning mission has not been completed
+	if (computer[1] != computer[0]) {
 
-		std::cout << "Probe warped to: ("
-			<< asts[index].get(0) << ", " << asts[index].get(1)
-			<< "). Scanning asteroid...\n";
+		std::cout << name << " warped " << std::fixed << std::setprecision(2)
+			<< traveled	<< " light years to: ("	<< asts[index].get(0) << ", "
+			<< asts[index].get(1) << "). Scanning...\n";
 
 		// linux has a different sleep function than windows.
 		#ifdef __linux__
-			usleep(500000);
+			usleep(1000000);
 		#else
-			Sleep(500);
+			Sleep(1000);
 		#endif
 
 		if (asts[index].isPrecious()) {
@@ -145,19 +101,26 @@ bool Starprobe::doAsteroid(int index, std::vector<Asteroid> &asts, bool ship, do
 
 		// increment total number of scanned asteroids
 		current++;
+		computer[1]++;
 		asts[index].setScanned(true);
 
 		// linux has a different sleep function than windows.
 		#ifdef __linux__
-			usleep(500000);
+			usleep(800000);
 		#else
-			Sleep(500);
+			Sleep(800);
 		#endif
 
 		return true;
 
 	} else
-		std::cout << "Starprobe is idle...\n";
+		std::cout << name << " is idle...\n";
+
+	#ifdef __linux__
+    usleep(1000000);
+  #else
+    Sleep(1000);
+  #endif
 
 	return false;
 

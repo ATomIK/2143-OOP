@@ -27,7 +27,7 @@ public:
   void flightPlan();
 
 	// override base class' doAsteroid method
-  bool doAsteroid(int,std::vector<Asteroid>&,bool,double);
+  bool doAsteroid(int,std::vector<Asteroid>&,bool,double,double);
 
   ~Starprobe();
 

@@ -21,7 +21,7 @@ public:
   // "mines" an asteroid
   void mineAsteroid(int, std::vector<Asteroid>&);
   // "blasts" an asteroid
-  void blAsteroid(int, std::vector<Asteroid>&);
+  void blAsteroid(int);
 
   ~Starship();
 

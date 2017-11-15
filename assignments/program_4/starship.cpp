@@ -67,40 +67,6 @@ Starship::Starship(std::string n, int x, int y) : Starcraft(n,x,y){
 int Starship::getAsteroids(){ return current; }
 
 /*
- * @MethodName: flightPlan
- * @Description:
- *			Prompts the user for initial warp coordinates and asteroid collection
- * @Params:
- *			n/a
- * @Returns:
- *			void
- */
-
-void Starship::flightPlan(){
-
-  // warp using pre-defined or manually defined coords?
-  int choice;
-  std::cout << "\nWould you like to warp using "
-					"pre-defined coordinates?\n\n1. Yes\n2. No.\n";
-	std::cin >> choice;
-
-  // if manually defined, set x and y
-	if(choice == 2){
-		std::cout << "\nPlease enter an x coordinate followed by a y coordinate\n "
-		"for the ship to warp to. ( Example: 5 25 ):";
-		std::cin >> coords[0] >> coords[1];
-	}
-  std::cout << "\nWarping to (" << coords[0] << "," << coords[1] << ")...\n\n";
-
-  // set the limit of the ship's mission
-	std::cout << "\nHow many asteroids <9 tons would you like to collect before\n "
-					"returning to earth? (integer): ";
-	std::cin >> limit;
-  std::cout << "\n";
-
-}
-
-/*
  * @MethodName: toString
  * @Description:
  *			Returns string of pretty object data
@@ -149,20 +115,26 @@ std::string Starship::toString(){
  *			void
  */
 
-void Starship::blAsteroid(int index, std::vector<Asteroid> &asts){
+void Starship::blAsteroid(int index){
   int pieces;
   double weight;
 
+  #ifdef __linux__
+    usleep(2000000);
+  #else
+    Sleep(2000);
+  #endif
+
   // prompt the user for a choice
   int choice;
-  std::cout << "\nUh-oh, you've encountered an asteroid too large for our drill!"
-    << "\nWould you like to blast it?\n1. Yes\n2. No\n";
+  std::cout << "\n" << name << " encountered an asteroid too large for its drill!"
+    << "\nBlast it?\n1. Yes\n2. No\n";
   std::cin >> choice;
   std::cout << "\n";
 
   // User chose not to blast it, ignoring it.
   if (choice == 2) {
-    asts.erase(asts.begin() + index); // delete asteroid from field
+    database.erase(database.begin() + index); // delete asteroid from field
 
     std::cout << "Ignoring asteroid...\n\n";
   } else {
@@ -171,13 +143,13 @@ void Starship::blAsteroid(int index, std::vector<Asteroid> &asts){
 
     pieces = rand() % 5;
 
-    weight = asts[index].getWeight()/pieces;
+    weight = database[index].getWeight()/pieces;
 
     std::cout << "Asteroid exploded.\n";
 
     // if pieces is 0
     if(!pieces)
-      std::cout << "You vaporized that asteroid! Woops..\n";
+      std::cout << name << " used too much power! It vaporized the asteroid..\n";
 
     // loop will only work if pieces is > 0.
     for (int j = 0;j < pieces;j++){
@@ -186,18 +158,16 @@ void Starship::blAsteroid(int index, std::vector<Asteroid> &asts){
       int x = rand()%100, y = rand()%100;
 
       // created asteroid and add it to the vector
-      bool precious = false;
-      if(asts[index].isPrecious())
-        precious = true;
+      bool precious = true;
 
       Asteroid temp = Asteroid(x, y, weight, 0, 0, precious);
 
-      asts.push_back(temp);
+      database.push_back(temp);
 
       // A piece flew into the ship if its coordinates equal the ship's coordinates
       if(x == coords[0] && y == coords[1]){
         // Captain is alerted and repait bots are called
-        std::cout << "A piece flew into your ship. Repair bots are on the way\n";
+        std::cout << "A piece flew into " << name <<". Repair bots are on the way\n";
         // Repair bots are repairing the ship...
         #ifdef __linux__
           usleep(3000000);
@@ -212,9 +182,15 @@ void Starship::blAsteroid(int index, std::vector<Asteroid> &asts){
 
   }
 
+  #ifdef __linux__
+    usleep(1000000);
+  #else
+    Sleep(1000);
+  #endif
+
   std::cout << "\n";
 
-  asts.erase(asts.begin() + index); // asteroid blows up
+  database.erase(database.begin() + index); // asteroid blows up
 
 }
 
