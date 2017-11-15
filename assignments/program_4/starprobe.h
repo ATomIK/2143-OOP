@@ -1,3 +1,5 @@
+// starprobe.h
+
 #pragma once
 #include <vector>
 #include "starcraft.h"
@@ -10,25 +12,19 @@ protected:
 
 public:
 
-  Starprobe();
+	Starprobe();
 
-	Starprobe(std::string,int,int);
-
-	// return scanned asteroids
-	int getScanned();
+	Starprobe(std::string, int, int);
 
 	// return number of precious asteroids
 	int getPrecious();
 
 	// object data to pretty string
-  std::string toString();
-
-  // discusses plans with the captain of the star ship
-  void flightPlan();
+	std::string toString();
 
 	// override base class' doAsteroid method
-  bool doAsteroid(int,std::vector<Asteroid>&,bool,double,double);
+	bool doAsteroid(int, std::vector<Asteroid>&, bool, double, double);
 
-  ~Starprobe();
+	~Starprobe();
 
 };

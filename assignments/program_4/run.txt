@@ -1,0 +1,30 @@
+Name of input file ('def' for 'input.txt'): def
+
+== [ Status report ] ==
+
+Starprobe #1 at (0, 0). Total distance: 0.00. Scanned asteroids: 0.
+Starprobe #2 at (50, 50). Total distance: 0.00. Scanned asteroids: 0.
+Starprobe #3 at (100, 100). Total distance: 0.00. Scanned asteroids: 0.
+Starprobe #4 at (100, 0). Total distance: 0.00. Scanned asteroids: 0.
+Starprobe #5 at (0, 100). Total distance: 0.00. Scanned asteroids: 0.
+Starship #1 at (0, 0). Total distance: 0.00. Cargo bay: 0.00 kilotons. Mined asteroids: 0.
+Starship #2 at (80, 80). Total distance: 0.00. Cargo bay: 0.00 kilotons. Mined asteroids: 0.
+
+== [ Beginning mission ] ==
+
+-- "Asynchronous" turn #1 --
+
+Starprobe #1 is idle...
+Can't scan more than what exists... Continue to end of mission...
+Press any key to continue . . .
+
+[Starships' combined cargo bay]
+
+ID   Location     Size
+
+== [ Mission complete ] ==
+
+Asteroids scanned: (0/35).
+Asteroids collected: (0/10).
+
+Press any key to continue . . .

@@ -1,0 +1,291 @@
+Name of input file ('def' for 'input.txt'): def
+
+== [ Status report ] ==
+
+Starprobe #1 at (11, 88). Total distance: 0.00. Scanned asteroids: 0.
+Starprobe #2 at (80, 7). Total distance: 0.00. Scanned asteroids: 0.
+Starprobe #3 at (47, 186). Total distance: 0.00. Scanned asteroids: 0.
+Starship #1 at (30, 139). Total distance: 0.00. Cargo bay: 0.00 kilotons. Mined asteroids: 0.
+
+== [ Beginning mission ] ==
+
+-- "Asynchronous" turn #1 --
+
+Starprobe #1 warped 5.83 light years to: (6, 85). Scanning...
+Asteroid contains precious metals! 1/33
+
+Starprobe #2 warped 5.39 light years to: (85, 9). Scanning...
+Asteroid contains precious metals! 2/33
+
+Starprobe #3 warped 19.03 light years to: (46, 167). Scanning...
+Asteroid contains precious metals! 3/33
+
+-- "Asynchronous" turn #2 --
+
+Starprobe #1 warped 18.44 light years to: (2, 103). Scanning...
+Asteroid contains precious metals! 4/33
+
+Starprobe #2 warped 2.00 light years to: (87, 9). Scanning...
+Asteroid did not contain precious metals... 5/33
+
+Starprobe #3 warped 11.70 light years to: (50, 156). Scanning...
+Asteroid contains precious metals! 6/33
+
+-- "Asynchronous" turn #3 --
+
+Starprobe #1 warped 35.51 light years to: (37, 109). Scanning...
+Asteroid contains precious metals! 7/33
+
+Starprobe #2 warped 4.12 light years to: (86, 13). Scanning...
+Asteroid contains precious metals! 8/33
+
+Starprobe #3 warped 10.82 light years to: (44, 147). Scanning...
+Asteroid did not contain precious metals... 9/33
+
+-- "Asynchronous" turn #4 --
+
+Starprobe #1 warped 13.04 light years to: (38, 96). Scanning...
+Asteroid contains precious metals! 10/33
+
+Starprobe #2 warped 8.25 light years to: (94, 11). Scanning...
+Asteroid did not contain precious metals... 11/33
+
+Starprobe #3 warped 26.93 light years to: (30, 170). Scanning...
+Asteroid did not contain precious metals... 12/33
+
+-- "Asynchronous" turn #5 --
+
+Starprobe #1 warped 30.02 light years to: (39, 66). Scanning...
+Asteroid did not contain precious metals... 13/33
+
+Starprobe #2 warped 14.87 light years to: (108, 6). Scanning...
+Asteroid contains precious metals! 14/33
+
+Starprobe #3 warped 49.04 light years to: (76, 187). Scanning...
+Asteroid did not contain precious metals... 15/33
+
+-- "Asynchronous" turn #6 --
+
+Starprobe #1 warped 30.00 light years to: (39, 36). Scanning...
+Asteroid contains precious metals! 16/33
+
+Starprobe #2 warped 30.15 light years to: (111, 36). Scanning...
+Asteroid did not contain precious metals... 17/33
+
+Starprobe #3 warped 16.97 light years to: (88, 175). Scanning...
+Asteroid did not contain precious metals... 18/33
+
+-- "Asynchronous" turn #7 --
+
+Starprobe #1 warped 8.25 light years to: (41, 28). Scanning...
+Asteroid contains precious metals! 19/33
+
+Starprobe #2 warped 16.03 light years to: (127, 37). Scanning...
+Asteroid contains precious metals! 20/33
+
+Starprobe #3 warped 28.44 light years to: (83, 147). Scanning...
+Asteroid contains precious metals! 21/33
+
+-- "Asynchronous" turn #8 --
+
+Starprobe #1 warped 14.21 light years to: (32, 17). Scanning...
+Asteroid contains precious metals! 22/33
+
+Starprobe #2 warped 24.08 light years to: (145, 21). Scanning...
+Asteroid contains precious metals! 23/33
+
+Starprobe #3 warped 31.30 light years to: (111, 133). Scanning...
+Asteroid contains precious metals! 24/33
+
+-- "Asynchronous" turn #9 --
+
+Starprobe #1 warped 15.62 light years to: (22, 5). Scanning...
+Asteroid contains precious metals! 25/33
+
+Starprobe #2 warped 24.35 light years to: (168, 13). Scanning...
+Asteroid contains precious metals! 26/33
+
+Starprobe #3 warped 27.46 light years to: (138, 138). Scanning...
+Asteroid contains precious metals! 27/33
+
+-- "Asynchronous" turn #10 --
+
+Starprobe #1 warped 28.44 light years to: (27, 33). Scanning...
+Asteroid contains precious metals! 28/33
+
+Starprobe #2 warped 34.13 light years to: (197, 31). Scanning...
+Asteroid contains precious metals! 29/33
+
+Starprobe #3 warped 22.56 light years to: (143, 116). Scanning...
+Asteroid did not contain precious metals... 30/33
+
+-- "Asynchronous" turn #11 --
+
+Starprobe #1 warped 20.52 light years to: (13, 48). Scanning...
+Asteroid did not contain precious metals... 31/33
+
+Starprobe #2 warped 16.28 light years to: (186, 43). Scanning...
+Asteroid contains precious metals! 32/33
+
+Starprobe #3 warped 18.68 light years to: (148, 98). Scanning...
+Asteroid contains precious metals! 33/33
+
+Starship #1 warped 143.11 light years to: (50, 156). Mining...
+3.50 kiloton asteroid mined (1/12)! Cargo bay: 3.50 kilotons.
+
+-- "Asynchronous" turn #12 --
+
+Starship #1 warped 26.17 light years to: (86, 13). Mining...
+4.50 kiloton asteroid mined (2/12)! Cargo bay: 8.00 kilotons.
+
+-- "Asynchronous" turn #13 --
+
+Starship #1 warped 121.00 light years to: (85, 9). Mining...
+2.40 kiloton asteroid mined (3/12)! Cargo bay: 10.40 kilotons.
+
+-- "Asynchronous" turn #14 --
+
+Starship #1 warped 100.70 light years to: (197, 31). Mining...
+4.80 kiloton asteroid mined (4/12)! Cargo bay: 15.20 kilotons.
+
+-- "Asynchronous" turn #15 --
+
+Starship #1 warped 67.54 light years to: (148, 98). Mining...
+5.30 kiloton asteroid mined (5/12)! Cargo bay: 20.50 kilotons.
+
+-- "Asynchronous" turn #16 --
+
+Starship #1 warped 140.43 light years to: (83, 147). Mining...
+3.00 kiloton asteroid mined (6/12)! Cargo bay: 23.50 kilotons.
+
+-- "Asynchronous" turn #17 --
+
+Starship #1 warped 118.61 light years to: (145, 21). Mining...
+Asteroid is bigger than 5.90 kilotons!!
+
+Starship #1 encountered an asteroid too large for its drill!
+Blast it?
+1. Yes
+2. No
+1
+
+Asteroid exploded.
+A piece flew to: (16, 62)
+A piece flew to: (42, 94)
+A piece flew to: (13, 90)
+
+-- "Asynchronous" turn #18 --
+
+Starship #1 warped 12.37 light years to: (27, 33). Mining...
+Asteroid is bigger than 5.90 kilotons!!
+
+Starship #1 encountered an asteroid too large for its drill!
+Blast it?
+1. Yes
+2. No
+1
+
+Asteroid exploded.
+A piece flew to: (94, 19)
+A piece flew to: (96, 70)
+A piece flew to: (25, 27)
+
+-- "Asynchronous" turn #19 --
+
+Starship #1 warped 88.01 light years to: (39, 36). Mining...
+5.70 kiloton asteroid mined (7/12)! Cargo bay: 29.20 kilotons.
+
+-- "Asynchronous" turn #20 --
+
+Starship #1 warped 162.69 light years to: (127, 37). Mining...
+2.30 kiloton asteroid mined (8/12)! Cargo bay: 31.50 kilotons.
+
+-- "Asynchronous" turn #21 --
+
+Starship #1 warped 186.50 light years to: (111, 133). Mining...
+5.40 kiloton asteroid mined (9/12)! Cargo bay: 36.90 kilotons.
+
+-- "Asynchronous" turn #22 --
+
+Starship #1 warped 63.95 light years to: (25, 27). Mining...
+1.97 kiloton asteroid mined (10/12)! Cargo bay: 38.87 kilotons.
+
+-- "Asynchronous" turn #23 --
+
+Starship #1 warped 68.07 light years to: (38, 96). Mining...
+1.10 kiloton asteroid mined (11/12)! Cargo bay: 39.97 kilotons.
+
+-- "Asynchronous" turn #24 --
+
+Starship #1 warped 114.24 light years to: (41, 28). Mining...
+2.60 kiloton asteroid mined (12/12)! Cargo bay: 42.57 kilotons.
+
+
+== [ End of mission ] ==
+
+[ Precious asteroids database ]
+
+ID   Location     Size
+0   (006, 085)    2.80
+1   (085, 009)    2.40
+2   (046, 167)    1.70
+3   (002, 103)    1.20
+4   (050, 156)    3.50
+5   (037, 109)    3.90
+6   (086, 013)    4.50
+7   (038, 096)    1.10
+8   (108, 006)    1.30
+9   (039, 036)    5.70
+10  (041, 028)    2.60
+11  (127, 037)    2.30
+12  (083, 147)    3.00
+13  (032, 017)    3.80
+14  (111, 133)    5.40
+15  (022, 005)    4.60
+16  (168, 013)    1.00
+17  (138, 138)    4.90
+18  (197, 031)    4.80
+19  (186, 043)    4.10
+20  (148, 098)    5.30
+21  (016, 062)    1.97
+22  (042, 094)    1.97
+23  (013, 090)    1.97
+24  (094, 019)    1.97
+25  (096, 070)    1.97
+26  (025, 027)    1.97
+
+Continue to starcrafts' status report...
+Press any key to continue . . .
+
+== [ Status report ] ==
+
+Starprobe #1 at (13, 48). Total distance: 219.88. Scanned asteroids: 11.
+Starprobe #2 at (186, 43). Total distance: 179.65. Scanned asteroids: 11.
+Starprobe #3 at (148, 98). Total distance: 262.93. Scanned asteroids: 11.
+Starship #1 at (146, 73). Total distance: 1413.38. Cargo bay: 42.57 kilotons. Mined asteroids: 12.
+
+Continue to cargo bay and mission report...
+Press any key to continue . . .
+
+[Starships' combined cargo bay]
+
+ID   Location     Size
+1   (085, 009)    2.40
+4   (050, 156)    3.50
+6   (086, 013)    4.50
+7   (038, 096)    1.10
+9   (039, 036)    5.70
+10  (041, 028)    2.60
+11  (127, 037)    2.30
+12  (083, 147)    3.00
+14  (111, 133)    5.40
+18  (197, 031)    4.80
+20  (148, 098)    5.30
+26  (025, 027)    1.97
+
+== [ Mission complete ] ==
+
+Asteroids scanned: (33/33).
+Asteroids collected: (12/12).
+
+Press any key to continue . . .

@@ -1,3 +1,5 @@
+// asteroid.cpp
+
 #include <iostream>
 #include <iomanip>
 #include "asteroid.h"
@@ -6,37 +8,42 @@
 /*
  * @DefaultConstructorName: Asteroid
  * @Description:
- *			Sets all Asteroid variables to 0
+ *			Sets all Asteroid variables to defaults
  * @Params:
  *			n/a
  * @Returns:
  *			n/a
  */
 
-Asteroid::Asteroid() : SpaceObject(){
-  name = "Asteroid";
-  weight = 0.0;
-  scanned = false;
-  collected = false;
-  p = false;
+Asteroid::Asteroid() : SpaceObject() {
+	name = "Asteroid";
+	weight = 0.0;
+	scanned = false;
+	collected = false;
+	p = false;
 }
 
 /*
- * @ConstructorName: Asteroid
+ * @ParameterizedConstructorName: Asteroid
  * @Description:
- *			Creates an Asteroid object
+ *			Sets all asteroid data
  * @Params:
- *			n/a
+ *			int setx - x coordinate
+ *			int sety - y coordinate
+ *			double setw - weight of asteroid
+ *			bool setc - collected status
+ *			bool scanstat - scanned status
+ *			bool precious - precious status
  * @Returns:
  *			n/a
  */
 
-Asteroid::Asteroid(int setx, int sety, double setw, bool setc, bool scanstat, bool precious) : SpaceObject(setx,sety){
-  name = "Asteroid";
-  weight = setw;
-  collected = setc;
-  scanned = scanstat;
-  p = precious;
+Asteroid::Asteroid(int setx, int sety, double setw, bool setc, bool scanstat, bool precious) : SpaceObject(setx, sety) {
+	name = "Asteroid";
+	weight = setw;
+	collected = setc;
+	scanned = scanstat;
+	p = precious;
 }
 
 /*
@@ -44,23 +51,23 @@ Asteroid::Asteroid(int setx, int sety, double setw, bool setc, bool scanstat, bo
  * @Description:
  *			A copy constructor for an Asteroid object
  * @Params:
- *			n/a
+ *			const Asteroid &obj - copied data
  * @Returns:
  *			n/a
  */
 
-Asteroid::Asteroid(const Asteroid &obj){
-  name = obj.name;
-  coords[0] = obj.coords[0];
-  coords[1] = obj.coords[1];
-  weight = obj.weight;
-  collected = obj.collected;
-  scanned = obj.scanned;
-  p = obj.p;
+Asteroid::Asteroid(const Asteroid &obj) {
+	name = obj.name;
+	coords[0] = obj.coords[0];
+	coords[1] = obj.coords[1];
+	weight = obj.weight;
+	collected = obj.collected;
+	scanned = obj.scanned;
+	p = obj.p;
 }
 
 /*
- * @MethodName: operator =
+ * @MethodName: operator=
  * @Description:
  *			Copy over an asteroid's values into another asteroid object
  * @Params:
@@ -69,13 +76,13 @@ Asteroid::Asteroid(const Asteroid &obj){
  *			void
  */
 
-void Asteroid::operator= (Asteroid obj){
-  coords[0] = obj.coords[0];
-  coords[1] = obj.coords[1];
-  weight = obj.weight;
-  collected = obj.collected;
-  scanned = obj.scanned;
-  p = obj.p;
+void Asteroid::operator= (Asteroid obj) {
+	coords[0] = obj.coords[0];
+	coords[1] = obj.coords[1];
+	weight = obj.weight;
+	collected = obj.collected;
+	scanned = obj.scanned;
+	p = obj.p;
 }
 
 /*
@@ -88,7 +95,7 @@ void Asteroid::operator= (Asteroid obj){
  *			bool - collected
  */
 
-bool Asteroid::isCollected(){ return collected; }
+bool Asteroid::isCollected() { return collected; }
 
 /*
  * @MethodName: isScanned
@@ -100,7 +107,7 @@ bool Asteroid::isCollected(){ return collected; }
  *			bool - scanned
  */
 
-bool Asteroid::isScanned(){ return scanned; }
+bool Asteroid::isScanned() { return scanned; }
 
 /*
  * @MethodName: isPrecious
@@ -112,7 +119,7 @@ bool Asteroid::isScanned(){ return scanned; }
  *			bool - precious
  */
 
-bool Asteroid::isPrecious(){ return p; }
+bool Asteroid::isPrecious() { return p; }
 
 /*
  * @MethodName: getWeight
@@ -124,7 +131,7 @@ bool Asteroid::isPrecious(){ return p; }
  *			double - weight
  */
 
-double Asteroid::getWeight(){ return weight; }
+double Asteroid::getWeight() { return weight; }
 
 /*
  * @MethodName: toString
@@ -136,35 +143,35 @@ double Asteroid::getWeight(){ return weight; }
  *			string - pretty object data
  */
 
-std::string Asteroid::toString(){
+std::string Asteroid::toString() {
 
-  std::string result = "\n";
+	std::string result = "\n";
 
-  result += name;
+	result += name;
 
-  result += " at ("; // coordinates
-  result += std::to_string(coords[0]);
-  result += ", ";
-  result += std::to_string(coords[1]);
-  result += ") ";
+	result += " at ("; // coordinates
+	result += std::to_string(coords[0]);
+	result += ", ";
+	result += std::to_string(coords[1]);
+	result += ") ";
 
-  std::stringstream dbl; // weight
-  dbl << std::fixed << std::setprecision(2) << weight;
-  std::string s = dbl.str();
-  result += s;
+	std::stringstream dbl; // weight
+	dbl << std::fixed << std::setprecision(2) << weight;
+	std::string s = dbl.str();
+	result += s;
 
-  result += " kilotons. Collected: ";
-  result += std::to_string(collected);
+	result += " kilotons. Collected: "; // collected status
+	result += std::to_string(collected);
 
-  result += ". Scanned: ";
-  result += std::to_string(scanned);
+	result += ". Scanned: "; // scanned status
+	result += std::to_string(scanned);
 
-  result += ". Precious: ";
-  result += std::to_string(p);
+	result += ". Precious: "; // precious status
+	result += std::to_string(p);
 
-  result += ".\n\n";
+	result += ".\n\n";
 
-  return result;
+	return result;
 }
 
 /*
@@ -177,7 +184,7 @@ std::string Asteroid::toString(){
  *			void
  */
 
-void Asteroid::setCollected(bool c){ collected = c; }
+void Asteroid::setCollected(bool c) { collected = c; }
 
 /*
  * @MethodName: setScanned
@@ -189,18 +196,8 @@ void Asteroid::setCollected(bool c){ collected = c; }
  *			void
  */
 
-void Asteroid::setScanned(bool s){ scanned = s; }
+void Asteroid::setScanned(bool s) { scanned = s; }
 
-/*
- * @DestructorName: ~Asteroid
- * @Description:
- *			-
- * @Params:
- *			n/a
- * @Returns:
- *			n/a
- */
-
-Asteroid::~Asteroid(){
+Asteroid::~Asteroid() {
 
 }

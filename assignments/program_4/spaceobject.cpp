@@ -1,21 +1,56 @@
+// spaceobject.cpp
+
 #include "spaceobject.h"
 
-SpaceObject::SpaceObject(){
-  name = "Spaceobject";
-  coords[0] = 0;
-  coords[1] = 0;
+/*
+* @DefaultConstructorName: SpaceObject
+* @Description:
+*			Sets coordinates to 0 and sets default name
+* @Params:
+*			n/a
+* @Returns:
+*			n/a
+*/
+
+SpaceObject::SpaceObject() {
+	name = "Spaceobject";
+	coords[0] = 0;
+	coords[1] = 0;
 }
 
-SpaceObject::SpaceObject(int x, int y){
-  name = "Spaceobject";
-  coords[0] = x;
-  coords[1] = y;
+/*
+* @ParameterizedConstructorName: SpaceObject
+* @Description:
+*			Sets default name and coordinates to 0
+* @Params:
+*			int x - x coordinate
+*			int y - y coordinate
+* @Returns:
+*			n/a
+*/
+
+SpaceObject::SpaceObject(int x, int y) {
+	name = "Spaceobject";
+	coords[0] = x;
+	coords[1] = y;
 }
 
-SpaceObject::SpaceObject(std::string n, int x, int y){
-  name = n;
-  coords[0] = x;
-  coords[1] = y;
+/*
+* @ParameterizedConstructorName: SpaceObject
+* @Description:
+*			Sets name and coordinates
+* @Params:
+*			std::string n - name of spaceobject
+*			int x - x coordinate
+*			int y - y coordinate
+* @Returns:
+*			n/a
+*/
+
+SpaceObject::SpaceObject(std::string n, int x, int y) {
+	name = n;
+	coords[0] = x;
+	coords[1] = y;
 }
 
 /*
@@ -28,7 +63,7 @@ SpaceObject::SpaceObject(std::string n, int x, int y){
  *			int - specified coordinate
  */
 
-int SpaceObject::get(int t){ return coords[t]; }
+int SpaceObject::get(int t) { return coords[t]; }
 
 /*
  * @MethodName: toString
@@ -40,16 +75,16 @@ int SpaceObject::get(int t){ return coords[t]; }
  *			string - pretty object data
  */
 
-std::string SpaceObject::toString(){
-  std::string result = name;
+std::string SpaceObject::toString() {
+	std::string result = name;
 
-  result += " at (";
-  result += std::to_string(coords[0]);
-  result += ", ";
-  result += std::to_string(coords[1]);
-  result += ")\n\n";
-  
-  return result;
+	result += " at (";
+	result += std::to_string(coords[0]);
+	result += ", ";
+	result += std::to_string(coords[1]);
+	result += ")\n\n";
+
+	return result;
 }
 
 /*
@@ -63,8 +98,8 @@ std::string SpaceObject::toString(){
  *			void
  */
 
-void SpaceObject::set(int t,int v){ coords[t] = v; }
+void SpaceObject::set(int t, int v) { coords[t] = v; }
 
-SpaceObject::~SpaceObject(){
+SpaceObject::~SpaceObject() {
 
 }

@@ -1,3 +1,5 @@
+// starship.h
+
 #pragma once
 #include <vector>
 #include <cmath>
@@ -8,21 +10,17 @@ class Starship : public Starcraft {
 
 public:
 
-  Starship();
+	Starship();
 
-  Starship(std::string,int,int);
+	Starship(std::string, int, int);
 
-  // returns number of asteroids collected
-  int getAsteroids();
-  // method to set limit and coordinates
-  void flightPlan();
-  // object data to pretty string
-  std::string toString();
-  // "mines" an asteroid
-  void mineAsteroid(int, std::vector<Asteroid>&);
-  // "blasts" an asteroid
-  void blAsteroid(int);
+	// returns number of asteroids collected
+	int getAsteroids();
+	// object data to pretty string
+	std::string toString();
+	// "blasts" an asteroid
+	void blAsteroid(int);
 
-  ~Starship();
+	~Starship();
 
 };
